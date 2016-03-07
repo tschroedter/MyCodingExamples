@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F21A3559-42A2-4B14-BEC4-F1998D149730}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ParkIQ.SecureParking</RootNamespace>
+    <AssemblyName>ParkIQ.SecureParking</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="JetBrains.Annotations, Version=10.0.0.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
+      <HintPath>..\packages\JetBrains.Annotations.10.0.0\lib\net20\JetBrains.Annotations.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Bay.cs" />
+    <Compile Include="BaysManager.cs" />
+    <Compile Include="CarDidNotPayFeeException.cs" />
+    <Compile Include="CarParkIsFullException.cs" />
+    <Compile Include="Fees\BaseCarFee.cs" />
+    <Compile Include="CarPark.cs" />
+    <Compile Include="Fees\ICarFeeFactory.cs" />
+    <Compile Include="Fees\TruckFee.cs" />
+    <Compile Include="Fees\FreeFee.cs" />
+    <Compile Include="IBay.cs" />
+    <Compile Include="IBaysManager.cs" />
+    <Compile Include="ICarPark.cs" />
+    <Compile Include="Fees\IFee.cs" />
+    <Compile Include="IVehicle.cs" />
+    <Compile Include="IVehicleFactory.cs" />
+    <Compile Include="Fees\LuxuryCarFee.cs" />
+    <Compile Include="Fees\MotorbikeFee.cs" />
+    <Compile Include="NoEmptyBayException.cs" />
+    <Compile Include="NoVehicleFoundInBaysException.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Fees\StandardCarFee.cs" />
+    <Compile Include="Vehicle.cs" />
+    <Compile Include="VehicleFactory.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ParkIQ.Extensions\ParkIQ.Extensions.csproj">
+      <Project>{fa113479-1876-4798-aacb-bace897c8e9f}</Project>
+      <Name>ParkIQ.Extensions</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
