@@ -45,7 +45,8 @@ namespace ParkIQ.SecureParking
 
         private IVehicle CreateStandardCar(int weightInKilogram)
         {
-            IVehicle vehicle = new Vehicle(GetNextId(),
+            IVehicle vehicle = new Vehicle(CreateVehicleFees(),
+                                           GetNextId(),
                                            weightInKilogram,
                                            VehicleType.StandardCar);
             IFee fee = new StandardCarFee(vehicle);
@@ -55,7 +56,8 @@ namespace ParkIQ.SecureParking
 
         private IVehicle CreateLuxuryCar(int weightInKilogram)
         {
-            IVehicle vehicle = new Vehicle(GetNextId(),
+            IVehicle vehicle = new Vehicle(CreateVehicleFees(),
+                                           GetNextId(),
                                            weightInKilogram,
                                            VehicleType.LuxuryCar);
             IFee fee = new LuxuryCarFee(vehicle);
@@ -65,7 +67,8 @@ namespace ParkIQ.SecureParking
 
         private IVehicle CreateMotorbike(int weightInKilogram)
         {
-            IVehicle vehicle = new Vehicle(GetNextId(),
+            IVehicle vehicle = new Vehicle(CreateVehicleFees(),
+                                           GetNextId(),
                                            weightInKilogram,
                                            VehicleType.Motorbike);
             IFee fee = new MotorbikeFee(vehicle);
@@ -75,12 +78,18 @@ namespace ParkIQ.SecureParking
 
         private IVehicle CreateTruck(int weightInKilogram)
         {
-            IVehicle vehicle = new Vehicle(GetNextId(),
+            IVehicle vehicle = new Vehicle(CreateVehicleFees(),
+                                           GetNextId(),
                                            weightInKilogram,
                                            VehicleType.Truck);
             IFee fee = new TruckFee(vehicle);
             vehicle.SetFee(fee);
             return vehicle;
+        }
+
+        private IVehicleFees CreateVehicleFees()
+        {
+            return new VehicleFees(new FeeCalculator());
         }
 
         private int GetNextId()

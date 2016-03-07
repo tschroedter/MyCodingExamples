@@ -1,4 +1,5 @@
 ﻿using System;
+using JetBrains.Annotations;
 using ParkIQ.Extensions;
 using ParkIQ.SecureParking.Fees;
 
@@ -6,7 +7,10 @@ namespace ParkIQ.SecureParking
 {
     public class Vehicle : IVehicle
     {
-        public Vehicle(int id,
+        private readonly IVehicleFees m_VehicleFees;
+
+        public Vehicle([NotNull] IVehicleFees vehicleFees,
+                       int id,
                        int weightInKilogram,
                        VehicleFactory.VehicleType vehicleType)
         {
@@ -14,6 +18,7 @@ namespace ParkIQ.SecureParking
             WeightInKilogram = weightInKilogram;
             VehicleType = vehicleType;
             Fee = new FreeFee(this);
+            m_VehicleFees = vehicleFees;
         }
 
         public IFee Fee { get; private set; }
@@ -34,6 +39,11 @@ namespace ParkIQ.SecureParking
             Fee.FeeIsPaid();
 
             Console.WriteLine("Vehicle '{0}' paid the fees!".Inject(Id));
+        }
+
+        public void AddFee(IFee fee)
+        {
+            m_VehicleFees.AddFee(fee);
         }
 
         public bool IsFeePaid

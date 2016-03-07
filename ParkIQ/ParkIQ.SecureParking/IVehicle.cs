@@ -14,7 +14,9 @@ namespace ParkIQ.SecureParking
         bool IsFeePaid { get; }
         int Id { get; }
 
-        void SetFee([NotNull] IFee fee);
+        void SetFee([NotNull] IFee fee); // todo remove
         void PaysFee();
+
+        void AddFee([NotNull] IFee fee);
     }
 }

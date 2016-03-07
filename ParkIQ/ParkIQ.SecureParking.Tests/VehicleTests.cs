@@ -10,9 +10,18 @@ namespace ParkIQ.SecureParking.Tests
     [TestFixture]
     internal sealed class VehicleTests
     {
-        private static Vehicle CreateSut()
+        private IVehicleFees m_VehicleFees;
+
+        [SetUp]
+        public void Setup()
         {
-            var sut = new Vehicle(1,
+            m_VehicleFees = Substitute.For <IVehicleFees>();
+        }
+
+        private Vehicle CreateSut()
+        {
+            var sut = new Vehicle(m_VehicleFees,
+                                  1,
                                   100,
                                   VehicleFactory.VehicleType.StandardCar);
             return sut;
@@ -111,5 +120,20 @@ namespace ParkIQ.SecureParking.Tests
             Assert.AreEqual("Id: 1 VehicleType: StandardCar Fees: 0 IsFeePaid: False",
                             actual);
         }
+
+        [Test]
+        public void AddFee_CallsVehicleFees_WhenCalled()
+        {
+            // Arrange
+            var fee = Substitute.For<IFee>();
+            Vehicle sut = CreateSut();
+
+            // Act
+            sut.AddFee(fee);
+
+            // Assert
+            m_VehicleFees.Received().AddFee(fee);
+        }
+
     }
 }
