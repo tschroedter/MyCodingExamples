@@ -56,10 +56,12 @@
     <Compile Include="Fees\CarFeeFactory.cs" />
     <Compile Include="Fees\BaseCarFeeTests.cs" />
     <Compile Include="CarParkTests.cs" />
+    <Compile Include="Fees\FeeCalculatorTests.cs" />
     <Compile Include="Fees\FreeFeeTests.cs" />
     <Compile Include="Fees\LuxuryCarFeeTests.cs" />
     <Compile Include="Fees\MotorbikeFeeTests.cs" />
     <Compile Include="Fees\TruckFeeTests.cs" />
+    <Compile Include="Fees\VehicleFeesTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Fees\StandardCarFeeTests.cs" />
     <Compile Include="VehicleFactoryTests.cs" />
