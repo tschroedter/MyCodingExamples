@@ -1,17 +1,12 @@
-﻿using JetBrains.Annotations;
-
-namespace ParkIQ.SecureParking.Fees
+﻿namespace ParkIQ.SecureParking.Fees
 {
-    public class TruckFee : BaseCarFee
+    public class TruckFee : IFee
     {
-        public TruckFee([NotNull] IVehicle vehicle)
-            : base(vehicle)
-        {
-        }
+        private const int TenDollars = 10;
 
-        internal override int CalculateCharge()
+        public int Calculate()
         {
-            return VehicleFee + 10;
+            return TenDollars;
         }
     }
 }

@@ -2,19 +2,20 @@ using JetBrains.Annotations;
 
 namespace ParkIQ.SecureParking.Fees
 {
-    public class LuxuryCarFee : BaseCarFee
+    public class LuxuryCarFee : IFee
     {
-        private readonly StandardCarFee m_StandardCar; // todo not nice
+        private const int ThreeDollars = 3;
 
-        public LuxuryCarFee([NotNull] IVehicle vehicle)
-            : base(vehicle)
+        private readonly StandardCarFee m_StandardCar;
+
+        public LuxuryCarFee([NotNull] StandardCarFee standardCarFee)
         {
-            m_StandardCar = new StandardCarFee(vehicle);
+            m_StandardCar = standardCarFee;
         }
 
-        internal override int CalculateCharge()
+        public int Calculate()
         {
-            return m_StandardCar.CalculateCharge() + 3;
+            return m_StandardCar.Calculate() + ThreeDollars;
         }
     }
 }

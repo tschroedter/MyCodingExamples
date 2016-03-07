@@ -47,7 +47,6 @@
     <Compile Include="BaysManager.cs" />
     <Compile Include="CarDidNotPayFeeException.cs" />
     <Compile Include="CarParkIsFullException.cs" />
-    <Compile Include="Fees\BaseCarFee.cs" />
     <Compile Include="CarPark.cs" />
     <Compile Include="Fees\FeeAlreadyAddedException.cs" />
     <Compile Include="Fees\FeeCalculator.cs" />
@@ -55,8 +54,9 @@
     <Compile Include="Fees\IFeeCalculator.cs" />
     <Compile Include="Fees\IVehicleFees.cs" />
     <Compile Include="Fees\TruckFee.cs" />
-    <Compile Include="Fees\FreeFee.cs" />
+    <Compile Include="Fees\VehicleFee.cs" />
     <Compile Include="Fees\VehicleFees.cs" />
+    <Compile Include="Fees\WeightFee.cs" />
     <Compile Include="IBay.cs" />
     <Compile Include="IBaysManager.cs" />
     <Compile Include="ICarPark.cs" />

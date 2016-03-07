@@ -6,19 +6,19 @@ namespace ParkIQ.SecureParking.Tests.Fees
 {
     [ExcludeFromCodeCoverage]
     [TestFixture]
-    internal sealed class TruckFeeTests
+    internal sealed class WeightFeeTests
     {
         [Test]
         public void Calculate_ReturnsCorrectCharge_ForExtraCharges()
         {
             // Arrange
-            IFee sut = new TruckFee();
+            IFee sut = new WeightFee();
 
             // Act
             int actual = sut.Calculate();
 
             // Assert
-            Assert.AreEqual(10,
+            Assert.AreEqual(3,
                             actual);
         }
     }

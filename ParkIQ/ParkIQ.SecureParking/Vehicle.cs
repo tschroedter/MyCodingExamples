@@ -18,11 +18,8 @@ namespace ParkIQ.SecureParking
             Id = id;
             WeightInKilogram = weightInKilogram;
             VehicleType = vehicleType;
-            Fee = new FreeFee(this);
             m_VehicleFees = vehicleFees;
         }
-
-        public IFee Fee { get; private set; }
 
         public VehicleFactory.VehicleType VehicleType { get; private set; }
 

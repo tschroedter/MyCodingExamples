@@ -1,6 +1,6 @@
 ﻿namespace ParkIQ.SecureParking.Fees
 {
-    public class MotorbikeFee : IFee
+    public class VehicleFee : IFee
     {
         private const int TwoDollars = 2;
 

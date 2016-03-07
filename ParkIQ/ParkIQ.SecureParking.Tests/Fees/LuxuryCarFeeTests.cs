@@ -6,33 +6,19 @@ namespace ParkIQ.SecureParking.Tests.Fees
 {
     [ExcludeFromCodeCoverage]
     [TestFixture]
-    internal sealed class LuxuryCarFeeTests : BaseFeeTests <LuxuryCarFee>
+    internal sealed class LuxuryCarFeeTests
     {
         [Test]
         public void Calculate_ReturnsCorrectCharge_ForExtraCharges()
         {
             // Arrange
-            IFee sut = CreateSutWithExtraCharge();
+            IFee sut = new LuxuryCarFee(new StandardCarFee());
 
             // Act
             int actual = sut.Calculate();
 
             // Assert
-            Assert.AreEqual(13,
-                            actual);
-        }
-
-        [Test]
-        public void Calculate_ReturnsCorrectCharge_ForNoExtraCharges()
-        {
-            // Arrange
-            IFee sut = CreateSutWithNoExtraCharge();
-
-            // Act
-            int actual = sut.Calculate();
-
-            // Assert
-            Assert.AreEqual(10,
+            Assert.AreEqual(8,
                             actual);
         }
     }
