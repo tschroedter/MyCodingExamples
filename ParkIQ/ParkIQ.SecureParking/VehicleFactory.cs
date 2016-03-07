@@ -50,7 +50,7 @@ namespace ParkIQ.SecureParking
                                            weightInKilogram,
                                            VehicleType.StandardCar);
             IFee fee = new StandardCarFee(vehicle);
-            vehicle.SetFee(fee);
+            vehicle.AddFee(fee);
             return vehicle;
         }
 
@@ -61,7 +61,7 @@ namespace ParkIQ.SecureParking
                                            weightInKilogram,
                                            VehicleType.LuxuryCar);
             IFee fee = new LuxuryCarFee(vehicle);
-            vehicle.SetFee(fee);
+            vehicle.AddFee(fee);
             return vehicle;
         }
 
@@ -72,7 +72,7 @@ namespace ParkIQ.SecureParking
                                            weightInKilogram,
                                            VehicleType.Motorbike);
             IFee fee = new MotorbikeFee(vehicle);
-            vehicle.SetFee(fee);
+            vehicle.AddFee(fee);
             return vehicle;
         }
 
@@ -83,7 +83,7 @@ namespace ParkIQ.SecureParking
                                            weightInKilogram,
                                            VehicleType.Truck);
             IFee fee = new TruckFee(vehicle);
-            vehicle.SetFee(fee);
+            vehicle.AddFee(fee);
             return vehicle;
         }
 

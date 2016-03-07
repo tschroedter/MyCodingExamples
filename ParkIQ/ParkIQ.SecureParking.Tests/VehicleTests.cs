@@ -2,6 +2,7 @@ using System.Diagnostics.CodeAnalysis;
 using NSubstitute;
 using NUnit.Framework;
 using ParkIQ.SecureParking.Fees;
+
 // using VehicleType = ParkIQ.SecureParking.VehicleFactory.VehicleType; // todo figure out why ReSharper remove using when doing Code Clean-Up
 
 namespace ParkIQ.SecureParking.Tests
@@ -10,13 +11,13 @@ namespace ParkIQ.SecureParking.Tests
     [TestFixture]
     internal sealed class VehicleTests
     {
-        private IVehicleFees m_VehicleFees;
-
         [SetUp]
         public void Setup()
         {
             m_VehicleFees = Substitute.For <IVehicleFees>();
         }
+
+        private IVehicleFees m_VehicleFees;
 
         private Vehicle CreateSut()
         {
@@ -25,6 +26,20 @@ namespace ParkIQ.SecureParking.Tests
                                   100,
                                   VehicleFactory.VehicleType.StandardCar);
             return sut;
+        }
+
+        [Test]
+        public void AddFee_CallsVehicleFees_WhenCalled()
+        {
+            // Arrange
+            var fee = Substitute.For <IFee>();
+            Vehicle sut = CreateSut();
+
+            // Act
+            sut.AddFee(fee);
+
+            // Assert
+            m_VehicleFees.Received().AddFee(fee);
         }
 
         [Test]
@@ -64,13 +79,39 @@ namespace ParkIQ.SecureParking.Tests
         }
 
         [Test]
-        public void IsFeePaid_CallsFee_WhenCalled()
+        public void ContainsFee_CallsVehicleFees_WhenCalled()
         {
             // Arrange
             var fee = Substitute.For <IFee>();
-            fee.IsPaid.Returns(true);
             Vehicle sut = CreateSut();
-            sut.SetFee(fee);
+
+            // Act
+            sut.ContainsFee(fee);
+
+            // Assert
+            m_VehicleFees.Received().ContainsFee(fee);
+        }
+
+        [Test]
+        public void Fees_ReturnsFees_WhenCalled()
+        {
+            // Arrange
+            var expected = new IFee[0];
+            m_VehicleFees.Fees.Returns(expected);
+            Vehicle sut = CreateSut();
+
+            // Act
+            // Assert
+            Assert.AreEqual(expected,
+                            sut.Fees);
+        }
+
+        [Test]
+        public void IsFeePaid_CallsFee_WhenCalled()
+        {
+            // Arrange
+            m_VehicleFees.IsPaid.Returns(true);
+            Vehicle sut = CreateSut();
 
             // Act
             // Assert
@@ -78,33 +119,16 @@ namespace ParkIQ.SecureParking.Tests
         }
 
         [Test]
-        public void PaysFee_CallsFeeIsPaid_WhenCalled()
+        public void PaysFee_CallsVehicleFees_WhenCalled()
         {
             // Arrange
-            var fee = Substitute.For <IFee>();
             Vehicle sut = CreateSut();
-            sut.SetFee(fee);
 
             // Act
             sut.PaysFee();
 
             // Assert
-            fee.Received().FeeIsPaid();
-        }
-
-        [Test]
-        public void SetFee_SetsFee_WhenCalled()
-        {
-            // Arrange
-            var fee = Substitute.For <IFee>();
-            Vehicle sut = CreateSut();
-
-            // Act
-            sut.SetFee(fee);
-
-            // Assert
-            Assert.AreEqual(fee,
-                            sut.Fee);
+            m_VehicleFees.Received().FeeIsPaid();
         }
 
         [Test]
@@ -120,20 +144,5 @@ namespace ParkIQ.SecureParking.Tests
             Assert.AreEqual("Id: 1 VehicleType: StandardCar Fees: 0 IsFeePaid: False",
                             actual);
         }
-
-        [Test]
-        public void AddFee_CallsVehicleFees_WhenCalled()
-        {
-            // Arrange
-            var fee = Substitute.For<IFee>();
-            Vehicle sut = CreateSut();
-
-            // Act
-            sut.AddFee(fee);
-
-            // Assert
-            m_VehicleFees.Received().AddFee(fee);
-        }
-
     }
 }

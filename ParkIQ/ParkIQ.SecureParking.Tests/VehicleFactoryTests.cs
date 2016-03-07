@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using NUnit.Framework;
 using ParkIQ.SecureParking.Fees;
 
@@ -84,7 +85,7 @@ namespace ParkIQ.SecureParking.Tests
                                          DoesNotMatterWeight);
 
             // Assert
-            Assert.True(actual.Fee is LuxuryCarFee);
+            Assert.True(actual.Fees.Any(x => x is LuxuryCarFee));
         }
 
         [Test]
@@ -98,7 +99,7 @@ namespace ParkIQ.SecureParking.Tests
                                          DoesNotMatterWeight);
 
             // Assert
-            Assert.True(actual.Fee is MotorbikeFee);
+            Assert.True(actual.Fees.Any(x => x is MotorbikeFee));
         }
 
         [Test]
@@ -112,7 +113,7 @@ namespace ParkIQ.SecureParking.Tests
                                          DoesNotMatterWeight);
 
             // Assert
-            Assert.True(actual.Fee is StandardCarFee);
+            Assert.True(actual.Fees.Any(x => x is StandardCarFee));
         }
 
         [Test]
@@ -126,7 +127,7 @@ namespace ParkIQ.SecureParking.Tests
                                          DoesNotMatterWeight);
 
             // Assert
-            Assert.True(actual.Fee is TruckFee);
+            Assert.True(actual.Fees.Any(x => x is TruckFee));
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using JetBrains.Annotations;
 using ParkIQ.Extensions;
 using ParkIQ.SecureParking.Fees;
@@ -29,14 +30,9 @@ namespace ParkIQ.SecureParking
 
         public int Id { get; private set; }
 
-        public void SetFee(IFee fee)
-        {
-            Fee = fee;
-        }
-
         public void PaysFee()
         {
-            Fee.FeeIsPaid();
+            m_VehicleFees.FeeIsPaid();
 
             Console.WriteLine("Vehicle '{0}' paid the fees!".Inject(Id));
         }
@@ -50,7 +46,20 @@ namespace ParkIQ.SecureParking
         {
             get
             {
-                return Fee.IsPaid;
+                return m_VehicleFees.IsPaid;
+            }
+        }
+
+        public bool ContainsFee(IFee fee)
+        {
+            return m_VehicleFees.ContainsFee(fee);
+        }
+
+        public IEnumerable <IFee> Fees
+        {
+            get
+            {
+                return m_VehicleFees.Fees;
             }
         }
 
@@ -58,7 +67,7 @@ namespace ParkIQ.SecureParking
         {
             return "Id: {0} VehicleType: {1} Fees: {2} IsFeePaid: {3}".Inject(Id,
                                                                               VehicleType,
-                                                                              Fee.Calculate(),
+                                                                              m_VehicleFees.Calulate(),
                                                                               IsFeePaid);
         }
     }
