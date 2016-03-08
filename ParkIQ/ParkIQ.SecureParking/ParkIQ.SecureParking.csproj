@@ -61,6 +61,7 @@
     <Compile Include="IBaysManager.cs" />
     <Compile Include="ICarPark.cs" />
     <Compile Include="Fees\IFee.cs" />
+    <Compile Include="Vehicles\INewVehicle.cs" />
     <Compile Include="Vehicles\IVehicle.cs" />
     <Compile Include="IVehicleFactory.cs" />
     <Compile Include="Fees\LuxuryCarFee.cs" />
@@ -71,6 +72,11 @@
     <Compile Include="Fees\StandardCarFee.cs" />
     <Compile Include="Vehicle.cs" />
     <Compile Include="VehicleFactory.cs" />
+    <Compile Include="Vehicles\BaseVehicle.cs" />
+    <Compile Include="Vehicles\LuxuryCar.cs" />
+    <Compile Include="Vehicles\Motorbike.cs" />
+    <Compile Include="Vehicles\StandardCar.cs" />
+    <Compile Include="Vehicles\Truck.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

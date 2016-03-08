@@ -4,10 +4,8 @@ using ParkIQ.SecureParking.Fees;
 
 namespace ParkIQ.SecureParking.Vehicles
 {
-    // todo tobe replaced with INewVehcile
-    public interface IVehicle
+    public interface INewVehicle
     {
-        VehicleFactory.VehicleType VehicleType { get; }
         int WeightInKilogram { get; }
 
         int Id { get; }
@@ -15,11 +13,13 @@ namespace ParkIQ.SecureParking.Vehicles
         bool IsFeePaid { get; }
 
         [NotNull]
-        IEnumerable <IFee> Fees { get; }
+        IEnumerable<IFee> Fees { get; }
 
         void PaysFee();
 
         void AddFee([NotNull] IFee fee);
         bool ContainsFee([NotNull] IFee fee);
+        [NotNull]
+        string ShortDescription { get; }
     }
 }
