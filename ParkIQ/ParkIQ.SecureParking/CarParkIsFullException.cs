@@ -6,13 +6,13 @@ namespace ParkIQ.SecureParking
 {
     public class CarParkIsFullException : Exception
     {
-        public CarParkIsFullException([NotNull] IVehicle vehicle)
+        public CarParkIsFullException([NotNull] INewVehicle vehicle)
             :
                 base("Car park is full!")
         {
             Vehicle = vehicle;
         }
 
-        public IVehicle Vehicle { get; private set; }
+        public INewVehicle Vehicle { get; private set; }
     }
 }

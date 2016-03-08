@@ -58,7 +58,7 @@ namespace ParkIQ.SecureParking
             }
         }
 
-        public IEnumerable <IVehicle> Vehicles
+        public IEnumerable<INewVehicle> Vehicles
         {
             get
             {
@@ -66,7 +66,7 @@ namespace ParkIQ.SecureParking
             }
         }
 
-        public void AssignBay(IVehicle vehicle)
+        public void AssignBay(INewVehicle vehicle)
         {
             IBay emptyBay = m_Bays.FirstOrDefault(x => x.IsEmpty);
 
@@ -78,7 +78,7 @@ namespace ParkIQ.SecureParking
             emptyBay.Vehicle = vehicle;
         }
 
-        public void ReleaseBay(IVehicle vehicle)
+        public void ReleaseBay(INewVehicle vehicle)
         {
             IBay assignedBay = m_Bays.FirstOrDefault(x => x.Vehicle == vehicle);
 
@@ -90,7 +90,7 @@ namespace ParkIQ.SecureParking
             assignedBay.Vehicle = null;
         }
 
-        public int FindVehicleBayId(IVehicle vehicle)
+        public int FindVehicleBayId(INewVehicle vehicle)
         {
             IBay assignedBay = m_Bays.FirstOrDefault(x => x.Vehicle == vehicle);
 

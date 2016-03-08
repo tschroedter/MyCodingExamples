@@ -1,5 +1,6 @@
 ﻿using System;
 using JetBrains.Annotations;
+using ParkIQ.Extensions;
 using ParkIQ.SecureParking.Vehicles;
 using TechTalk.SpecFlow;
 
@@ -8,16 +9,16 @@ namespace ParkIQ.SecureParking.SpecFlow.Steps.Common
     [Binding]
     public abstract class BaseStep
     {
-        protected IVehicleFactory VehicleFactory
+        protected INewVehicleFactory VehicleFactory
         {
             get
             {
                 if ( !ScenarioContext.Current.ContainsKey("VehicleFactory") )
                 {
-                    ScenarioContext.Current [ "VehicleFactory" ] = new VehicleFactory();
+                    ScenarioContext.Current [ "VehicleFactory" ] = new NewVehicleFactory();
                 }
 
-                return ( IVehicleFactory ) ScenarioContext.Current [ "VehicleFactory" ];
+                return ( INewVehicleFactory ) ScenarioContext.Current [ "VehicleFactory" ];
             }
         }
 
@@ -33,16 +34,27 @@ namespace ParkIQ.SecureParking.SpecFlow.Steps.Common
             }
         }
 
-        protected IVehicle CreateVehicle([NotNull] string vehicleTypeString,
+        protected INewVehicle CreateVehicle([NotNull] string vehicleTypeString,
                                          int weightInKilogram)
         {
-            var vehicleType = ( VehicleFactory.VehicleType ) Enum.Parse(typeof ( VehicleFactory.VehicleType ),
-                                                                        vehicleTypeString);
+            switch ( vehicleTypeString )
+            {
+                case "StandardCar":
+                    return VehicleFactory.Create<StandardCar>(weightInKilogram);
 
-            IVehicle vehicle = VehicleFactory.Create(vehicleType,
-                                                     weightInKilogram);
+                case "LuxuryCar":
+                    return VehicleFactory.Create<LuxuryCar>(weightInKilogram);
 
-            return vehicle;
+                case "Motorbike":
+                    return VehicleFactory.Create<Motorbike>(weightInKilogram);
+
+                case "Truck":
+                    return VehicleFactory.Create<Truck>(weightInKilogram);
+
+                default:
+                    throw new ArgumentException("Unknown vehivle type '{0}'!".Inject(vehicleTypeString));
+            }
+
         }
     }
 }

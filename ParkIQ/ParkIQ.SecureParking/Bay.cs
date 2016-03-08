@@ -19,6 +19,6 @@ namespace ParkIQ.SecureParking
             }
         }
 
-        public IVehicle Vehicle { get; set; }
+        public INewVehicle Vehicle { get; set; }
     }
 }

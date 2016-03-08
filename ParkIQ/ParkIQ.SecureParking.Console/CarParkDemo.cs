@@ -12,7 +12,7 @@ namespace ParkIQ.SecureParking.Console
 
         public CarParkDemo()
         {
-            Factory = new VehicleFactory();
+            Factory = new NewVehicleFactory();
             CreateVehicles();
 
             // 1.	Initialise the car park with 10 bays and a name of “Test carpark”
@@ -21,26 +21,21 @@ namespace ParkIQ.SecureParking.Console
                                   "Test carpark");
         }
 
-        private VehicleFactory Factory { get; set; }
-        private IVehicle StandardCar { get; set; }
-        private IVehicle LuxuryCar { get; set; }
-        private IVehicle Motorbike { get; set; }
-        private IVehicle MotorbikeOther { get; set; }
-        private IVehicle Truck { get; set; }
+        private INewVehicleFactory Factory { get; set; }
+        private INewVehicle StandardCar { get; set; }
+        private INewVehicle LuxuryCar { get; set; }
+        private INewVehicle Motorbike { get; set; }
+        private INewVehicle MotorbikeOther { get; set; }
+        private INewVehicle Truck { get; set; }
         private CarPark CarPark { get; set; }
 
         private void CreateVehicles()
         {
-            StandardCar = Factory.Create(VehicleFactory.VehicleType.StandardCar,
-                                         DoesNotMatterWeightInKilogram);
-            LuxuryCar = Factory.Create(VehicleFactory.VehicleType.LuxuryCar,
-                                       DoesNotMatterWeightInKilogram);
-            Motorbike = Factory.Create(VehicleFactory.VehicleType.Motorbike,
-                                       DoesNotMatterWeightInKilogram);
-            Truck = Factory.Create(VehicleFactory.VehicleType.Truck,
-                                   101);
-            MotorbikeOther = Factory.Create(VehicleFactory.VehicleType.Motorbike,
-                                            DoesNotMatterWeightInKilogram);
+            StandardCar = Factory.Create<StandardCar>(DoesNotMatterWeightInKilogram);
+            LuxuryCar = Factory.Create<LuxuryCar>(DoesNotMatterWeightInKilogram);
+            Motorbike = Factory.Create<Motorbike>(DoesNotMatterWeightInKilogram);
+            Truck = Factory.Create<Truck>(101);
+            MotorbikeOther = Factory.Create<Motorbike>(DoesNotMatterWeightInKilogram);
         }
 
         public void Run()
@@ -80,7 +75,7 @@ namespace ParkIQ.SecureParking.Console
             // 3.	List the details of all the vehicles in the car park including their type and outstanding fees.
             System.Console.WriteLine("\r\n\t\tVehicle Details");
 
-            foreach ( IVehicle vehicle in CarPark.Vehicles )
+            foreach ( INewVehicle vehicle in CarPark.Vehicles )
             {
                 System.Console.WriteLine("\t\t{0}".Inject(vehicle));
             }

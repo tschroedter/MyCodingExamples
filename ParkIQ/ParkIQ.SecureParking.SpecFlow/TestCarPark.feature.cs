@@ -27,9 +27,7 @@ namespace ParkIQ.SecureParking.SpecFlow
 #line 1 "TestCarPark.feature"
 #line hidden
         
-#pragma warning disable 618
         [NUnit.Framework.TestFixtureSetUpAttribute()]
-#pragma warning restore 618
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
@@ -37,9 +35,7 @@ namespace ParkIQ.SecureParking.SpecFlow
             testRunner.OnFeatureStart(featureInfo);
         }
         
-#pragma warning disable 618
         [NUnit.Framework.TestFixtureTearDownAttribute()]
-#pragma warning restore 618
         public virtual void FeatureTearDown()
         {
             testRunner.OnFeatureEnd();
@@ -100,20 +96,20 @@ this.ScenarioSetup(scenarioInfo);
 #line 12
  testRunner.And("a \"LuxuryCar\" enters the car park", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 13
- testRunner.And("a \"Motorbike \" enters the car park", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("a \"Motorbike\" enters the car park", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 14
  testRunner.And("a \"Truck\" with a weight of 101 kgs enters the car park", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
                         "Output"});
             table1.AddRow(new string[] {
-                        "Id: 1 VehicleType: StandardCar Fees: 7 IsFeePaid: False"});
+                        "Id: 1 ShortDescription: StandardCar Fees: 7 IsFeePaid: False"});
             table1.AddRow(new string[] {
-                        "Id: 2 VehicleType: LuxuryCar Fees: 10 IsFeePaid: False"});
+                        "Id: 2 ShortDescription: LuxuryCar Fees: 10 IsFeePaid: False"});
             table1.AddRow(new string[] {
-                        "Id: 3 VehicleType: Motorbike Fees: 4 IsFeePaid: False"});
+                        "Id: 3 ShortDescription: Motorbike Fees: 4 IsFeePaid: False"});
             table1.AddRow(new string[] {
-                        "Id: 4 VehicleType: Truck Fees: 15 IsFeePaid: False"});
+                        "Id: 4 ShortDescription: Truck Fees: 15 IsFeePaid: False"});
 #line 16
  testRunner.Then("the vehicles details should look like this:", ((string)(null)), table1, "Then ");
 #line hidden

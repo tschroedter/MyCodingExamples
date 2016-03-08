@@ -10,7 +10,7 @@ namespace ParkIQ.SecureParking.SpecFlow.Steps
         public void GivenAWithAWeightOfKgsEntersTheCarPark(string vehicleTypeString,
                                                            int weightInKilogram)
         {
-            IVehicle vehicle = CreateVehicle(vehicleTypeString,
+            INewVehicle vehicle = CreateVehicle(vehicleTypeString,
                                              weightInKilogram);
 
             ScenarioContext.Current [ vehicleTypeString ] = vehicle;

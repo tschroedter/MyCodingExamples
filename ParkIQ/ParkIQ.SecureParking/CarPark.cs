@@ -35,7 +35,7 @@ namespace ParkIQ.SecureParking
             }
         }
 
-        public IEnumerable <IVehicle> Vehicles
+        public IEnumerable<INewVehicle> Vehicles
         {
             get
             {
@@ -67,7 +67,7 @@ namespace ParkIQ.SecureParking
             }
         }
 
-        public void Enter(IVehicle vehicle)
+        public void Enter(INewVehicle vehicle)
         {
             if ( m_BaysManager.IsFull )
             {
@@ -79,7 +79,7 @@ namespace ParkIQ.SecureParking
             Console.WriteLine("Vehicle '{0}' entered car park!".Inject(vehicle.Id));
         }
 
-        public void Exit(IVehicle vehicle)
+        public void Exit(INewVehicle vehicle)
         {
             if ( !vehicle.IsFeePaid )
             {

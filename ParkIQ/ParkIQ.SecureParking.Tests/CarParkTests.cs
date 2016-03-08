@@ -16,9 +16,9 @@ namespace ParkIQ.SecureParking.Tests
         {
             m_ThreeVehicles = new[]
                               {
-                                  Substitute.For <IVehicle>(),
-                                  Substitute.For <IVehicle>(),
-                                  Substitute.For <IVehicle>()
+                                  Substitute.For <INewVehicle>(),
+                                  Substitute.For <INewVehicle>(),
+                                  Substitute.For <INewVehicle>()
                               };
 
             m_ThreeBays = new[]
@@ -35,7 +35,7 @@ namespace ParkIQ.SecureParking.Tests
         private IBaysManager m_BayManager;
         private string m_DefaultName;
         private IBay[] m_ThreeBays;
-        private IVehicle[] m_ThreeVehicles;
+        private INewVehicle[] m_ThreeVehicles;
 
         private CarPark CreateSut()
         {
@@ -62,7 +62,7 @@ namespace ParkIQ.SecureParking.Tests
         public void Enter_CallBayManager_ForCarParkIsNotFull()
         {
             // Arrange
-            var vehicle = Substitute.For <IVehicle>();
+            var vehicle = Substitute.For <INewVehicle>();
             m_BayManager.IsFull.Returns(false);
             CarPark sut = CreateSut();
 
@@ -77,7 +77,7 @@ namespace ParkIQ.SecureParking.Tests
         public void Enter_ThrowsException_ForCarParkIsFull()
         {
             // Arrange
-            var vehicle = Substitute.For <IVehicle>();
+            var vehicle = Substitute.For <INewVehicle>();
             m_BayManager.IsFull.Returns(true);
             CarPark sut = CreateSut();
 
@@ -90,7 +90,7 @@ namespace ParkIQ.SecureParking.Tests
         public void Exit_CallBayManager_ForFeeIsPaid()
         {
             // Arrange
-            var vehicle = Substitute.For <IVehicle>();
+            var vehicle = Substitute.For <INewVehicle>();
             vehicle.IsFeePaid.Returns(true);
             CarPark sut = CreateSut();
 
@@ -105,7 +105,7 @@ namespace ParkIQ.SecureParking.Tests
         public void Exit_ThrowsException_Exit_CallBayManager_ForFeeIsNotPaid()
         {
             // Arrange
-            var vehicle = Substitute.For <IVehicle>();
+            var vehicle = Substitute.For <INewVehicle>();
             vehicle.IsFeePaid.Returns(false);
             CarPark sut = CreateSut();
 

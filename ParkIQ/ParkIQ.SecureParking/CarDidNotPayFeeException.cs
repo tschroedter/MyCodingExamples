@@ -6,13 +6,13 @@ namespace ParkIQ.SecureParking
 {
     public class CarDidNotPayFeeException : Exception
     {
-        public CarDidNotPayFeeException([NotNull] IVehicle vehicle)
+        public CarDidNotPayFeeException([NotNull] INewVehicle vehicle)
             :
                 base("Car didn't pay the fee!")
         {
             Vehicle = vehicle;
         }
 
-        public IVehicle Vehicle { get; private set; }
+        public INewVehicle Vehicle { get; private set; }
     }
 }

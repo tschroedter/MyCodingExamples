@@ -6,13 +6,13 @@ namespace ParkIQ.SecureParking
 {
     public class NoVehicleFoundInBaysException : Exception
     {
-        public NoVehicleFoundInBaysException([NotNull] IVehicle vehicle)
+        public NoVehicleFoundInBaysException([NotNull] INewVehicle vehicle)
             :
                 base("There is no bay with the car in the car park!")
         {
             Vehicle = vehicle;
         }
 
-        public IVehicle Vehicle { get; private set; }
+        public INewVehicle Vehicle { get; private set; }
     }
 }
