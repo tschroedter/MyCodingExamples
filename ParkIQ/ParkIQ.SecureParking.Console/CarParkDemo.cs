@@ -1,6 +1,7 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 using ParkIQ.Extensions;
+using ParkIQ.SecureParking.Vehicles;
 
 namespace ParkIQ.SecureParking.Console
 {

@@ -1,5 +1,6 @@
 ﻿using System;
 using JetBrains.Annotations;
+using ParkIQ.SecureParking.Vehicles;
 using TechTalk.SpecFlow;
 
 namespace ParkIQ.SecureParking.SpecFlow.Steps.Common

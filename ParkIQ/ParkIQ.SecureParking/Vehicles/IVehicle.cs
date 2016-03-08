@@ -2,7 +2,7 @@
 using JetBrains.Annotations;
 using ParkIQ.SecureParking.Fees;
 
-namespace ParkIQ.SecureParking
+namespace ParkIQ.SecureParking.Vehicles
 {
     public interface IVehicle
     {

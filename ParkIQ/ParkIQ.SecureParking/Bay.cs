@@ -1,4 +1,6 @@
-﻿namespace ParkIQ.SecureParking
+﻿using ParkIQ.SecureParking.Vehicles;
+
+namespace ParkIQ.SecureParking
 {
     public class Bay : IBay
     {

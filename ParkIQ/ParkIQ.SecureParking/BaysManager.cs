@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using ParkIQ.SecureParking.Vehicles;
 
 namespace ParkIQ.SecureParking
 {

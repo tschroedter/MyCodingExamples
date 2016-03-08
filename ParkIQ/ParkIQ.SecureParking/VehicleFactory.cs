@@ -1,12 +1,13 @@
 ﻿using System;
 using ParkIQ.Extensions;
 using ParkIQ.SecureParking.Fees;
+using ParkIQ.SecureParking.Vehicles;
 
 namespace ParkIQ.SecureParking
 {
     public class VehicleFactory : IVehicleFactory
     {
-        public enum VehicleType
+        public enum VehicleType // todo replace with classes
         {
             StandardCar,
             LuxuryCar,

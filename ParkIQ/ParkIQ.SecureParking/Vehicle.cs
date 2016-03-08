@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using JetBrains.Annotations;
 using ParkIQ.Extensions;
 using ParkIQ.SecureParking.Fees;
+using ParkIQ.SecureParking.Vehicles;
 
 namespace ParkIQ.SecureParking
 {

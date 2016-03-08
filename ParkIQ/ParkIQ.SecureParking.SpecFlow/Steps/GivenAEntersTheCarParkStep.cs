@@ -1,5 +1,6 @@
 using TechTalk.SpecFlow;
 using ParkIQ.SecureParking.SpecFlow.Steps.Common;
+using ParkIQ.SecureParking.Vehicles;
 
 namespace ParkIQ.SecureParking.SpecFlow.Steps
 {

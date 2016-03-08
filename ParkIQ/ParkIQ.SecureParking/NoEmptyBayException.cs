@@ -1,5 +1,6 @@
 using System;
 using JetBrains.Annotations;
+using ParkIQ.SecureParking.Vehicles;
 
 namespace ParkIQ.SecureParking
 {

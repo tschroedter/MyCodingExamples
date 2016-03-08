@@ -2,6 +2,7 @@
 using System.Linq;
 using NUnit.Framework;
 using ParkIQ.SecureParking.Fees;
+using ParkIQ.SecureParking.Vehicles;
 
 namespace ParkIQ.SecureParking.Tests
 {
