@@ -29,7 +29,7 @@ namespace ParkIQ.SecureParking.Vehicles
         {
             get
             {
-                return VehicleFees.IsPaid; // todo rename???
+                return VehicleFees.IsFeePaid;
             }
         }
 
@@ -43,7 +43,7 @@ namespace ParkIQ.SecureParking.Vehicles
 
         public void PaysFee()
         {
-            VehicleFees.FeeIsPaid(); // todo rename???
+            VehicleFees.FeeIsPaid();
         }
 
         public void AddFee(IFee fee)

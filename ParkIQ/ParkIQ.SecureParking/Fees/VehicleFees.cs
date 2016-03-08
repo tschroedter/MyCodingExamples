@@ -46,11 +46,11 @@ namespace ParkIQ.SecureParking.Fees
             return m_Fees.Contains(fee);
         }
 
-        public bool IsPaid { get; private set; }
+        public bool IsFeePaid { get; private set; }
 
         public void FeeIsPaid()
         {
-            IsPaid = true;
+            IsFeePaid = true;
         }
     }
 }

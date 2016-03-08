@@ -102,7 +102,7 @@ namespace ParkIQ.SecureParking.Tests.Vehicles
         {
             // Arrange
             var fees = Substitute.For <IVehicleFees>();
-            fees.IsPaid.Returns(true);
+            fees.IsFeePaid.Returns(true);
             var sut = new TestBaseVehilce(fees,
                                           DefaultId,
                                           DefaultWeightInKilogram);

@@ -102,7 +102,7 @@ namespace ParkIQ.SecureParking.Tests.Fees
         }
 
         [Test]
-        public void IsPaid_ReturnsFalse_ByDefault()
+        public void IsFeePaid_ReturnsFalse_ByDefault()
         {
             // Arrange
             var calculator = Substitute.For <IFeeCalculator>();
@@ -110,11 +110,11 @@ namespace ParkIQ.SecureParking.Tests.Fees
 
             // Act
             // Assert
-            Assert.False(sut.IsPaid);
+            Assert.False(sut.IsFeePaid);
         }
 
         [Test]
-        public void IsPaid_ReturnsTrue_WhenFeeIsPaid()
+        public void IsFeePaid_ReturnsTrue_WhenFeeIsPaid()
         {
             // Arrange
             var calculator = Substitute.For <IFeeCalculator>();
@@ -123,7 +123,7 @@ namespace ParkIQ.SecureParking.Tests.Fees
 
             // Act
             // Assert
-            Assert.True(sut.IsPaid);
+            Assert.True(sut.IsFeePaid);
         }
 
         [Test]
