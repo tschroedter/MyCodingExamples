@@ -41,8 +41,7 @@ namespace ParkIQ.SecureParking.Vehicles
                                                GetNextId(),
                                                weightInKilogram);
 
-            AddCommonFees(weightInKilogram,
-                          vehicle);
+            AddCommonFees(vehicle);
             vehicle.AddFee(new StandardCarFee());
 
             return vehicle;
@@ -54,8 +53,7 @@ namespace ParkIQ.SecureParking.Vehicles
                                              GetNextId(),
                                              weightInKilogram);
 
-            AddCommonFees(weightInKilogram,
-                          vehicle);
+            AddCommonFees(vehicle);
             vehicle.AddFee(new LuxuryCarFee(new StandardCarFee()));
 
             return vehicle;
@@ -67,8 +65,7 @@ namespace ParkIQ.SecureParking.Vehicles
                                              GetNextId(),
                                              weightInKilogram);
 
-            AddCommonFees(weightInKilogram,
-                          vehicle);
+            AddCommonFees(vehicle);
             vehicle.AddFee(new MotorbikeFee());
 
             return vehicle;
@@ -80,18 +77,15 @@ namespace ParkIQ.SecureParking.Vehicles
                                          GetNextId(),
                                          weightInKilogram);
 
-            AddCommonFees(weightInKilogram,
-                          vehicle);
+            AddCommonFees(vehicle);
             vehicle.AddFee(new TruckFee());
 
             return vehicle;
         }
 
-        private static void AddCommonFees(int weightInKilogram,
-                                          [NotNull] IVehicle vehicle)
+        private static void AddCommonFees([NotNull] IVehicle vehicle)
         {
-            AddWeightFeeIfRequired(weightInKilogram,
-                                   vehicle);
+            AddWeightFeeIfRequired(vehicle);
 
             vehicle.AddFee(new VehicleFee());
         }
@@ -101,11 +95,9 @@ namespace ParkIQ.SecureParking.Vehicles
             return new VehicleFees(new FeeCalculator());
         }
 
-        // todo why kilo and vehicle
-        private static void AddWeightFeeIfRequired(int weightInKilogram,
-                                                   [NotNull] IVehicle vehicle)
+        private static void AddWeightFeeIfRequired([NotNull] IVehicle vehicle)
         {
-            if ( weightInKilogram > 100 )
+            if ( vehicle.WeightInKilogram > 100 )
             {
                 vehicle.AddFee(new WeightFee());
             }
