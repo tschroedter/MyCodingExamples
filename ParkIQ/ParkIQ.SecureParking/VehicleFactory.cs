@@ -132,4 +132,8 @@ namespace ParkIQ.SecureParking
             return m_NextId++;
         }
     }
+
+    public interface INewVehicleFactory
+    {
+    }
 }

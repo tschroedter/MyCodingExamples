@@ -61,6 +61,7 @@
     <Compile Include="IBaysManager.cs" />
     <Compile Include="ICarPark.cs" />
     <Compile Include="Fees\IFee.cs" />
+    <Compile Include="Vehicles\NewVehicleFactory.cs" />
     <Compile Include="Vehicles\INewVehicle.cs" />
     <Compile Include="Vehicles\IVehicle.cs" />
     <Compile Include="IVehicleFactory.cs" />

@@ -59,6 +59,7 @@
     <Compile Include="Fees\TruckFeeTests.cs" />
     <Compile Include="Fees\VehicleFeesTests.cs" />
     <Compile Include="Fees\WeightFeeTests.cs" />
+    <Compile Include="Vehicles\NewVehicleFactoryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Fees\StandardCarFeeTests.cs" />
     <Compile Include="VehicleFactoryTests.cs" />
