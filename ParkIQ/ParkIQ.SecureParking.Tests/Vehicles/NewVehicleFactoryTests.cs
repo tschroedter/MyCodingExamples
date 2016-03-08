@@ -18,7 +18,7 @@ namespace ParkIQ.SecureParking.Tests.Vehicles
         public void Create_ReturnsVehicleWithCorrectWeight_ForGivenWeight()
         {
             // Arrange
-            var sut = new NewVehicleFactory();
+            var sut = new VehicleFactory();
 
             // Act
             var actual = sut.Create <StandardCar>(DoesNotMatterWeight);
@@ -32,7 +32,7 @@ namespace ParkIQ.SecureParking.Tests.Vehicles
         public void Create_ReturnsVehicleWithDifferentIds_ForSameVehicleType()
         {
             // Arrange
-            var sut = new NewVehicleFactory();
+            var sut = new VehicleFactory();
 
             // Act
             var one = sut.Create <Truck>(DoesNotMatterWeight);
@@ -47,7 +47,7 @@ namespace ParkIQ.SecureParking.Tests.Vehicles
         public void Create_ReturnsVehicleWithDifferentIds_ForVehicles()
         {
             // Arrange
-            var sut = new NewVehicleFactory();
+            var sut = new VehicleFactory();
 
             // Act
             var one = sut.Create <StandardCar>(DoesNotMatterWeight);
@@ -74,7 +74,7 @@ namespace ParkIQ.SecureParking.Tests.Vehicles
         public void Create_ReturnsVehicleWithLuxuryCarFee_ForVehicleTypeLuxuryCar()
         {
             // Arrange
-            var sut = new NewVehicleFactory();
+            var sut = new VehicleFactory();
 
             // Act
             var actual = sut.Create <LuxuryCar>(DoesNotMatterWeight);
@@ -87,7 +87,7 @@ namespace ParkIQ.SecureParking.Tests.Vehicles
         public void Create_ReturnsVehicleWithMotorbikeFee_ForVehicleTypeMotorbike()
         {
             // Arrange
-            var sut = new NewVehicleFactory();
+            var sut = new VehicleFactory();
 
             // Act
             var actual = sut.Create <Motorbike>(DoesNotMatterWeight);
@@ -100,7 +100,7 @@ namespace ParkIQ.SecureParking.Tests.Vehicles
         public void Create_ReturnsVehicleWithStandardCarFee_ForVehicleTypeStandardCar()
         {
             // Arrange
-            var sut = new NewVehicleFactory();
+            var sut = new VehicleFactory();
 
             // Act
             var actual = sut.Create <StandardCar>(DoesNotMatterWeight);
@@ -113,7 +113,7 @@ namespace ParkIQ.SecureParking.Tests.Vehicles
         public void Create_ReturnsVehicleWithTruckFee_ForVehicleTypeTruck()
         {
             // Arrange
-            var sut = new NewVehicleFactory();
+            var sut = new VehicleFactory();
 
             // Act
             var actual = sut.Create <Truck>(DoesNotMatterWeight);
@@ -126,7 +126,7 @@ namespace ParkIQ.SecureParking.Tests.Vehicles
         public void Create_ReturnsVehicleWithVehicleFee_ForVehicleTypeLuxuryCar()
         {
             // Arrange
-            var sut = new NewVehicleFactory();
+            var sut = new VehicleFactory();
 
             // Act
             var actual = sut.Create <LuxuryCar>(DoesNotMatterWeight);
@@ -139,7 +139,7 @@ namespace ParkIQ.SecureParking.Tests.Vehicles
         public void Create_ReturnsVehicleWithVehicleFee_ForVehicleTypeMotorbike()
         {
             // Arrange
-            var sut = new NewVehicleFactory();
+            var sut = new VehicleFactory();
 
             // Act
             var actual = sut.Create <Motorbike>(DoesNotMatterWeight);
@@ -152,7 +152,7 @@ namespace ParkIQ.SecureParking.Tests.Vehicles
         public void Create_ReturnsVehicleWithVehicleFee_ForVehicleTypeStandardCar()
         {
             // Arrange
-            var sut = new NewVehicleFactory();
+            var sut = new VehicleFactory();
 
             // Act
             var actual = sut.Create <StandardCar>(DoesNotMatterWeight);
@@ -165,7 +165,7 @@ namespace ParkIQ.SecureParking.Tests.Vehicles
         public void Create_ReturnsVehicleWithVehicleFee_ForVehicleTypeTruck()
         {
             // Arrange
-            var sut = new NewVehicleFactory();
+            var sut = new VehicleFactory();
 
             // Act
             var actual = sut.Create <Truck>(DoesNotMatterWeight);
@@ -178,7 +178,7 @@ namespace ParkIQ.SecureParking.Tests.Vehicles
         public void Create_ReturnsVehicleWithWeightFee_ForLuxuryCarAndHeavyVehicle()
         {
             // Arrange
-            var sut = new NewVehicleFactory();
+            var sut = new VehicleFactory();
 
             // Act
             var actual = sut.Create <LuxuryCar>(MinWeightInKilogramToForceWeightFee);
@@ -191,7 +191,7 @@ namespace ParkIQ.SecureParking.Tests.Vehicles
         public void Create_ReturnsVehicleWithWeightFee_ForMotorbikeAndHeavyVehicle()
         {
             // Arrange
-            var sut = new NewVehicleFactory();
+            var sut = new VehicleFactory();
 
             // Act
             var actual = sut.Create <Motorbike>(MinWeightInKilogramToForceWeightFee);
@@ -204,7 +204,7 @@ namespace ParkIQ.SecureParking.Tests.Vehicles
         public void Create_ReturnsVehicleWithWeightFee_ForStandardCarAndHeavyVehicle()
         {
             // Arrange
-            var sut = new NewVehicleFactory();
+            var sut = new VehicleFactory();
 
             // Act
             var actual = sut.Create <StandardCar>(MinWeightInKilogramToForceWeightFee);
@@ -217,7 +217,7 @@ namespace ParkIQ.SecureParking.Tests.Vehicles
         public void Create_ReturnsVehicleWithWeightFee_ForTruckAndHeavyVehicle()
         {
             // Arrange
-            var sut = new NewVehicleFactory();
+            var sut = new VehicleFactory();
 
             // Act
             var actual = sut.Create <Truck>(MinWeightInKilogramToForceWeightFee);

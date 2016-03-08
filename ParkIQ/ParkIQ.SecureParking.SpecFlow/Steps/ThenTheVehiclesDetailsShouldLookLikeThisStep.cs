@@ -36,7 +36,7 @@ namespace ParkIQ.SecureParking.SpecFlow.Steps
         {
             var lines = new List <Line>();
 
-            foreach ( INewVehicle vehicle in CarPark.Vehicles )
+            foreach ( IVehicle vehicle in CarPark.Vehicles )
             {
                 var line = new Line
                            {

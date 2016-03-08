@@ -4,7 +4,7 @@ using ParkIQ.SecureParking.Fees;
 
 namespace ParkIQ.SecureParking.Vehicles
 {
-    public interface INewVehicle
+    public interface IVehicle
     {
         int WeightInKilogram { get; }
 
@@ -13,13 +13,14 @@ namespace ParkIQ.SecureParking.Vehicles
         bool IsFeePaid { get; }
 
         [NotNull]
-        IEnumerable<IFee> Fees { get; }
+        IEnumerable <IFee> Fees { get; }
+
+        [NotNull]
+        string ShortDescription { get; }
 
         void PaysFee();
 
         void AddFee([NotNull] IFee fee);
         bool ContainsFee([NotNull] IFee fee);
-        [NotNull]
-        string ShortDescription { get; }
     }
 }

@@ -8,11 +8,11 @@ namespace ParkIQ.SecureParking
     {
         string Name { get; }
         IEnumerable <IBay> Bays { get; }
-        IEnumerable<INewVehicle> Vehicles { get; }
+        IEnumerable <IVehicle> Vehicles { get; }
         int NumberOfBays { get; }
         int NumberOfOccupiedBays { get; }
         bool IsFull { get; }
-        void Enter([NotNull] INewVehicle vehicle);
-        void Exit([NotNull] INewVehicle vehicle);
+        void Enter([NotNull] IVehicle vehicle);
+        void Exit([NotNull] IVehicle vehicle);
     }
 }

@@ -9,16 +9,16 @@ namespace ParkIQ.SecureParking.SpecFlow.Steps.Common
     [Binding]
     public abstract class BaseStep
     {
-        protected INewVehicleFactory VehicleFactory
+        protected IVehicleFactory VehicleFactory
         {
             get
             {
                 if ( !ScenarioContext.Current.ContainsKey("VehicleFactory") )
                 {
-                    ScenarioContext.Current [ "VehicleFactory" ] = new NewVehicleFactory();
+                    ScenarioContext.Current [ "VehicleFactory" ] = new VehicleFactory();
                 }
 
-                return ( INewVehicleFactory ) ScenarioContext.Current [ "VehicleFactory" ];
+                return ( IVehicleFactory ) ScenarioContext.Current [ "VehicleFactory" ];
             }
         }
 
@@ -34,7 +34,7 @@ namespace ParkIQ.SecureParking.SpecFlow.Steps.Common
             }
         }
 
-        protected INewVehicle CreateVehicle([NotNull] string vehicleTypeString,
+        protected IVehicle CreateVehicle([NotNull] string vehicleTypeString,
                                          int weightInKilogram)
         {
             switch ( vehicleTypeString )

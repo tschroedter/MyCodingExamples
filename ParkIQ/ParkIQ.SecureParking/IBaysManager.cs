@@ -15,10 +15,10 @@ namespace ParkIQ.SecureParking
         bool IsFull { get; }
 
         [NotNull]
-        IEnumerable<INewVehicle> Vehicles { get; }
+        IEnumerable <IVehicle> Vehicles { get; }
 
-        void AssignBay([NotNull] INewVehicle vehicle);
-        void ReleaseBay([NotNull] INewVehicle vehicle);
-        int FindVehicleBayId([NotNull] INewVehicle vehicle);
+        void AssignBay([NotNull] IVehicle vehicle);
+        void ReleaseBay([NotNull] IVehicle vehicle);
+        int FindVehicleBayId([NotNull] IVehicle vehicle);
     }
 }

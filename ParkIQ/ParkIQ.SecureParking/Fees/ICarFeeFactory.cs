@@ -5,7 +5,7 @@ namespace ParkIQ.SecureParking.Fees
 {
     public interface ICarFeeFactory
     {
-        IFee Create([NotNull] INewVehicle vehicle);
+        IFee Create([NotNull] IVehicle vehicle);
         void Release([NotNull] IFee fee);
     }
 }

@@ -14,8 +14,8 @@ namespace ParkIQ.SecureParking.Tests
         public void AssignBay_AssignsVehiclesToDifferetBays_ForVehicles()
         {
             // Arrange
-            var vehicleOne = Substitute.For <INewVehicle>();
-            var vehicleTwo = Substitute.For <INewVehicle>();
+            var vehicleOne = Substitute.For <IVehicle>();
+            var vehicleTwo = Substitute.For <IVehicle>();
             var sut = new BaysManager(3);
 
             // Act
@@ -36,7 +36,7 @@ namespace ParkIQ.SecureParking.Tests
         public void AssignBay_AssignsVehicleToBay_ForVehicle()
         {
             // Arrange
-            var vehicle = Substitute.For <INewVehicle>();
+            var vehicle = Substitute.For <IVehicle>();
             var sut = new BaysManager(3);
 
             // Act
@@ -51,7 +51,7 @@ namespace ParkIQ.SecureParking.Tests
         public void AssignBay_DecreasesNumberOfEmptyBays_ForVehicle()
         {
             // Arrange
-            var vehicleOne = Substitute.For <INewVehicle>();
+            var vehicleOne = Substitute.For <IVehicle>();
             var sut = new BaysManager(3);
 
             // Act
@@ -66,7 +66,7 @@ namespace ParkIQ.SecureParking.Tests
         public void AssignBay_IncreasedNumberOfOccupiedBays_ForVehicle()
         {
             // Arrange
-            var vehicleOne = Substitute.For <INewVehicle>();
+            var vehicleOne = Substitute.For <IVehicle>();
             var sut = new BaysManager(3);
 
             // Act
@@ -81,8 +81,8 @@ namespace ParkIQ.SecureParking.Tests
         public void AssignBay_ThrowsException_ForNoEmptyBayLeft()
         {
             // Arrange
-            var vehicleOne = Substitute.For <INewVehicle>();
-            var vehicleTwo = Substitute.For <INewVehicle>();
+            var vehicleOne = Substitute.For <IVehicle>();
+            var vehicleTwo = Substitute.For <IVehicle>();
             var sut = new BaysManager(1);
             sut.AssignBay(vehicleOne);
 
@@ -119,7 +119,7 @@ namespace ParkIQ.SecureParking.Tests
         public void IsFull_ReturnsFalse_WhenEmptyBaysAreAvailable()
         {
             // Arrange
-            var vehicleOne = Substitute.For <INewVehicle>();
+            var vehicleOne = Substitute.For <IVehicle>();
             var sut = new BaysManager(2);
             sut.AssignBay(vehicleOne);
 
@@ -132,7 +132,7 @@ namespace ParkIQ.SecureParking.Tests
         public void IsFull_ReturnsTrue_WhenAllBaysAreOccupied()
         {
             // Arrange
-            var vehicleOne = Substitute.For <INewVehicle>();
+            var vehicleOne = Substitute.For <IVehicle>();
             var sut = new BaysManager(1);
             sut.AssignBay(vehicleOne);
 
@@ -145,7 +145,7 @@ namespace ParkIQ.SecureParking.Tests
         public void ReleaseBay_MarksBayAsEmpty_ForVehicle()
         {
             // Arrange
-            var vehicle = Substitute.For <INewVehicle>();
+            var vehicle = Substitute.For <IVehicle>();
             var sut = new BaysManager(3);
             sut.AssignBay(vehicle);
 
@@ -161,7 +161,7 @@ namespace ParkIQ.SecureParking.Tests
         public void ReleaseBay_ReleasesBayFromVehicle_ForVehicle()
         {
             // Arrange
-            var vehicle = Substitute.For <INewVehicle>();
+            var vehicle = Substitute.For <IVehicle>();
             var sut = new BaysManager(3);
             sut.AssignBay(vehicle);
 
@@ -176,7 +176,7 @@ namespace ParkIQ.SecureParking.Tests
         public void ReleaseBay_ThrowsException_ForVehicleIsNotInCarPark()
         {
             // Arrange
-            var vehicle = Substitute.For <INewVehicle>();
+            var vehicle = Substitute.For <IVehicle>();
             var sut = new BaysManager(3);
 
             // Act
@@ -188,14 +188,14 @@ namespace ParkIQ.SecureParking.Tests
         public void Vehicles_ReturnsVehiclesInBays_WhenCalled()
         {
             // Arrange
-            var vehicleOne = Substitute.For <INewVehicle>();
-            var vehicleTwo = Substitute.For <INewVehicle>();
+            var vehicleOne = Substitute.For <IVehicle>();
+            var vehicleTwo = Substitute.For <IVehicle>();
             var sut = new BaysManager(3);
             sut.AssignBay(vehicleOne);
             sut.AssignBay(vehicleTwo);
 
             // Act
-            INewVehicle[] actual = sut.Vehicles.ToArray();
+            IVehicle[] actual = sut.Vehicles.ToArray();
 
             // Assert
             Assert.AreEqual(2,

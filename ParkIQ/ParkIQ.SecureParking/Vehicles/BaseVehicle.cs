@@ -5,10 +5,8 @@ using ParkIQ.SecureParking.Fees;
 
 namespace ParkIQ.SecureParking.Vehicles
 {
-    public abstract class BaseVehicle : INewVehicle
+    public abstract class BaseVehicle : IVehicle
     {
-        private IVehicleFees VehicleFees { get; set; }
-
         protected BaseVehicle([NotNull] IVehicleFees vehicleFees,
                               int id,
                               int weightInKilogram)
@@ -18,6 +16,8 @@ namespace ParkIQ.SecureParking.Vehicles
             WeightInKilogram = weightInKilogram;
             ShortDescription = string.Empty;
         }
+
+        private IVehicleFees VehicleFees { get; set; }
 
         public string ShortDescription { get; protected set; }
 
@@ -33,7 +33,8 @@ namespace ParkIQ.SecureParking.Vehicles
             }
         }
 
-        public IEnumerable <IFee> Fees {
+        public IEnumerable <IFee> Fees
+        {
             get
             {
                 return VehicleFees.Fees;
@@ -58,9 +59,9 @@ namespace ParkIQ.SecureParking.Vehicles
         public override string ToString()
         {
             return "Id: {0} ShortDescription: {1} Fees: {2} IsFeePaid: {3}".Inject(Id,
-                                                                              ShortDescription,
-                                                                              VehicleFees.Calulate(),
-                                                                              IsFeePaid);
+                                                                                   ShortDescription,
+                                                                                   VehicleFees.Calulate(),
+                                                                                   IsFeePaid);
         }
     }
 }

@@ -11,7 +11,7 @@ namespace ParkIQ.SecureParking.SpecFlow.Steps
         [Given(@"a ""(.*)"" enters the car park")]
         public void GivenAEntersTheCarPark(string vehicleTypeString)
         {
-            INewVehicle vehicle = CreateVehicle(vehicleTypeString,
+            IVehicle vehicle = CreateVehicle(vehicleTypeString,
                                              DoesNotMatterWeight);
 
             ScenarioContext.Current [ vehicleTypeString ] = vehicle;

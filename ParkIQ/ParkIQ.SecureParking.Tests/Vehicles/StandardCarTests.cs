@@ -17,7 +17,7 @@ namespace ParkIQ.SecureParking.Tests.Vehicles
         public void ShortDescription_ReturnsString_WhenCalled()
         {
             // Arrange
-            var fees = Substitute.For<IVehicleFees>();
+            var fees = Substitute.For <IVehicleFees>();
             var sut = new StandardCar(fees,
                                       DefaultId,
                                       DefaultWeightInKilogram);
