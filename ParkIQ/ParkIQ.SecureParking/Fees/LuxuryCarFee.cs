@@ -1,14 +1,16 @@
 using JetBrains.Annotations;
+using Selkie.Windsor;
 
 namespace ParkIQ.SecureParking.Fees
 {
-    public class LuxuryCarFee : IFee
+    [ProjectComponent(Lifestyle.Transient)]
+    public class LuxuryCarFee : ILuxuryCarFee
     {
         private const int ThreeDollars = 3;
 
-        private readonly StandardCarFee m_StandardCar;
+        private readonly IStandardCarFee m_StandardCar;
 
-        public LuxuryCarFee([NotNull] StandardCarFee standardCarFee)
+        public LuxuryCarFee([NotNull] IStandardCarFee standardCarFee)
         {
             m_StandardCar = standardCarFee;
         }

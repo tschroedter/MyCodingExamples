@@ -1,11 +1,11 @@
 ﻿using JetBrains.Annotations;
-using ParkIQ.SecureParking.Vehicles;
+using Selkie.Windsor;
 
 namespace ParkIQ.SecureParking.Fees
 {
-    public interface ICarFeeFactory
+    public interface IFeeFactory : ITypedFactory
     {
-        IFee Create([NotNull] IVehicle vehicle);
+        T Create <T>() where T : IFee;
         void Release([NotNull] IFee fee);
     }
 }

@@ -3,7 +3,9 @@ using ParkIQ.SecureParking.Fees;
 
 namespace ParkIQ.SecureParking.Vehicles
 {
-    public class Truck : BaseVehicle
+    public class Truck
+        : BaseVehicle,
+          ITruck
     {
         public Truck([NotNull] IVehicleFees vehicleFees,
                      int id,

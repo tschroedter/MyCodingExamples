@@ -1,5 +1,7 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
+using Castle.Windsor;
+using JetBrains.Annotations;
 using ParkIQ.Extensions;
 using ParkIQ.SecureParking.Vehicles;
 
@@ -8,11 +10,14 @@ namespace ParkIQ.SecureParking.Console
     [ExcludeFromCodeCoverage]
     public class CarParkDemo
     {
+        private readonly IWindsorContainer m_Container;
         private const int DoesNotMatterWeightInKilogram = 1;
 
-        public CarParkDemo()
+        public CarParkDemo([NotNull] IWindsorContainer container)
         {
-            Factory = new VehicleFactory();
+            m_Container = container;
+
+            VehicleAndFeeFactory = container.Resolve<IVehicleAndFeeFactory>();
             CreateVehicles();
 
             // 1.	Initialise the car park with 10 bays and a name of “Test carpark”
@@ -21,7 +26,9 @@ namespace ParkIQ.SecureParking.Console
                                   "Test carpark");
         }
 
-        private IVehicleFactory Factory { get; set; }
+        public IVehicleFactory Factory { get; set; }
+
+        private IVehicleAndFeeFactory VehicleAndFeeFactory { get; set; }
         private IVehicle StandardCar { get; set; }
         private IVehicle LuxuryCar { get; set; }
         private IVehicle Motorbike { get; set; }
@@ -31,11 +38,11 @@ namespace ParkIQ.SecureParking.Console
 
         private void CreateVehicles()
         {
-            StandardCar = Factory.Create <StandardCar>(DoesNotMatterWeightInKilogram);
-            LuxuryCar = Factory.Create <LuxuryCar>(DoesNotMatterWeightInKilogram);
-            Motorbike = Factory.Create <Motorbike>(DoesNotMatterWeightInKilogram);
-            Truck = Factory.Create <Truck>(101);
-            MotorbikeOther = Factory.Create <Motorbike>(DoesNotMatterWeightInKilogram);
+            StandardCar = VehicleAndFeeFactory.Create <IStandardCar>(DoesNotMatterWeightInKilogram);
+            LuxuryCar = VehicleAndFeeFactory.Create <ILuxuryCar>(DoesNotMatterWeightInKilogram);
+            Motorbike = VehicleAndFeeFactory.Create <IMotorbike>(DoesNotMatterWeightInKilogram);
+            Truck = VehicleAndFeeFactory.Create <ITruck>(101);
+            MotorbikeOther = VehicleAndFeeFactory.Create <IMotorbike>(DoesNotMatterWeightInKilogram);
         }
 
         public void Run()

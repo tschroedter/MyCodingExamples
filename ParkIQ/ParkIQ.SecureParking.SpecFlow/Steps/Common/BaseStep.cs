@@ -1,4 +1,5 @@
 ﻿using System;
+using Castle.Windsor;
 using JetBrains.Annotations;
 using ParkIQ.Extensions;
 using ParkIQ.SecureParking.Vehicles;
@@ -9,16 +10,32 @@ namespace ParkIQ.SecureParking.SpecFlow.Steps.Common
     [Binding]
     public abstract class BaseStep
     {
-        protected IVehicleFactory VehicleFactory
+        protected IWindsorContainer Container
         {
             get
             {
-                if ( !ScenarioContext.Current.ContainsKey("VehicleFactory") )
+                if (!ScenarioContext.Current.ContainsKey("WindsorContainer"))
                 {
-                    ScenarioContext.Current [ "VehicleFactory" ] = new VehicleFactory();
+                    var installer = new Installer();
+                    var container = new WindsorContainer();
+                    ScenarioContext.Current["WindsorContainer"] = container;
+                    container.Install(installer);
                 }
 
-                return ( IVehicleFactory ) ScenarioContext.Current [ "VehicleFactory" ];
+                return (IWindsorContainer)ScenarioContext.Current["WindsorContainer"];
+            }
+        }
+
+        protected IVehicleAndFeeFactory VehicleAndFeeFactory
+        {
+            get
+            {
+                if ( !ScenarioContext.Current.ContainsKey("VehicleAndFeeFactory") )
+                {
+                    ScenarioContext.Current [ "VehicleAndFeeFactory" ] = Container.Resolve<IVehicleAndFeeFactory>();
+                }
+
+                return ( IVehicleAndFeeFactory ) ScenarioContext.Current [ "VehicleAndFeeFactory" ];
             }
         }
 
@@ -40,16 +57,16 @@ namespace ParkIQ.SecureParking.SpecFlow.Steps.Common
             switch ( vehicleTypeString )
             {
                 case "StandardCar":
-                    return VehicleFactory.Create<StandardCar>(weightInKilogram);
+                    return VehicleAndFeeFactory.Create<StandardCar>(weightInKilogram);
 
                 case "LuxuryCar":
-                    return VehicleFactory.Create<LuxuryCar>(weightInKilogram);
+                    return VehicleAndFeeFactory.Create<LuxuryCar>(weightInKilogram);
 
                 case "Motorbike":
-                    return VehicleFactory.Create<Motorbike>(weightInKilogram);
+                    return VehicleAndFeeFactory.Create<Motorbike>(weightInKilogram);
 
                 case "Truck":
-                    return VehicleFactory.Create<Truck>(weightInKilogram);
+                    return VehicleAndFeeFactory.Create<Truck>(weightInKilogram);
 
                 default:
                     throw new ArgumentException("Unknown vehivle type '{0}'!".Inject(vehicleTypeString));

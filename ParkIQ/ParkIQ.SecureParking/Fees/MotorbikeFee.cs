@@ -1,6 +1,9 @@
-﻿namespace ParkIQ.SecureParking.Fees
+﻿using Selkie.Windsor;
+
+namespace ParkIQ.SecureParking.Fees
 {
-    public class MotorbikeFee : IFee
+    [ProjectComponent(Lifestyle.Transient)]
+    public class MotorbikeFee : IMotorbikeFee
     {
         private const int TwoDollars = 2;
 

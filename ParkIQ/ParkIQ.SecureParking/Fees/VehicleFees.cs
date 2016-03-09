@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
 using JetBrains.Annotations;
+using Selkie.Windsor;
 
 namespace ParkIQ.SecureParking.Fees
 {
+    [ProjectComponent(Lifestyle.Transient)]
     public class VehicleFees : IVehicleFees
     {
         private readonly IFeeCalculator m_Calculator;
