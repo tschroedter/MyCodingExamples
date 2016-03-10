@@ -14,15 +14,11 @@ namespace ParkIQ.SecureParking.SpecFlow.Steps.Common
         {
             get
             {
-                if (!ScenarioContext.Current.ContainsKey("WindsorContainer"))
-                {
-                    var installer = new Installer();
-                    var container = new WindsorContainer();
-                    ScenarioContext.Current["WindsorContainer"] = container;
-                    container.Install(installer);
-                }
-
                 return (IWindsorContainer)ScenarioContext.Current["WindsorContainer"];
+            }
+            set
+            {
+                ScenarioContext.Current["WindsorContainer"] = value;
             }
         }
 

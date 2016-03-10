@@ -30,17 +30,27 @@ namespace ParkIQ.SecureParking.Tests
 
             m_DefaultName = "King Street";
             m_BayManager = Substitute.For <IBaysManager>();
+
+            m_Factory = Substitute.For<IBaysManagerFactory>();
+            m_Factory.Create(Arg.Any<int>()).Returns(m_BayManager);
         }
 
         private IBaysManager m_BayManager;
         private string m_DefaultName;
         private IBay[] m_ThreeBays;
         private IVehicle[] m_ThreeVehicles;
+        private IBaysManagerFactory m_Factory;
 
-        private CarPark CreateSut()
+        private CarPark CreateSut(IBaysManagerFactory baysManagerFactory = null)
         {
-            var sut = new CarPark(m_BayManager,
-                                  m_DefaultName);
+            if ( baysManagerFactory == null )
+            {
+                baysManagerFactory = m_Factory;
+            }
+
+            var sut = new CarPark(baysManagerFactory,
+                                  m_DefaultName,
+                                  3);
             return sut;
         }
 
@@ -50,12 +60,43 @@ namespace ParkIQ.SecureParking.Tests
             // Arrange
             m_BayManager.Bays.Returns(m_ThreeBays);
 
-            // Act
             CarPark sut = CreateSut();
 
+            // Act
             // Assert
             Assert.AreEqual(m_ThreeBays,
                             sut.Bays);
+        }
+
+        [Test]
+        public void Constructor_CallsCreate_WhenCalled()
+        {
+            // Arrange
+            var factory = Substitute.For <IBaysManagerFactory>();
+            CarPark sut = CreateSut(factory);
+
+            // Act
+            sut.Dispose();
+
+            // Assert
+            factory.Received().Create(Arg.Any <int>());
+        }
+
+        [Test]
+        public void Dispose_CallsRelease_WhenCalled()
+        {
+            // Arrange
+            var manager = Substitute.For <IBaysManager>();
+            var factory = Substitute.For <IBaysManagerFactory>();
+            factory.Create(Arg.Any <int>()).Returns(manager);
+
+            CarPark sut = CreateSut(factory);
+
+            // Act
+            sut.Dispose();
+
+            // Assert
+            factory.Received().Release(manager);
         }
 
         [Test]

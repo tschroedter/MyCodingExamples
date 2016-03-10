@@ -1,20 +1,29 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using JetBrains.Annotations;
 using ParkIQ.SecureParking.Vehicles;
+using Selkie.Windsor;
 
 namespace ParkIQ.SecureParking
 {
-    public class BaysManager : IBaysManager
+    [ProjectComponent(Lifestyle.Transient)]
+    public class BaysManager
+        : IBaysManager,
+          IDisposable
     {
         private readonly IBay[] m_Bays;
+        private readonly IBayFactory m_Factory;
 
-        public BaysManager(int numberOfBays)
+        public BaysManager([NotNull] IBayFactory factory,
+                           int numberOfBays)
         {
+            m_Factory = factory;
             m_Bays = new IBay[numberOfBays];
 
             for ( var i = 0 ; i < m_Bays.Length ; i++ )
             {
-                m_Bays [ i ] = new Bay(i);
+                m_Bays [ i ] = factory.Create(i);
             }
         }
 
@@ -100,6 +109,15 @@ namespace ParkIQ.SecureParking
             }
 
             return assignedBay.Id;
+        }
+
+        public void Dispose()
+        {
+            // todo testing
+            foreach ( IBay bay in m_Bays )
+            {
+                m_Factory.Release(bay);
+            }
         }
     }
 }

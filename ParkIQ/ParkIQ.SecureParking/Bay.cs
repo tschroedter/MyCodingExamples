@@ -1,7 +1,9 @@
 ﻿using ParkIQ.SecureParking.Vehicles;
+using Selkie.Windsor;
 
 namespace ParkIQ.SecureParking
 {
+    [ProjectComponent(Lifestyle.Transient)]
     public class Bay : IBay
     {
         public Bay(int id)

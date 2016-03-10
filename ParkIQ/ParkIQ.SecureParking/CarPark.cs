@@ -3,18 +3,24 @@ using System.Collections.Generic;
 using JetBrains.Annotations;
 using ParkIQ.Extensions;
 using ParkIQ.SecureParking.Vehicles;
+using Selkie.Windsor;
 
 namespace ParkIQ.SecureParking
 {
-    public class CarPark : ICarPark
+    [ProjectComponent(Lifestyle.Transient)]
+    public class CarPark
+        : ICarPark,
+          IDisposable
     {
         private readonly IBaysManager m_BaysManager;
 
-        public CarPark([NotNull] IBaysManager baysManager,
-                       [NotNull] string name)
+        public CarPark([NotNull] IBaysManagerFactory factory,
+                       [NotNull] string name,
+                       int numberOfBays)
         {
+            Factory = factory;
             Name = name;
-            m_BaysManager = baysManager;
+            m_BaysManager = factory.Create(numberOfBays);
         }
 
         private IBaysManager BaysManager
@@ -25,6 +31,7 @@ namespace ParkIQ.SecureParking
             }
         }
 
+        public IBaysManagerFactory Factory { get; set; }
         public string Name { get; private set; }
 
         public IEnumerable <IBay> Bays
@@ -89,6 +96,11 @@ namespace ParkIQ.SecureParking
             m_BaysManager.ReleaseBay(vehicle);
 
             Console.WriteLine("Vehicle '{0}' exited car park!".Inject(vehicle.Id));
+        }
+
+        public void Dispose()
+        {
+            Factory.Release(BaysManager);
         }
     }
 }

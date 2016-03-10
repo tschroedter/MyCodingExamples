@@ -88,9 +88,12 @@
     <Compile Include="Fees\VehicleFees.cs" />
     <Compile Include="Fees\WeightFee.cs" />
     <Compile Include="IBay.cs" />
+    <Compile Include="IBayFactory.cs" />
     <Compile Include="IBaysManager.cs" />
+    <Compile Include="IBaysManagerFactory.cs" />
     <Compile Include="ICarPark.cs" />
     <Compile Include="Fees\IFee.cs" />
+    <Compile Include="ICarParkFactory.cs" />
     <Compile Include="Installer.cs" />
     <Compile Include="Vehicles\ILuxuryCar.cs" />
     <Compile Include="Vehicles\IMotorbike.cs" />

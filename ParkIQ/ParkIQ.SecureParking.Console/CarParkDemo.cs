@@ -8,7 +8,7 @@ using ParkIQ.SecureParking.Vehicles;
 namespace ParkIQ.SecureParking.Console
 {
     [ExcludeFromCodeCoverage]
-    public class CarParkDemo
+    public class CarParkDemo : IDisposable
     {
         private readonly IWindsorContainer m_Container;
         private const int DoesNotMatterWeightInKilogram = 1;
@@ -21,9 +21,9 @@ namespace ParkIQ.SecureParking.Console
             CreateVehicles();
 
             // 1.	Initialise the car park with 10 bays and a name of “Test carpark”
-            var manager = new BaysManager(10);
-            CarPark = new CarPark(manager,
-                                  "Test carpark");
+            var factory = container.Resolve<ICarParkFactory>();
+            CarPark = factory.Create("Test carpark",
+                                     10);
         }
 
         public IVehicleFactory Factory { get; set; }
@@ -34,7 +34,7 @@ namespace ParkIQ.SecureParking.Console
         private IVehicle Motorbike { get; set; }
         private IVehicle MotorbikeOther { get; set; }
         private IVehicle Truck { get; set; }
-        private CarPark CarPark { get; set; }
+        private ICarPark CarPark { get; set; }
 
         private void CreateVehicles()
         {
@@ -128,6 +128,11 @@ namespace ParkIQ.SecureParking.Console
         {
             // 11.	Have a motorbike enter the car park
             CarPark.Exit(MotorbikeOther);
+        }
+
+        public void Dispose()
+        {
+            m_Container.Dispose();
         }
     }
 }
