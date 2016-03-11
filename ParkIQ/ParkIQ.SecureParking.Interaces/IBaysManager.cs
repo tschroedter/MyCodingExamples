@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using JetBrains.Annotations;
-using ParkIQ.SecureParking.Vehicles;
+using ParkIQ.SecureParking.Interaces.Vehicles;
 
-namespace ParkIQ.SecureParking
+namespace ParkIQ.SecureParking.Interaces
 {
     public interface IBaysManager
     {

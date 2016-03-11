@@ -1,13 +1,14 @@
 ﻿using System;
 using JetBrains.Annotations;
 using ParkIQ.Extensions;
-using ParkIQ.SecureParking.Fees;
+using ParkIQ.SecureParking.Interaces.Fees;
+using ParkIQ.SecureParking.Interaces.Vehicles;
 using Selkie.Windsor;
 
 namespace ParkIQ.SecureParking.Vehicles
 {
     // todo check tests
-    [ProjectComponent(Lifestyle.Singleton)]
+    [ProjectComponent(Lifestyle.Transient)]
     public class VehicleAndFeeFactory : IVehicleAndFeeFactory
     {
         private int m_NextId = 1;
@@ -46,6 +47,10 @@ namespace ParkIQ.SecureParking.Vehicles
             }
 
             throw new ArgumentException("Can't create vehicle for type '{0}'!".Inject(typeof ( T )));
+        }
+
+        public void Release(IVehicle vehicle)
+        {
         }
 
         private IVehicle CreateStandardCar(int weightInKilogram)

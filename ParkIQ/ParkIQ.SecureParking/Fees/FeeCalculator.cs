@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using ParkIQ.SecureParking.Interaces.Fees;
 using Selkie.Windsor;
 
 namespace ParkIQ.SecureParking.Fees

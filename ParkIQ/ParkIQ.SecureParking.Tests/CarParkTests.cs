@@ -2,7 +2,8 @@
 using System.Linq;
 using NSubstitute;
 using NUnit.Framework;
-using ParkIQ.SecureParking.Vehicles;
+using ParkIQ.SecureParking.Interaces;
+using ParkIQ.SecureParking.Interaces.Vehicles;
 
 namespace ParkIQ.SecureParking.Tests
 {

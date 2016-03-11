@@ -1,5 +1,5 @@
 using Castle.Windsor;
-using Castle.Windsor.Installer;
+using ParkIQ.SecureParking.Interaces;
 using TechTalk.SpecFlow;
 using ParkIQ.SecureParking.SpecFlow.Steps.Common;
 
@@ -10,8 +10,11 @@ namespace ParkIQ.SecureParking.SpecFlow.Steps
         [BeforeScenario]
         public void BeforeScenario()
         {
-            Container = new WindsorContainer();
-            Container.Install(FromAssembly.This());
+            var windsorContainer = new WindsorContainer();
+            var installer = new Installer();
+            windsorContainer.Install(installer);
+
+            Container = windsorContainer;
         }
 
         [AfterScenario]

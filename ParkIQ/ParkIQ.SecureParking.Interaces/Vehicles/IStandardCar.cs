@@ -1,4 +1,4 @@
-﻿namespace ParkIQ.SecureParking.Vehicles
+﻿namespace ParkIQ.SecureParking.Interaces.Vehicles
 {
     public interface IStandardCar : IVehicle
     {

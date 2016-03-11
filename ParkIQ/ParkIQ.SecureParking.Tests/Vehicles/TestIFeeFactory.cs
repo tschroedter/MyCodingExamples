@@ -2,6 +2,7 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using ParkIQ.Extensions;
 using ParkIQ.SecureParking.Fees;
+using ParkIQ.SecureParking.Interaces.Fees;
 
 namespace ParkIQ.SecureParking.Tests.Vehicles
 {

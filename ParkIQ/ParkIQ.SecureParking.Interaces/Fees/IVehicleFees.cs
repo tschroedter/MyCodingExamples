@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace ParkIQ.SecureParking.Fees
+namespace ParkIQ.SecureParking.Interaces.Fees
 {
     public interface IVehicleFees
     {

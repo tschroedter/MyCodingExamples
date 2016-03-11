@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using JetBrains.Annotations;
-using ParkIQ.SecureParking.Vehicles;
+using ParkIQ.SecureParking.Interaces;
+using ParkIQ.SecureParking.Interaces.Vehicles;
 using Selkie.Windsor;
 
 namespace ParkIQ.SecureParking

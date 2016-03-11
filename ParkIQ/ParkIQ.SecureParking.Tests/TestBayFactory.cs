@@ -1,3 +1,5 @@
+using ParkIQ.SecureParking.Interaces;
+
 namespace ParkIQ.SecureParking.Tests
 {
     internal sealed class TestBayFactory : IBayFactory

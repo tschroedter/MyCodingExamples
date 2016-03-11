@@ -1,6 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 using NUnit.Framework;
 using ParkIQ.SecureParking.Fees;
+using ParkIQ.SecureParking.Interaces.Fees;
 
 namespace ParkIQ.SecureParking.Tests.Fees
 {

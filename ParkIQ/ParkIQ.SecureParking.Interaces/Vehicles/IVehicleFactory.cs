@@ -1,7 +1,7 @@
 using JetBrains.Annotations;
 using Selkie.Windsor;
 
-namespace ParkIQ.SecureParking.Vehicles
+namespace ParkIQ.SecureParking.Interaces.Vehicles
 {
     public interface IVehicleFactory : ITypedFactory
     {

@@ -114,6 +114,10 @@
       <Project>{fa113479-1876-4798-aacb-bace897c8e9f}</Project>
       <Name>ParkIQ.Extensions</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ParkIQ.SecureParking.Interaces\ParkIQ.SecureParking.Interaces.csproj">
+      <Project>{1904BA32-9D1C-4146-87CF-6B8F42F16A65}</Project>
+      <Name>ParkIQ.SecureParking.Interaces</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ParkIQ.SecureParking\ParkIQ.SecureParking.csproj">
       <Project>{f21a3559-42a2-4b14-bec4-f1998d149730}</Project>
       <Name>ParkIQ.SecureParking</Name>

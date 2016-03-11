@@ -2,6 +2,8 @@
 using Castle.Windsor;
 using JetBrains.Annotations;
 using ParkIQ.Extensions;
+using ParkIQ.SecureParking.Interaces;
+using ParkIQ.SecureParking.Interaces.Vehicles;
 using ParkIQ.SecureParking.Vehicles;
 using TechTalk.SpecFlow;
 

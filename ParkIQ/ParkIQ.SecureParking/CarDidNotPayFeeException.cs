@@ -1,6 +1,6 @@
 ﻿using System;
 using JetBrains.Annotations;
-using ParkIQ.SecureParking.Vehicles;
+using ParkIQ.SecureParking.Interaces.Vehicles;
 
 namespace ParkIQ.SecureParking
 {

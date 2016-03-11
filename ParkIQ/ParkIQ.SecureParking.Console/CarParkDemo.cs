@@ -3,7 +3,8 @@ using System.Diagnostics.CodeAnalysis;
 using Castle.Windsor;
 using JetBrains.Annotations;
 using ParkIQ.Extensions;
-using ParkIQ.SecureParking.Vehicles;
+using ParkIQ.SecureParking.Interaces;
+using ParkIQ.SecureParking.Interaces.Vehicles;
 
 namespace ParkIQ.SecureParking.Console
 {

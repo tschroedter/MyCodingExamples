@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
 using ParkIQ.Extensions;
+using ParkIQ.SecureParking.Interaces.Vehicles;
 using ParkIQ.SecureParking.SpecFlow.Steps.Common;
 using ParkIQ.SecureParking.Vehicles;
 using TechTalk.SpecFlow;

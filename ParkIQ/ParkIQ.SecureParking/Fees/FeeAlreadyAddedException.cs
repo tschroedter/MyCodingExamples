@@ -1,4 +1,5 @@
 ﻿using System;
+using ParkIQ.SecureParking.Interaces.Fees;
 
 namespace ParkIQ.SecureParking.Fees
 {

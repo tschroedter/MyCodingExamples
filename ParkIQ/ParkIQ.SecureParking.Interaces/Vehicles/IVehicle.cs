@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using JetBrains.Annotations;
-using ParkIQ.SecureParking.Fees;
+using ParkIQ.SecureParking.Interaces.Fees;
 
-namespace ParkIQ.SecureParking.Vehicles
+namespace ParkIQ.SecureParking.Interaces.Vehicles
 {
     public interface IVehicle
     {
