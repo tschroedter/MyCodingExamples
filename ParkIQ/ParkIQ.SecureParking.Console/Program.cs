@@ -1,4 +1,5 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using Castle.Windsor;
 
 namespace ParkIQ.SecureParking.Console
@@ -8,15 +9,23 @@ namespace ParkIQ.SecureParking.Console
     {
         private static void Main()
         {
-            var container = new WindsorContainer();
-            var installer = new Installer();
-            container.Install(installer);
+            try
+            {
+                var container = new WindsorContainer();
+                var installer = new Installer();
+                container.Install(installer);
 
-            var demo = new CarParkDemo(container);
-            demo.Run();
+                var demo = new CarParkDemo(container);
+                demo.Run();
 
-            System.Console.WriteLine("Press 'Return' to exit...");
-            System.Console.ReadLine();
+                System.Console.WriteLine("Press 'Return' to exit...");
+                System.Console.ReadLine();
+            }
+            catch ( Exception ex )
+            {
+                System.Console.WriteLine(ex.Message);
+                System.Console.WriteLine(ex.StackTrace);
+            }
         }
     }
 }

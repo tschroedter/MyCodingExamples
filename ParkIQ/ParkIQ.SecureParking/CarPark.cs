@@ -15,10 +15,12 @@ namespace ParkIQ.SecureParking
     {
         private readonly IBaysManager m_BaysManager;
 
-        public CarPark([NotNull] IBaysManagerFactory factory,
+        public CarPark([NotNull] ISelkieLogger logger,
+                       [NotNull] IBaysManagerFactory factory,
                        [NotNull] string name,
                        int numberOfBays)
         {
+            Logger = logger;
             Factory = factory;
             Name = name;
             m_BaysManager = factory.Create(numberOfBays);
@@ -32,6 +34,7 @@ namespace ParkIQ.SecureParking
             }
         }
 
+        public ISelkieLogger Logger { get; set; }
         public IBaysManagerFactory Factory { get; set; }
         public string Name { get; private set; }
 
@@ -84,7 +87,7 @@ namespace ParkIQ.SecureParking
 
             m_BaysManager.AssignBay(vehicle);
 
-            Console.WriteLine("Vehicle '{0}' entered car park!".Inject(vehicle.Id));
+            Logger.Info("Vehicle '{0}' entered car park!".Inject(vehicle.Id));
         }
 
         public void Exit(IVehicle vehicle)
@@ -96,7 +99,7 @@ namespace ParkIQ.SecureParking
 
             m_BaysManager.ReleaseBay(vehicle);
 
-            Console.WriteLine("Vehicle '{0}' exited car park!".Inject(vehicle.Id));
+            Logger.Info("Vehicle '{0}' exited car park!".Inject(vehicle.Id));
         }
 
         public void Dispose()

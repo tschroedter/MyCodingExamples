@@ -4,6 +4,7 @@ using NSubstitute;
 using NUnit.Framework;
 using ParkIQ.SecureParking.Interaces;
 using ParkIQ.SecureParking.Interaces.Vehicles;
+using Selkie.Windsor;
 
 namespace ParkIQ.SecureParking.Tests
 {
@@ -48,7 +49,8 @@ namespace ParkIQ.SecureParking.Tests
                 baysManagerFactory = m_Factory;
             }
 
-            var sut = new CarPark(baysManagerFactory,
+            var sut = new CarPark(Substitute.For<ISelkieLogger>(),
+                                  baysManagerFactory,
                                   m_DefaultName,
                                   3);
             return sut;

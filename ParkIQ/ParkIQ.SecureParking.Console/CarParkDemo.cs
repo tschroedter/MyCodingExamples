@@ -2,9 +2,11 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using Castle.Windsor;
 using JetBrains.Annotations;
+using NLog;
 using ParkIQ.Extensions;
 using ParkIQ.SecureParking.Interaces;
 using ParkIQ.SecureParking.Interaces.Vehicles;
+using Selkie.Windsor;
 
 namespace ParkIQ.SecureParking.Console
 {
@@ -17,6 +19,7 @@ namespace ParkIQ.SecureParking.Console
         public CarParkDemo([NotNull] IWindsorContainer container)
         {
             m_Container = container;
+            Logger = m_Container.Resolve <ISelkieLogger>();
 
             VehicleAndFeeFactory = container.Resolve <IVehicleAndFeeFactory>();
             CreateVehicles();
@@ -27,7 +30,9 @@ namespace ParkIQ.SecureParking.Console
                                      10);
         }
 
-        public IVehicleFactory Factory { get; set; }
+        public ISelkieLogger Logger { get; private set; }
+
+        public IVehicleFactory Factory { get; private set; }
 
         private IVehicleAndFeeFactory VehicleAndFeeFactory { get; set; }
         private IVehicle StandardCar { get; set; }
@@ -70,7 +75,7 @@ namespace ParkIQ.SecureParking.Console
             }
             catch ( Exception ex )
             {
-                System.Console.WriteLine("Exception: {0}".Inject(ex.Message));
+                Logger.Error("Exception: {0}".Inject(ex.Message), ex);
             }
         }
 
@@ -86,14 +91,14 @@ namespace ParkIQ.SecureParking.Console
         private void ListVehicleDetails()
         {
             // 3.	List the details of all the vehicles in the car park including their type and outstanding fees.
-            System.Console.WriteLine("\r\n\t\tVehicle Details");
+            Logger.Info("\r\n\t\tVehicle Details");
 
             foreach ( IVehicle vehicle in CarPark.Vehicles )
             {
-                System.Console.WriteLine("\t\t{0}".Inject(vehicle));
+                Logger.Info("\t\t{0}".Inject(vehicle));
             }
 
-            System.Console.WriteLine("");
+            Logger.Info("");
         }
 
         private void LuxuryCarPaysFee()
