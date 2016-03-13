@@ -4,7 +4,6 @@ using NUnit.Framework;
 using ParkIQ.Extensions;
 using ParkIQ.SecureParking.Interaces.Vehicles;
 using ParkIQ.SecureParking.SpecFlow.Steps.Common;
-using ParkIQ.SecureParking.Vehicles;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
 

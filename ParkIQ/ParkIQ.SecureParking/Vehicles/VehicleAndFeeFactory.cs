@@ -7,7 +7,6 @@ using Selkie.Windsor;
 
 namespace ParkIQ.SecureParking.Vehicles
 {
-    // todo check tests
     [ProjectComponent(Lifestyle.Transient)]
     public class VehicleAndFeeFactory : IVehicleAndFeeFactory
     {
@@ -56,7 +55,7 @@ namespace ParkIQ.SecureParking.Vehicles
         private IVehicle CreateStandardCar(int weightInKilogram)
         {
             IVehicle vehicle = VehicleFactory.Create <IStandardCar>(GetNextId(),
-                                                                       weightInKilogram);
+                                                                    weightInKilogram);
 
             AddCommonFees(vehicle);
             vehicle.AddFee(FeeFactory.Create <IStandardCarFee>());
@@ -67,7 +66,7 @@ namespace ParkIQ.SecureParking.Vehicles
         private IVehicle CreateLuxuryCar(int weightInKilogram)
         {
             IVehicle vehicle = VehicleFactory.Create <ILuxuryCar>(GetNextId(),
-                                                                     weightInKilogram);
+                                                                  weightInKilogram);
 
             AddCommonFees(vehicle);
             vehicle.AddFee(FeeFactory.Create <ILuxuryCarFee>());
@@ -78,7 +77,7 @@ namespace ParkIQ.SecureParking.Vehicles
         private IVehicle CreateMotorbike(int weightInKilogram)
         {
             IVehicle vehicle = VehicleFactory.Create <IMotorbike>(GetNextId(),
-                                                                     weightInKilogram);
+                                                                  weightInKilogram);
 
             AddCommonFees(vehicle);
             vehicle.AddFee(FeeFactory.Create <IMotorbikeFee>());
@@ -89,7 +88,7 @@ namespace ParkIQ.SecureParking.Vehicles
         private IVehicle CreateTruck(int weightInKilogram)
         {
             IVehicle vehicle = VehicleFactory.Create <ITruck>(GetNextId(),
-                                                                 weightInKilogram);
+                                                              weightInKilogram);
 
             AddCommonFees(vehicle);
             vehicle.AddFee(FeeFactory.Create <ITruckFee>());

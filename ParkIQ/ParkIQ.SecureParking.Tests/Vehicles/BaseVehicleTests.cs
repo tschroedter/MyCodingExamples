@@ -146,5 +146,22 @@ namespace ParkIQ.SecureParking.Tests.Vehicles
             Assert.AreEqual(string.Empty,
                             actual);
         }
+
+        [Test]
+        public void ToString_ReturnsString_WhenCalled()
+        {
+            // Arrange
+            var fees = Substitute.For <IVehicleFees>();
+            var sut = new TestBaseVehilce(fees,
+                                          DefaultId,
+                                          DefaultWeightInKilogram);
+
+            // Act
+            string actual = sut.ToString();
+
+            // Assert
+            Assert.AreEqual("Id: 1 ShortDescription:  Fees: 0 IsFeePaid: False",
+                            actual);
+        }
     }
 }

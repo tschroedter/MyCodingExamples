@@ -114,7 +114,6 @@ namespace ParkIQ.SecureParking
 
         public void Dispose()
         {
-            // todo testing
             foreach ( IBay bay in m_Bays )
             {
                 m_Factory.Release(bay);

@@ -58,7 +58,6 @@ namespace ParkIQ.SecureParking.Tests.Vehicles
 
         public void Release(IFee fee)
         {
-            throw new NotImplementedException();
         }
     }
 }

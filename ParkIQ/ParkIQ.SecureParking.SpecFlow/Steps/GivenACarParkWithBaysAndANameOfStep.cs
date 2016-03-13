@@ -1,7 +1,7 @@
 using Castle.Windsor;
 using ParkIQ.SecureParking.Interaces;
-using TechTalk.SpecFlow;
 using ParkIQ.SecureParking.SpecFlow.Steps.Common;
+using TechTalk.SpecFlow;
 
 namespace ParkIQ.SecureParking.SpecFlow.Steps
 {
@@ -17,19 +17,13 @@ namespace ParkIQ.SecureParking.SpecFlow.Steps
             Container = windsorContainer;
         }
 
-        [AfterScenario]
-        public void AfterScenario()
-        {
-            Container.Dispose();
-        }
-
         [Given(@"a car park with (.*) bays and a name of ""(.*)""")]
         public void GivenACarParkWithBaysAndANameOf(int numberOfBays,
                                                     string name)
         {
             var factory = Container.Resolve <ICarParkFactory>();
 
-            CarPark = factory.Create("name",
+            CarPark = factory.Create("Test carpark",
                                      numberOfBays);
         }
     }

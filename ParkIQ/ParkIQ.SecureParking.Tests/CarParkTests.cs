@@ -7,7 +7,6 @@ using ParkIQ.SecureParking.Interaces.Vehicles;
 
 namespace ParkIQ.SecureParking.Tests
 {
-    // todo XUnit might be nicer using AutoNSubstitute
     [ExcludeFromCodeCoverage]
     [TestFixture]
     internal sealed class CarParkTests
@@ -32,8 +31,8 @@ namespace ParkIQ.SecureParking.Tests
             m_DefaultName = "King Street";
             m_BayManager = Substitute.For <IBaysManager>();
 
-            m_Factory = Substitute.For<IBaysManagerFactory>();
-            m_Factory.Create(Arg.Any<int>()).Returns(m_BayManager);
+            m_Factory = Substitute.For <IBaysManagerFactory>();
+            m_Factory.Create(Arg.Any <int>()).Returns(m_BayManager);
         }
 
         private IBaysManager m_BayManager;

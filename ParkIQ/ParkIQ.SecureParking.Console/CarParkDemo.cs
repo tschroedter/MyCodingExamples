@@ -11,18 +11,18 @@ namespace ParkIQ.SecureParking.Console
     [ExcludeFromCodeCoverage]
     public class CarParkDemo : IDisposable
     {
-        private readonly IWindsorContainer m_Container;
         private const int DoesNotMatterWeightInKilogram = 1;
+        private readonly IWindsorContainer m_Container;
 
         public CarParkDemo([NotNull] IWindsorContainer container)
         {
             m_Container = container;
 
-            VehicleAndFeeFactory = container.Resolve<IVehicleAndFeeFactory>();
+            VehicleAndFeeFactory = container.Resolve <IVehicleAndFeeFactory>();
             CreateVehicles();
 
             // 1.	Initialise the car park with 10 bays and a name of “Test carpark”
-            var factory = container.Resolve<ICarParkFactory>();
+            var factory = container.Resolve <ICarParkFactory>();
             CarPark = factory.Create("Test carpark",
                                      10);
         }
@@ -36,6 +36,11 @@ namespace ParkIQ.SecureParking.Console
         private IVehicle MotorbikeOther { get; set; }
         private IVehicle Truck { get; set; }
         private ICarPark CarPark { get; set; }
+
+        public void Dispose()
+        {
+            m_Container.Dispose();
+        }
 
         private void CreateVehicles()
         {
@@ -129,11 +134,6 @@ namespace ParkIQ.SecureParking.Console
         {
             // 11.	Have a motorbike enter the car park
             CarPark.Exit(MotorbikeOther);
-        }
-
-        public void Dispose()
-        {
-            m_Container.Dispose();
         }
     }
 }

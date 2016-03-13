@@ -1,7 +1,6 @@
 using ParkIQ.SecureParking.Interaces.Vehicles;
-using TechTalk.SpecFlow;
 using ParkIQ.SecureParking.SpecFlow.Steps.Common;
-using ParkIQ.SecureParking.Vehicles;
+using TechTalk.SpecFlow;
 
 namespace ParkIQ.SecureParking.SpecFlow.Steps
 {

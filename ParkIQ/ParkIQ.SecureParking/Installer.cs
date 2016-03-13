@@ -27,8 +27,8 @@ namespace ParkIQ.SecureParking
 
             container.Register(
                                Classes.FromThisAssembly()
-                                      .BasedOn<IFee>()
-                                      .WithServiceFromInterface(typeof(IFee))
+                                      .BasedOn <IFee>()
+                                      .WithServiceFromInterface(typeof ( IFee ))
                                       .Configure(c => c.LifeStyle.Is(LifestyleType.Transient)));
         }
 

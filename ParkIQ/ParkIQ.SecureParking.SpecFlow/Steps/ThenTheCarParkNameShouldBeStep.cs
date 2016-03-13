@@ -1,6 +1,6 @@
-﻿using TechTalk.SpecFlow;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using ParkIQ.SecureParking.SpecFlow.Steps.Common;
+using TechTalk.SpecFlow;
 
 namespace ParkIQ.SecureParking.SpecFlow.Steps
 {

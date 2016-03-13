@@ -11,13 +11,25 @@ namespace ParkIQ.SecureParking.Tests
     [TestFixture]
     internal sealed class BaysManagerTests
     {
+        private static BaysManager CreateSut(int numberOfBays,
+                                             IBayFactory factory = null)
+        {
+            if ( factory == null )
+            {
+                factory = new TestBayFactory();
+            }
+
+            return new BaysManager(factory,
+                                   numberOfBays);
+        }
+
         [Test]
         public void AssignBay_AssignsVehiclesToDifferetBays_ForVehicles()
         {
             // Arrange
             var vehicleOne = Substitute.For <IVehicle>();
             var vehicleTwo = Substitute.For <IVehicle>();
-            var sut = CreateSut(3);
+            BaysManager sut = CreateSut(3);
 
             // Act
             sut.AssignBay(vehicleOne);
@@ -33,24 +45,12 @@ namespace ParkIQ.SecureParking.Tests
                             "vehicleTwo");
         }
 
-        private static BaysManager CreateSut(int numberOfBays,
-                                             IBayFactory factory = null)
-        {
-            if ( factory == null )
-            {
-                factory = new TestBayFactory();
-            }
-
-            return new BaysManager(factory,
-                                   numberOfBays);
-        }
-
         [Test]
         public void AssignBay_AssignsVehicleToBay_ForVehicle()
         {
             // Arrange
             var vehicle = Substitute.For <IVehicle>();
-            var sut = CreateSut(3);
+            BaysManager sut = CreateSut(3);
 
             // Act
             sut.AssignBay(vehicle);
@@ -65,7 +65,7 @@ namespace ParkIQ.SecureParking.Tests
         {
             // Arrange
             var vehicleOne = Substitute.For <IVehicle>();
-            var sut = CreateSut(3);
+            BaysManager sut = CreateSut(3);
 
             // Act
             sut.AssignBay(vehicleOne);
@@ -80,7 +80,7 @@ namespace ParkIQ.SecureParking.Tests
         {
             // Arrange
             var vehicleOne = Substitute.For <IVehicle>();
-            var sut = CreateSut(3);
+            BaysManager sut = CreateSut(3);
 
             // Act
             sut.AssignBay(vehicleOne);
@@ -96,7 +96,7 @@ namespace ParkIQ.SecureParking.Tests
             // Arrange
             var vehicleOne = Substitute.For <IVehicle>();
             var vehicleTwo = Substitute.For <IVehicle>();
-            var sut = CreateSut(1);
+            BaysManager sut = CreateSut(1);
             sut.AssignBay(vehicleOne);
 
             // Act
@@ -105,11 +105,24 @@ namespace ParkIQ.SecureParking.Tests
         }
 
         [Test]
+        public void Constructor_CallsCreate_WhenCalled()
+        {
+            // Arrange
+            var factory = Substitute.For <IBayFactory>();
+            CreateSut(3,
+                      factory);
+
+            // Act
+            // Assert
+            factory.Received(3).Create(Arg.Any <int>());
+        }
+
+        [Test]
         public void Constructor_CreatesBays_WhenCalled()
         {
             // Arrange
             // Act
-            var sut = CreateSut(3);
+            BaysManager sut = CreateSut(3);
 
             // Assert
             Assert.AreEqual(3,
@@ -121,7 +134,7 @@ namespace ParkIQ.SecureParking.Tests
         {
             // Arrange
             // Act
-            var sut = CreateSut(3);
+            BaysManager sut = CreateSut(3);
 
             // Assert
             Assert.AreEqual(3,
@@ -129,11 +142,52 @@ namespace ParkIQ.SecureParking.Tests
         }
 
         [Test]
+        public void Dispose_CallsRelease_WhenCalled()
+        {
+            // Arrange
+            var bayOne = Substitute.For <IBay>();
+            bayOne.IsEmpty.Returns(true);
+            var bayTwo = Substitute.For <IBay>();
+            bayTwo.IsEmpty.Returns(true);
+            var factory = Substitute.For <IBayFactory>();
+            factory.Create(Arg.Any <int>()).Returns(bayOne,
+                                                    bayTwo);
+            var vehicleOne = Substitute.For <IVehicle>();
+            var vehicleTwo = Substitute.For <IVehicle>();
+            BaysManager sut = CreateSut(3,
+                                        factory);
+            sut.AssignBay(vehicleOne);
+            sut.AssignBay(vehicleTwo);
+
+            // Act
+            sut.Dispose();
+
+            // Assert
+            factory.Received().Release(bayOne);
+            factory.Received().Release(bayTwo);
+        }
+
+        [Test]
+        public void Dispose_ReleasesBays_WhenCalled()
+        {
+            // Arrange
+            var factory = Substitute.For <IBayFactory>();
+            BaysManager sut = CreateSut(3,
+                                        factory);
+
+            // Act
+            sut.Dispose();
+
+            // Assert
+            factory.Received(3).Release(Arg.Any <IBay>());
+        }
+
+        [Test]
         public void IsFull_ReturnsFalse_WhenEmptyBaysAreAvailable()
         {
             // Arrange
             var vehicleOne = Substitute.For <IVehicle>();
-            var sut = CreateSut(2);
+            BaysManager sut = CreateSut(2);
             sut.AssignBay(vehicleOne);
 
             // Act
@@ -146,7 +200,7 @@ namespace ParkIQ.SecureParking.Tests
         {
             // Arrange
             var vehicleOne = Substitute.For <IVehicle>();
-            var sut = CreateSut(1);
+            BaysManager sut = CreateSut(1);
             sut.AssignBay(vehicleOne);
 
             // Act
@@ -159,7 +213,7 @@ namespace ParkIQ.SecureParking.Tests
         {
             // Arrange
             var vehicle = Substitute.For <IVehicle>();
-            var sut = CreateSut(3);
+            BaysManager sut = CreateSut(3);
             sut.AssignBay(vehicle);
 
             // Act
@@ -175,7 +229,7 @@ namespace ParkIQ.SecureParking.Tests
         {
             // Arrange
             var vehicle = Substitute.For <IVehicle>();
-            var sut = CreateSut(3);
+            BaysManager sut = CreateSut(3);
             sut.AssignBay(vehicle);
 
             // Act
@@ -190,7 +244,7 @@ namespace ParkIQ.SecureParking.Tests
         {
             // Arrange
             var vehicle = Substitute.For <IVehicle>();
-            var sut = CreateSut(3);
+            BaysManager sut = CreateSut(3);
 
             // Act
             // Assert
@@ -203,7 +257,7 @@ namespace ParkIQ.SecureParking.Tests
             // Arrange
             var vehicleOne = Substitute.For <IVehicle>();
             var vehicleTwo = Substitute.For <IVehicle>();
-            var sut = CreateSut(3);
+            BaysManager sut = CreateSut(3);
             sut.AssignBay(vehicleOne);
             sut.AssignBay(vehicleTwo);
 
@@ -220,34 +274,6 @@ namespace ParkIQ.SecureParking.Tests
             Assert.AreEqual(vehicleTwo,
                             actual.Last(),
                             "vehicleTwo");
-        }
-
-        [Test]
-        public void Constructor_CallsCreate_WhenCalled()
-        {
-            // Arrange
-            var factory = Substitute.For<IBayFactory>();
-            CreateSut(3,
-                      factory);
-
-            // Act
-            // Assert
-            factory.Received(3).Create(Arg.Any<int>());
-        }
-
-        [Test]
-        public void Dispose_ReleasesBays_WhenCalled()
-        {
-            // Arrange
-            var factory = Substitute.For<IBayFactory>();
-            var sut = CreateSut(3,
-                                factory);
-
-            // Act
-            sut.Dispose();
-
-            // Assert
-            factory.Received(3).Release(Arg.Any<IBay>());
         }
     }
 }
