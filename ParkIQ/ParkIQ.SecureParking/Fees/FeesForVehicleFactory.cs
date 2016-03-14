@@ -49,7 +49,6 @@ namespace ParkIQ.SecureParking.Fees
             else
             {
                 throw new ArgumentException("Can't create vehicle for type '{0}'!".Inject(vehicle.GetType()));
-                // todo can use Selkie.Windosr.Inject
             }
 
             return fees;
@@ -81,26 +80,6 @@ namespace ParkIQ.SecureParking.Fees
                 var weightFee = m_FeeFactory.Create <IWeightFee>();
 
                 fees.Add(weightFee);
-            }
-        }
-    }
-    [AttributeUsage(AttributeTargets.Class, Inherited = false)]
-    public sealed class CarFeeAttribute
-        : Attribute
-    {
-        // todo
-        private readonly Type m_FeeType;
-
-        public CarFeeAttribute(Type type)
-        {
-            m_FeeType = type;
-        }
-
-        public Type FeeType
-        {
-            get
-            {
-                return m_FeeType;
             }
         }
     }

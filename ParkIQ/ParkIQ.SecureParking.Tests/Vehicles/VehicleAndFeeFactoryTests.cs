@@ -1,7 +1,9 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using NSubstitute;
 using NUnit.Framework;
+using ParkIQ.SecureParking.Fees;
 using ParkIQ.SecureParking.Interaces.Fees;
 using ParkIQ.SecureParking.Interaces.Vehicles;
 using ParkIQ.SecureParking.Vehicles;
@@ -17,7 +19,7 @@ namespace ParkIQ.SecureParking.Tests.Vehicles
         private const int MinWeightInKilogramToForceWeightFee = 101;
 
         private static VehicleAndFeeFactory CreateSut(IVehicleFactory vehicleFactory = null,
-                                                      IFeeFactory feeFactory = null)
+                                                      IFeesForVehicleFactory feeFactory = null)
         {
             if ( vehicleFactory == null )
             {
@@ -26,7 +28,7 @@ namespace ParkIQ.SecureParking.Tests.Vehicles
 
             if ( feeFactory == null )
             {
-                feeFactory = new TestIFeeFactory();
+                feeFactory = new FeesForVehicleFactory(new TestIFeeFactory());
             }
 
             var sut = new VehicleAndFeeFactory(vehicleFactory,
@@ -261,6 +263,40 @@ namespace ParkIQ.SecureParking.Tests.Vehicles
 
             // Assert
             Assert.True(actual.Fees.Any(x => x is IWeightFee));
+        }
+
+        [Test]
+        public void Release_CallsFeeFactory_WhenCalled()
+        {
+            // Arrange
+            var vehicleFactory = Substitute.For <IVehicleFactory>();
+            var feeFactory = Substitute.For <IFeesForVehicleFactory>();
+            VehicleAndFeeFactory sut = CreateSut(vehicleFactory,
+                                                 feeFactory);
+            var vehicle = sut.Create <IStandardCar>(DefaultWeight);
+
+            // Act
+            sut.Release(vehicle);
+
+            // Assert
+            feeFactory.Received().Release(Arg.Any <IEnumerable <IFee>>());
+        }
+
+        [Test]
+        public void Release_CallsVehicleFactory_WhenCalled()
+        {
+            // Arrange
+            var vehicleFactory = Substitute.For <IVehicleFactory>();
+            var feeFactory = Substitute.For <IFeesForVehicleFactory>();
+            VehicleAndFeeFactory sut = CreateSut(vehicleFactory,
+                                                 feeFactory);
+            var vehicle = sut.Create <IStandardCar>(DefaultWeight);
+
+            // Act
+            sut.Release(vehicle);
+
+            // Assert
+            vehicleFactory.Received().Release(Arg.Any <IVehicle>());
         }
     }
 }

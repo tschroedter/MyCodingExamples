@@ -1,8 +1,7 @@
 using JetBrains.Annotations;
-using ParkIQ.SecureParking.Interaces.Fees;
 using Selkie.Windsor;
 
-namespace ParkIQ.SecureParking.Fees
+namespace ParkIQ.SecureParking.Interaces.Fees
 {
     public interface IVehicleFeesFactory : ITypedFactory
     {

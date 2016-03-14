@@ -1,6 +1,5 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using JetBrains.Annotations;
-using ParkIQ.Extensions;
 using ParkIQ.SecureParking.Interaces.Fees;
 using ParkIQ.SecureParking.Interaces.Vehicles;
 using Selkie.Windsor;
@@ -13,102 +12,40 @@ namespace ParkIQ.SecureParking.Vehicles
         private int m_NextId = 1;
 
         public VehicleAndFeeFactory([NotNull] IVehicleFactory vehicleFactory,
-                                    [NotNull] IFeeFactory feeFactory)
+                                    [NotNull] IFeesForVehicleFactory feeFactory)
         {
             VehicleFactory = vehicleFactory;
             FeeFactory = feeFactory;
         }
 
         public IVehicleFactory VehicleFactory { get; set; }
-        public IFeeFactory FeeFactory { get; set; }
+        public IFeesForVehicleFactory FeeFactory { get; set; }
 
         public T Create <T>(int weightInKilogram) where T : IVehicle
         {
-            // todo castle windsor factory
-            if ( typeof ( T ) == typeof ( IStandardCar ) )
-            {
-                return ( T ) CreateStandardCar(weightInKilogram);
-            }
-
-            if ( typeof ( T ) == typeof ( ILuxuryCar ) )
-            {
-                return ( T ) CreateLuxuryCar(weightInKilogram);
-            }
-
-            if ( typeof ( T ) == typeof ( IMotorbike ) )
-            {
-                return ( T ) CreateMotorbike(weightInKilogram);
-            }
-
-            if ( typeof ( T ) == typeof ( ITruck ) )
-            {
-                return ( T ) CreateTruck(weightInKilogram);
-            }
-
-            throw new ArgumentException("Can't create vehicle for type '{0}'!".Inject(typeof ( T )));
+            return ( T ) CreateVehicleWithFees <T>(weightInKilogram);
         }
 
         public void Release(IVehicle vehicle)
         {
+            FeeFactory.Release(vehicle.Fees);
+            VehicleFactory.Release(vehicle);
         }
 
-        private IVehicle CreateStandardCar(int weightInKilogram)
+        private IVehicle CreateVehicleWithFees <T>(int weightInKilogram)
+            where T : IVehicle
         {
-            IVehicle vehicle = VehicleFactory.Create <IStandardCar>(GetNextId(),
-                                                                    weightInKilogram);
+            IVehicle vehicle = VehicleFactory.Create <T>(GetNextId(),
+                                                         weightInKilogram);
 
-            AddCommonFees(vehicle);
-            vehicle.AddFee(FeeFactory.Create <IStandardCarFee>());
+            IEnumerable <IFee> fees = FeeFactory.Create(vehicle);
 
-            return vehicle;
-        }
-
-        private IVehicle CreateLuxuryCar(int weightInKilogram)
-        {
-            IVehicle vehicle = VehicleFactory.Create <ILuxuryCar>(GetNextId(),
-                                                                  weightInKilogram);
-
-            AddCommonFees(vehicle);
-            vehicle.AddFee(FeeFactory.Create <ILuxuryCarFee>());
-
-            return vehicle;
-        }
-
-        private IVehicle CreateMotorbike(int weightInKilogram)
-        {
-            IVehicle vehicle = VehicleFactory.Create <IMotorbike>(GetNextId(),
-                                                                  weightInKilogram);
-
-            AddCommonFees(vehicle);
-            vehicle.AddFee(FeeFactory.Create <IMotorbikeFee>());
-
-            return vehicle;
-        }
-
-        private IVehicle CreateTruck(int weightInKilogram)
-        {
-            IVehicle vehicle = VehicleFactory.Create <ITruck>(GetNextId(),
-                                                              weightInKilogram);
-
-            AddCommonFees(vehicle);
-            vehicle.AddFee(FeeFactory.Create <ITruckFee>());
-
-            return vehicle;
-        }
-
-        private void AddCommonFees([NotNull] IVehicle vehicle)
-        {
-            AddWeightFeeIfRequired(vehicle);
-
-            vehicle.AddFee(FeeFactory.Create <IVehicleFee>());
-        }
-
-        private void AddWeightFeeIfRequired([NotNull] IVehicle vehicle)
-        {
-            if ( vehicle.WeightInKilogram > 100 )
+            foreach ( IFee fee in fees )
             {
-                vehicle.AddFee(FeeFactory.Create <IWeightFee>());
+                vehicle.AddFee(fee);
             }
+
+            return vehicle;
         }
 
         private int GetNextId()

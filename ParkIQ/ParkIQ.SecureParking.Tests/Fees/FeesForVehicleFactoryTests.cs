@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
@@ -197,6 +198,39 @@ namespace ParkIQ.SecureParking.Tests.Fees
 
             // Assert
             Assert.True(actual.Any(x => x is IWeightFee));
+        }
+
+        [Test]
+        public void Release_CallsFactory_ForFees()
+        {
+            // Arrange
+            var truckFee = Substitute.For <ITruckFee>();
+            var vehicleFee = Substitute.For <IVehicleFee>();
+            var vehicle = Substitute.For <ITruck>();
+            var factory = Substitute.For <IFeeFactory>();
+            factory.Create <IVehicleFee>().Returns(vehicleFee);
+            factory.Create <ITruckFee>().Returns(truckFee);
+            FeesForVehicleFactory sut = CreateSut(factory);
+            IEnumerable <IFee> fees = sut.Create(vehicle);
+
+            // Act
+            sut.Release(fees);
+
+            // Assert
+            factory.Received(2).Release(Arg.Any <IFee>());
+        }
+
+        [Test]
+        public void ThrowsException_ForUnknowVehicleType()
+        {
+            // Arrange
+            var vehicle = Substitute.For <IVehicle>();
+            vehicle.WeightInKilogram.Returns(MinWeightInKilogramToForceWeightFee);
+            FeesForVehicleFactory sut = CreateSut();
+
+            // Act
+            // Assert
+            Assert.Throws <ArgumentException>(() => sut.Create(vehicle));
         }
     }
 }
