@@ -29,6 +29,14 @@ namespace ParkIQ.SecureParking.Fees
             return m_Calculator.Calulate(m_Fees);
         }
 
+        public void AddFees(IEnumerable <IFee> fees)
+        { // todo testing
+            foreach ( IFee fee in fees )
+            {
+                AddFee(fee);
+            }
+        }
+
         public void AddFee(IFee fee)
         {
             if ( m_Fees.Contains(fee) )

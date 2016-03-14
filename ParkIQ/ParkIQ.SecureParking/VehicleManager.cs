@@ -11,14 +11,4 @@ namespace ParkIQ.SecureParking
     public interface IVehicleManager
     {
     }
-
-    [ProjectComponent(Lifestyle.Transient)]
-    public class FeeManager : IFeeManager
-    {
-        // todo
-    }
-
-    public interface IFeeManager
-    {
-    }
 }

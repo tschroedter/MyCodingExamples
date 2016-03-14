@@ -70,12 +70,14 @@
     <Compile Include="Fees\IFee.cs" />
     <Compile Include="Fees\IFeeCalculator.cs" />
     <Compile Include="Fees\IFeeFactory.cs" />
+    <Compile Include="Fees\IFeesForVehicleFactory.cs" />
     <Compile Include="Fees\ILuxuryCarFee.cs" />
     <Compile Include="Fees\IMotorbikeFee.cs" />
     <Compile Include="Fees\IStandardCarFee.cs" />
     <Compile Include="Fees\ITruckFee.cs" />
     <Compile Include="Fees\IVehicleFee.cs" />
     <Compile Include="Fees\IVehicleFees.cs" />
+    <Compile Include="Fees\IVehicleFeesFactory.cs" />
     <Compile Include="Fees\IWeightFee.cs" />
     <Compile Include="IBay.cs" />
     <Compile Include="IBayFactory.cs" />

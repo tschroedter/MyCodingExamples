@@ -7,8 +7,7 @@ namespace ParkIQ.SecureParking
     public class NoEmptyBayException : Exception
     {
         public NoEmptyBayException([NotNull] IVehicle vehicle)
-            :
-                base("There is no empty bay!")
+            : base("There is no empty bay!")
         {
             Vehicle = vehicle;
         }

@@ -2,7 +2,6 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using Castle.Windsor;
 using JetBrains.Annotations;
-using NLog;
 using ParkIQ.Extensions;
 using ParkIQ.SecureParking.Interaces;
 using ParkIQ.SecureParking.Interaces.Vehicles;
@@ -19,20 +18,21 @@ namespace ParkIQ.SecureParking.Console
         public CarParkDemo([NotNull] IWindsorContainer container)
         {
             m_Container = container;
+            VehicleFactory = container.Resolve <IVehicleFactory>();
             Logger = m_Container.Resolve <ISelkieLogger>();
 
             VehicleAndFeeFactory = container.Resolve <IVehicleAndFeeFactory>();
             CreateVehicles();
 
             // 1.	Initialise the car park with 10 bays and a name of “Test carpark”
-            var factory = container.Resolve <ICarParkFactory>();
-            CarPark = factory.Create("Test carpark",
-                                     10);
+            var carParkFactory = container.Resolve <ICarParkFactory>();
+            CarPark = carParkFactory.Create("Test carpark",
+                                            10);
         }
 
         public ISelkieLogger Logger { get; private set; }
 
-        public IVehicleFactory Factory { get; private set; }
+        public IVehicleFactory VehicleFactory { get; private set; }
 
         private IVehicleAndFeeFactory VehicleAndFeeFactory { get; set; }
         private IVehicle StandardCar { get; set; }

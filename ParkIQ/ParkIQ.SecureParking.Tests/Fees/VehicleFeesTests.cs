@@ -11,13 +11,24 @@ namespace ParkIQ.SecureParking.Tests.Fees
     [TestFixture]
     internal sealed class VehicleFeesTests
     {
+        private static VehicleFees CreateSut(IFeeCalculator calculator = null)
+        {
+            if ( calculator == null )
+            {
+                calculator = Substitute.For <IFeeCalculator>();
+            }
+
+            var sut = new VehicleFees(calculator);
+            return sut;
+        }
+
         [Test]
         public void AddFee_AddsFeeToFees_ForGivenFee()
         {
             // Arrange
             var fee = Substitute.For <IFee>();
             var calculator = Substitute.For <IFeeCalculator>();
-            var sut = new VehicleFees(calculator);
+            VehicleFees sut = CreateSut(calculator);
 
             // Act
             sut.AddFee(fee);
@@ -35,7 +46,7 @@ namespace ParkIQ.SecureParking.Tests.Fees
             // Arrange
             var fee = Substitute.For <IFee>();
             var calculator = Substitute.For <IFeeCalculator>();
-            var sut = new VehicleFees(calculator);
+            VehicleFees sut = CreateSut(calculator);
 
             // Act
             sut.AddFee(fee);
@@ -51,7 +62,7 @@ namespace ParkIQ.SecureParking.Tests.Fees
             // Arrange
             var fee = Substitute.For <IFee>();
             var calculator = Substitute.For <IFeeCalculator>();
-            var sut = new VehicleFees(calculator);
+            VehicleFees sut = CreateSut(calculator);
             sut.AddFee(fee);
 
             // Act
@@ -65,7 +76,7 @@ namespace ParkIQ.SecureParking.Tests.Fees
             // Arrange
             var calculator = Substitute.For <IFeeCalculator>();
             calculator.Calulate(new IFee[0]).ReturnsForAnyArgs(123);
-            var sut = new VehicleFees(calculator);
+            VehicleFees sut = CreateSut(calculator);
 
             // Act
             int actual = sut.Calulate();
@@ -81,7 +92,7 @@ namespace ParkIQ.SecureParking.Tests.Fees
             // Arrange
             var fee = Substitute.For <IFee>();
             var calculator = Substitute.For <IFeeCalculator>();
-            var sut = new VehicleFees(calculator);
+            VehicleFees sut = CreateSut(calculator);
 
             // Act
             // Assert
@@ -94,7 +105,7 @@ namespace ParkIQ.SecureParking.Tests.Fees
             // Arrange
             var fee = Substitute.For <IFee>();
             var calculator = Substitute.For <IFeeCalculator>();
-            var sut = new VehicleFees(calculator);
+            VehicleFees sut = CreateSut(calculator);
             sut.AddFee(fee);
 
             // Act
@@ -107,7 +118,7 @@ namespace ParkIQ.SecureParking.Tests.Fees
         {
             // Arrange
             var calculator = Substitute.For <IFeeCalculator>();
-            var sut = new VehicleFees(calculator);
+            VehicleFees sut = CreateSut(calculator);
 
             // Act
             // Assert
@@ -119,7 +130,7 @@ namespace ParkIQ.SecureParking.Tests.Fees
         {
             // Arrange
             var calculator = Substitute.For <IFeeCalculator>();
-            var sut = new VehicleFees(calculator);
+            VehicleFees sut = CreateSut(calculator);
             sut.FeeIsPaid();
 
             // Act
@@ -133,7 +144,7 @@ namespace ParkIQ.SecureParking.Tests.Fees
             // Arrange
             var fee = Substitute.For <IFee>();
             var calculator = Substitute.For <IFeeCalculator>();
-            var sut = new VehicleFees(calculator);
+            VehicleFees sut = CreateSut(calculator);
             sut.AddFee(fee);
 
             // Act
@@ -150,7 +161,7 @@ namespace ParkIQ.SecureParking.Tests.Fees
             // Arrange
             var fee = Substitute.For <IFee>();
             var calculator = Substitute.For <IFeeCalculator>();
-            var sut = new VehicleFees(calculator);
+            VehicleFees sut = CreateSut(calculator);
             sut.AddFee(fee);
 
             // Act
@@ -166,7 +177,7 @@ namespace ParkIQ.SecureParking.Tests.Fees
             // Arrange
             var fee = Substitute.For <IFee>();
             var calculator = Substitute.For <IFeeCalculator>();
-            var sut = new VehicleFees(calculator);
+            VehicleFees sut = CreateSut(calculator);
 
             // Act
             sut.RemoveFee(fee);

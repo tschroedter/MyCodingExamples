@@ -78,6 +78,8 @@
     <Compile Include="BaysManagerTests.cs" />
     <Compile Include="CarParkTests.cs" />
     <Compile Include="Fees\FeeCalculatorTests.cs" />
+    <Compile Include="Fees\FeesForVehicleFactoryTests.cs" />
+    <Compile Include="Fees\FeesManagerTests.cs" />
     <Compile Include="Fees\LuxuryCarFeeTests.cs" />
     <Compile Include="Fees\MotorbikeFeeTests.cs" />
     <Compile Include="Fees\TruckFeeTests.cs" />
