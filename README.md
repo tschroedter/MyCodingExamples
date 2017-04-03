@@ -24,10 +24,12 @@
 |C#|Console|ParkIQ|Car park manager applicayion.|
 |C#|Console + Web|QUT|Microservices using Nancy and Enterprise Framework.|
 |C#|Console|WiseTechGlobal|ChequeWriter, RomanCalculator, RomanNumerals|
-||||Other Repositories below|
+|C++|Console|KataRomanCalculator|Calculator. Using GoogleMocks/Tests and SOLID, DRY, LEAN|
+|C++|Console|KataRomanNumerals|Roman numerals. Using GoogleMocks/Tests and SOLID, DRY, LEAN|
+|C++|Console|KataTennis|Keeping track of a tennis match. Using GoogleMocks/Tests and SOLID, DRY, LEAN|
+||||**Other Repositories below**|
 |C#|Console + Web|[Doctors Appointment](https://github.com/tschroedter/DoctorsAppointment)|Microservices + Enterprise Framework|
 |C#|Console + WPF|[Selkie](https://github.com/tschroedter/Selkie)|RabbitMQ, Services, WPF, losely coupled, traveling sales man...|
-
 
 # Adslot
 ## C#, Console Application
