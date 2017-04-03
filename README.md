@@ -1,5 +1,34 @@
 # MyCodingExamples
 
+## Overview
+| |Type|Name|Description|
+|-|----|----|-----------|
+|C#|Console|Adslot|Find index of longest sequence in integer array.|
+|C#|Console|Aimedia|todo|
+|C#,JavaScript|Web|AngularJS|todo|
+|C#|Console|Aimedia|todo|
+|C#|Console|AOPCastle|Aspect Oriented Programming using Castle Windsor.|
+|C#|Console|AOPExample|todo|
+|C#|Console|Brainteaser|Different implementation for puzzels from the Brainteaser website.|
+|C#|Console|CodingdojoOrg|(seems to be duplicate of Brainteaser)|
+|C#|Console|Deswik.MyTasks|This program is part of a task tracking system.|
+|C#|Console|DigitalSimulator|Digital circuit simulator|
+|F#|Console|FizzBuzz|Collection of multiple coding katas in F#.|
+|C#|Console|GameOfLive|Implemenaton of the game of live.|
+|C#|Console|FizzBuzz|FizzBuzz|
+|C#|Console + Web|IAsset|Microservices/JSON|
+|C#|Console|InheritanceSample|N/A|
+|C#|Console + WPF|Minesight|Loosely couple using in memory bus to communicate, replace events with messages.|
+|C#|Console|MYOB|MYOB - Technical Test|
+|C#|Console|ParkIQ|Car park manager applicayion.|
+|C#|Console|ParkIQ|Car park manager applicayion.|
+|C#|Console + Web|QUT|Microservices using Nancy and Enterprise Framework.|
+|C#|Console|WiseTechGlobal|ChequeWriter, RomanCalculator, RomanNumerals|
+||||Other Repositories below|
+|C#|Console + Web|[Doctors Appointment](https://github.com/tschroedter/DoctorsAppointment)|Microservices + Enterprise Framework|
+|C#|Console + WPF|[Selkie](https://github.com/tschroedter/Selkie)|RabbitMQ, Services, WPF, losely coupled, traveling sales man...|
+
+
 # Adslot
 ## C#, Console Application
 ### Description
@@ -72,7 +101,7 @@ N/A
 # Brainteaser
 ## C#, Console Application
 ### Description
-Different implementation for puzzels from the Brainteaser website
+Different implementation for puzzels from the Brainteaser website.
 - FrogRiverOne
 - InterviewZen
 - MaxCounters
@@ -299,9 +328,9 @@ Fody
 ### Description
 Create a set of working classes representing a car park as described below. The code you write should contain sufficient commenting and be of production quality. You may use the internet during your time. You may also ask questions to clarify the details described below.
 - A car park has a name
-- A car park has a certain number of bays (car spots).  BaysManager
-- A car park has a list of vehicles currently in the car park  VehiclesManager
-- A car park has a property indicating how full the car park Need more info % or count
+- A car park has a certain number of bays (car spots). (BaysManager)
+- A car park has a list of vehicles currently in the car park (VehiclesManager)
+- A car park has a property indicating how full the car park (Need more info % or count)
 - Vehicles can enter and exit the car park. When a vehicle enters the car park, the occupancy count goes up by 1. When a vehicle exits the car park, the occupancy count goes down by 1. 1) A vehicle cannot enter the car park if it is full. 2) A vehicle cannot exit the car park if its fee has not been paid.
 - All vehicles have a weight
 - All vehicles have a fee for parking in the car park. This vehicle fee is $2
