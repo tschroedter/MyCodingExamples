@@ -21,7 +21,7 @@ namespace Tennis
 
         public:
             Set ( 
-                std::unique_ptr<ISetStatusCalculator> calculator, // todo use this
+                std::unique_ptr<ISetStatusCalculator> calculator,
                 std::unique_ptr<ISetWonPointHandler> handler,
                 std::unique_ptr<IGames> games,
                 std::unique_ptr<ITieBreak> tie_break )
@@ -30,13 +30,13 @@ namespace Tennis
                 , m_games ( std::move ( games ) )
                 , m_tie_break ( std::move ( tie_break ) )
             {
-                m_games->new_game(); // todo need empty constructor
             }
 
             ~Set ()
             {
             }
 
+            void initialize() override;
             void won_point ( Player player ) override;
             IGame* get_current_game () const override;
             const IGames* get_games () const override;

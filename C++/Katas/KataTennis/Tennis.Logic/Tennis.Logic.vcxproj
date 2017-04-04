@@ -150,6 +150,7 @@
     <ClInclude Include="include\ISets.h" />
     <ClInclude Include="include\ISetStatusCalculator.h" />
     <ClInclude Include="include\ITieBreak.h" />
+    <ClInclude Include="include\ITieBreakFactory.h" />
     <ClInclude Include="include\ITieBreaks.h" />
     <ClInclude Include="include\ITieBreakScore.h" />
     <ClInclude Include="include\ISetWonPointHandler.h" />

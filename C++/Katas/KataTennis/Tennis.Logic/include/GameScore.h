@@ -6,7 +6,7 @@ namespace Tennis
 {
     namespace Logic
     {
-        class GameScore // todo continue
+        class GameScore
                 : public IGameScore
         {
         private:

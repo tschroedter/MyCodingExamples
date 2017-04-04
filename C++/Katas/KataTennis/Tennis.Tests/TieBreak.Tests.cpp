@@ -95,7 +95,7 @@ TEST(TieBreak, won_point_increases_score_for_player_two_twice)
     EXPECT_EQ(2, sut->get_score(Player::Two));
 }
 
-TEST(TieBreak, get_status_calls_calculate) // todo mock might be better
+TEST(TieBreak, get_status_calls_calculate)
 {
     using namespace Tennis::Logic;
 
@@ -106,5 +106,5 @@ TEST(TieBreak, get_status_calls_calculate) // todo mock might be better
     TieBreakStatus actual = sut->get_status();
 
     // Assert
-    EXPECT_EQ(TieBreakStatus_NotStarted, sut->get_score(Player::Two));
+    EXPECT_EQ(TieBreakStatus_NotStarted, actual);
 }

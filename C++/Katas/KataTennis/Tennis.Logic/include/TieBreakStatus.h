@@ -6,7 +6,7 @@ namespace Tennis
     {
         enum TieBreakStatus
         {
-            TieBreakStatus_NotStarted,  // todo check odd behaviour when removing TieBreakStatus_*
+            TieBreakStatus_NotStarted,
             TieBreakStatus_InProgress,
             TieBreakStatus_PlayerOneWon,
             TieBreakStatus_PlayerTwoWon,

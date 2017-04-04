@@ -12,7 +12,7 @@ namespace Tennis
     namespace Logic
     {
         class Game
-                : public IGame // todo dependency injection
+                : public IGame
         {
         private:
             std::unique_ptr<ILogger> m_logger;

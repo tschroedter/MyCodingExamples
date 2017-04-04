@@ -1,6 +1,5 @@
 #pragma once
 
-#pragma once
 #include <memory>
 #include <iostream>
 #include "include/SetFactory.h"
@@ -10,6 +9,11 @@
 #include "include/IMatchCounter.h"
 #include "include/MatchCounter.h"
 #include "include/MatchFactory.h"
+#include "include/IMatchWonPointHandler.h"
+#include "include/MatchWonPointHandler.h"
+#include "include/IMatchStatusCalculator.h"
+#include "include/MatchStatusCalculator.h"
+#include "include/Match.h"
 
 namespace Tennis
 {
@@ -19,17 +23,15 @@ namespace Tennis
         {
             using namespace Tennis::Logic;
 
-            std::unique_ptr<ILogger> logger = std::make_unique<Logger>(std::cout);
+            std::unique_ptr<ILogger> logger = std::make_unique<Logger> ( std::cout );
             std::shared_ptr<IAwardPointsFactory> award_points_factory = std::make_shared<AwardPointsFactory>();
             std::shared_ptr<IGameFactory> game_factory = std::make_shared<GameFactory> ( std::move ( award_points_factory ) );
             std::unique_ptr<ILogger> tie_break_logger = std::make_unique<Logger> ( std::cout );
-            std::shared_ptr<TieBreakFactory> tie_break_factory = std::make_shared<TieBreakFactory> ( std::move ( tie_break_logger ) );
-            SetFactory* p_set_factory =
-                    new SetFactory
-                                                                   (
-                                                                    std::move ( game_factory ),
-                                                                    std::move ( tie_break_factory )
-                                  );
+            std::shared_ptr<ITieBreakFactory> tie_break_factory = std::make_shared<TieBreakFactory> ( std::move ( tie_break_logger ) );
+            SetFactory* p_set_factory = new SetFactory (
+                                                        std::move ( game_factory ),
+                                                        std::move ( tie_break_factory )
+                                                       );
             std::unique_ptr<ISetFactory> set_factory ( p_set_factory );
 
             std::unique_ptr<ISets> sets = std::make_unique<Sets>

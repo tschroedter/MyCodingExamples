@@ -7,7 +7,7 @@ namespace Tennis
 {
     namespace Logic
     {
-        class PlayerNameManager // todo singelton
+        class PlayerNameManager
                 : public IPlayerNameManager
         {
         private:

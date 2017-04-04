@@ -1,4 +1,3 @@
-// todo this is an ugly test class 
 //
 // Tennis.Match.cpp : Defines the entry point for the console application.
 //
@@ -12,6 +11,7 @@
 #include "PlayerNameManager.h"
 #include "ScoreBoard.h"
 #include "MatchStatusToStringConverter.h"
+#include "Logger.h"
 
 void run_memory_leak_test ()
 {

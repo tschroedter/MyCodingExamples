@@ -23,7 +23,7 @@ public:
     };
 
     // MOCK_CONST_METHOD0(get_length, size_t());
-    size_t get_length () const // todo testing
+    size_t get_length () const
     {
         if ( mock_get_length_value == -1 )
         {

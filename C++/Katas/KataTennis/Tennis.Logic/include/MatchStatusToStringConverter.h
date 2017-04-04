@@ -1,14 +1,12 @@
 #pragma once
 
-#pragma once
-#include <string>
 #include "MatchStatus.h"
 
 namespace Tennis
 {
     namespace Logic
     {
-        class MatchStatusToStringConverter  // todo testing
+        class MatchStatusToStringConverter
         {
         public:
             static std::string to_string(const MatchStatus match_status)

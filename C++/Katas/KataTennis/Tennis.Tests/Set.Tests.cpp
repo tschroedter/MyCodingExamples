@@ -48,6 +48,8 @@ std::unique_ptr<Tennis::Logic::Set> createSet ()
                                                       std::move ( games ),
                                                       std::move ( tie_break ) );
 
+    sut->initialize();
+
     return sut;
 }
 
@@ -376,4 +378,35 @@ TEST(Set, get_tie_break_status_returns_status)
 
     // Assert
     EXPECT_EQ(TieBreakStatus_InProgress, actual);
+}
+
+TEST(Set, initialize_calls_games_new_game)
+{
+    using namespace Tennis::Logic;
+
+    // Arrange
+    MockISetStatusCalculator* mock_calculator = new MockISetStatusCalculator();
+    std::unique_ptr<ISetStatusCalculator> calculator ( mock_calculator );
+    MockIGame mock_game {};
+    MockIGames* mock_games = new MockIGames();
+    std::unique_ptr<IGames> games ( mock_games );
+    MockITieBreak* mock_tie_break = new MockITieBreak();
+    std::unique_ptr<ITieBreak> tie_break ( mock_tie_break );
+    MockISetWonPointHandler* mock_handler = new MockISetWonPointHandler();
+    std::unique_ptr<ISetWonPointHandler> handler ( mock_handler );
+
+    Set sut
+    {
+        std::move ( calculator ),
+        std::move ( handler ),
+        std::move ( games ),
+        std::move ( tie_break )
+    };
+
+    // Assert
+    EXPECT_CALL(*mock_games, new_game())
+                                        .Times ( 1 );
+
+    // Act
+    sut.initialize();
 }

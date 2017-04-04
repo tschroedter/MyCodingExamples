@@ -181,7 +181,9 @@
     <ClCompile Include="Logger.Tests.cpp" />
     <ClCompile Include="Match.Tests.cpp" />
     <ClCompile Include="MatchCounter.Tests.cpp" />
+    <ClCompile Include="MatchFactory.Tests.cpp" />
     <ClCompile Include="MatchStatusCalculator.Tests.cpp" />
+    <ClCompile Include="MatchStatusToStringConverter.Tests.cpp" />
     <ClCompile Include="PlayerNameManager.Tests.cpp" />
     <ClCompile Include="PossibleScores.Tests.cpp" />
     <ClCompile Include="ScoreBoard.Tests.cpp" />

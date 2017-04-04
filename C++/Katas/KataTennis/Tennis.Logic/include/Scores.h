@@ -4,7 +4,7 @@ namespace Tennis
 {
     namespace Logic
     {
-        const enum Scores // todo make this static
+        const enum Scores
         {
             Unknown,
             Love,

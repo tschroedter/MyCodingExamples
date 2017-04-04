@@ -5,6 +5,8 @@
 #include "MemoryLeakTest.h"
 #include "ScoreBoard.h"
 #include "MatchStatusToStringConverter.h"
+#include <iostream>
+#include "Logger.h"
 
 namespace Tennis
 {
@@ -90,7 +92,7 @@ namespace Tennis
 
             std::unique_ptr<Logic::IGamesCounter> counter = std::make_unique<Logic::GamesCounter>();
 
-            Logic::Logger logger { std::cout }; // todo shared ptr
+            Logic::Logger logger { std::cout };
 
             Logic::PlayerNameManager player_name_manager {
                 &logger,
@@ -99,7 +101,7 @@ namespace Tennis
 
             Logic::GamesCounter games_counter {};
 
-            Logic::ScoreBoard score_board // todo factory
+            Logic::ScoreBoard score_board
             {
                 &player_name_manager,
                 &games_counter,

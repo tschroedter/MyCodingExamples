@@ -38,7 +38,7 @@ TEST(MatchStatusCalculator, get_status_returns_PlayerOneWon_for_player_one_won_r
 
     MockISets* mock_sets = new MockISets();
     std::unique_ptr<ISets> sets ( mock_sets );
-    mock_sets->mock_get_length_value = 1; // todo not nice, maybe to mocks required
+    mock_sets->mock_get_length_value = 1;
 
     MatchStatusCalculator sut {
         std::move ( counter ),

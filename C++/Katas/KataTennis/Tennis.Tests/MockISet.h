@@ -12,6 +12,7 @@ class MockISet
 {
 public:
     // ReSharper disable CppOverridingFunctionWithoutOverrideSpecifier
+    MOCK_METHOD0(initialize, void());
     MOCK_METHOD1(won_point, void(Tennis::Logic::Player player));
     MOCK_CONST_METHOD0(get_current_game, Tennis::Logic::IGame*());
     MOCK_CONST_METHOD0(get_games, Tennis::Logic::IGames*());

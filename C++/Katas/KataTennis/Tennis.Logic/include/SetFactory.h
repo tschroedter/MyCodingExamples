@@ -12,12 +12,12 @@ namespace Tennis
         {
         private:
             std::shared_ptr<IGameFactory> m_game_factory;
-            std::shared_ptr<TieBreakFactory> m_tie_break_factory;
+            std::shared_ptr<ITieBreakFactory> m_tie_break_factory;
 
         public:
             SetFactory (
                 std::shared_ptr<IGameFactory> game_factory,
-                std::shared_ptr<TieBreakFactory> tie_break_factory )
+                std::shared_ptr<ITieBreakFactory> tie_break_factory )
                 : m_game_factory ( std::move ( game_factory ) )
                 , m_tie_break_factory ( std::move ( tie_break_factory ) )
             {

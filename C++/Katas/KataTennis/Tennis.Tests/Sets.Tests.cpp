@@ -10,9 +10,9 @@ std::unique_ptr<Tennis::Logic::Sets> create_sut ()
     using namespace Tennis::Logic;
 
     std::unique_ptr<IAwardPointsFactory> award_points_factory = std::make_unique<AwardPointsFactory>();
-    std::unique_ptr<GameFactory> game_factory = std::make_unique<GameFactory>(std::move(award_points_factory));
+    std::unique_ptr<GameFactory> game_factory = std::make_unique<GameFactory> ( std::move ( award_points_factory ) );
 
-    std::unique_ptr<ILogger> logger = std::make_unique<Logger>(std::cout);
+    std::unique_ptr<ILogger> logger = std::make_unique<Logger> ( std::cout );
     std::unique_ptr<TieBreakFactory> tie_break_factory = std::make_unique<TieBreakFactory> ( std::move ( logger ) );
 
     std::unique_ptr<SetFactory> factory = std::make_unique<SetFactory> (
@@ -82,4 +82,36 @@ TEST(Sets, get_current_set_returns_current_set)
 
     // Assert
     EXPECT_NE(nullptr, actual);
+}
+
+TEST(Sets, operator_index_returns_set_for_first_index)
+{
+    using namespace Tennis::Logic;
+
+    // Arrange
+    std::unique_ptr<Sets> sut = create_sut();
+    ISet* set_one = sut->new_set();
+    sut->new_set();
+
+    // Act
+    ISet* actual = ( *sut.get() ) [ 0 ];
+
+    // Assert
+    EXPECT_EQ(set_one, actual);
+}
+
+TEST(Sets, operator_index_returns_set_for_second_index)
+{
+    using namespace Tennis::Logic;
+
+    // Arrange
+    std::unique_ptr<Sets> sut = create_sut();
+    sut->new_set();
+    ISet* set_two = sut->new_set();
+
+    // Act
+    ISet* actual = ( *sut.get() ) [ 1 ];
+
+    // Assert
+    EXPECT_EQ(set_two, actual);
 }

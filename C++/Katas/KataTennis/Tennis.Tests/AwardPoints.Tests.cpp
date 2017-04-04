@@ -5,7 +5,7 @@
 #include "Scores.h"
 #include "GameScore.h"
 
-std::unique_ptr<Tennis::Logic::AwardPoints> create_sut () // todo return unique
+std::unique_ptr<Tennis::Logic::AwardPoints> create_sut ()
 {
     using namespace Tennis::Logic;
 

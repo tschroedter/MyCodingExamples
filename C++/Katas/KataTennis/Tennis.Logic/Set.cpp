@@ -5,6 +5,11 @@ namespace Tennis
 {
     namespace Logic
     {
+        void Set::initialize ()
+        {
+            m_games->new_game();
+        }
+
         void Set::won_point ( Player player )
         {
             m_handler->won_point( player );

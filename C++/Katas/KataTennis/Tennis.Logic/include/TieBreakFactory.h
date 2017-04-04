@@ -1,12 +1,14 @@
 #pragma once
 
 #include "TieBreak.h"
+#include "ITieBreakFactory.h"
 
 namespace Tennis
 {
     namespace Logic
     {
-        class TieBreakFactory // todo interface
+        class TieBreakFactory
+            : public ITieBreakFactory
         {
         private:
             std::unique_ptr<ILogger> m_logger;
@@ -17,8 +19,8 @@ namespace Tennis
             {
             }
 
-            ITieBreak* create (); // todo release or unique_ptr
-            static void release ( ITieBreak* tie_break );  // todo in se middle of doing stuff
+            ITieBreak* create () override;
+            void release ( ITieBreak* tie_break ) override;
         };
     }
 }

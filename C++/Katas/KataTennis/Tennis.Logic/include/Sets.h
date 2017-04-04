@@ -9,7 +9,7 @@ namespace Tennis
 {
     namespace Logic
     {
-        class Sets // todo testing
+        class Sets
                 : public ISets
         {
         private:
@@ -20,14 +20,15 @@ namespace Tennis
         public:
             Sets ( std::unique_ptr<ISetFactory> factory )
                 : m_factory ( std::move ( factory ) )
+                , m_current_set ( nullptr )
             {
             }
 
             ~Sets ()
             {
-                for (ISet* set : m_sets)
+                for ( ISet* set : m_sets )
                 {
-                    m_factory->release(set);
+                    m_factory->release ( set );
                 }
 
                 m_sets.clear();

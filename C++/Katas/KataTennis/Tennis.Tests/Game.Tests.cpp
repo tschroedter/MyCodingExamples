@@ -20,7 +20,7 @@ std::unique_ptr<Tennis::Logic::Game> create_sut ()
 
     std::unique_ptr<ILogger> logger = std::make_unique<MockILogger>();
     std::unique_ptr<ILogger> logger1 = std::make_unique<MockILogger>();
-    std::unique_ptr<IAwardPoints> award_points = std::make_unique<AwardPoints> ( move ( logger1 ) ); // todo next
+    std::unique_ptr<IAwardPoints> award_points = std::make_unique<AwardPoints> ( move ( logger1 ) );
     std::unique_ptr<IGameScore> game_score_one = std::make_unique<GameScore>();
     std::unique_ptr<IGameScore> game_score_two = std::make_unique<GameScore>();
     std::unique_ptr<Game> sut =
