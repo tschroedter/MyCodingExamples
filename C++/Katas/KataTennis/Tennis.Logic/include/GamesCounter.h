@@ -1,7 +1,7 @@
 #pragma once
 
 #include <cstdint>
-#include "Games.h"
+#include "IGames.h"
 #include "IGamesCounter.h"
 
 namespace Tennis
@@ -14,7 +14,7 @@ namespace Tennis
         public:
             int8_t count_games_for_player (
                 const Player player,
-                const Games* games ) override;
+                const IGames* games ) override;
         };
     };
 };

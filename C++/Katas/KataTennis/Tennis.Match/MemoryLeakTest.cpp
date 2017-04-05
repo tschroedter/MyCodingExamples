@@ -7,6 +7,8 @@
 #include "MatchStatusToStringConverter.h"
 #include <iostream>
 #include "Logger.h"
+#include "GamesCounter.h"
+#include "PlayerNameManager.h"
 
 namespace Tennis
 {

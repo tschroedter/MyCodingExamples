@@ -14,7 +14,7 @@ TEST(MatchStatusCalculator, get_status_returns_NotStarted_for_no_sets)
     std::unique_ptr<IMatchCounter> counter ( mock_counter );
 
     MockISets* mock_sets = new MockISets();
-    std::unique_ptr<Sets> sets ( mock_sets );
+    std::unique_ptr<ISets> sets ( mock_sets );
 
     MatchStatusCalculator sut {
         std::move ( counter ),
@@ -37,8 +37,7 @@ TEST(MatchStatusCalculator, get_status_returns_PlayerOneWon_for_player_one_won_r
     std::unique_ptr<IMatchCounter> counter ( mock_counter );
 
     MockISets* mock_sets = new MockISets();
-    std::unique_ptr<Sets> sets ( mock_sets );
-    mock_sets->mock_get_length_value = 1;
+    std::unique_ptr<ISets> sets ( mock_sets );
 
     MatchStatusCalculator sut {
         std::move ( counter ),
@@ -55,6 +54,10 @@ TEST(MatchStatusCalculator, get_status_returns_PlayerOneWon_for_player_one_won_r
                                                                         .Times ( 0 )
                                                                         .WillRepeatedly ( testing::Return ( 0 ) );
 
+    EXPECT_CALL(*mock_sets, get_number_of_sets())
+                                                 .Times ( 1 )
+                                                 .WillRepeatedly ( testing::Return ( 1 ) );
+
     // Act
     MatchStatus actual = sut.get_status();
     EXPECT_EQ(MatchStatus_PlayerOneWon, actual);
@@ -69,8 +72,7 @@ TEST(MatchStatusCalculator, get_status_returns_PlayerTwoWon_for_player_two_won_r
     std::unique_ptr<IMatchCounter> counter ( mock_counter );
 
     MockISets* mock_sets = new MockISets();
-    std::unique_ptr<Sets> sets ( mock_sets );
-    mock_sets->mock_get_length_value = 1;
+    std::unique_ptr<ISets> sets ( mock_sets );
 
     MatchStatusCalculator sut {
         std::move ( counter ),
@@ -86,6 +88,10 @@ TEST(MatchStatusCalculator, get_status_returns_PlayerTwoWon_for_player_two_won_r
     EXPECT_CALL(*mock_counter, count_sets_won_by_player(Two, mock_sets))
                                                                         .Times ( 1 )
                                                                         .WillRepeatedly ( testing::Return ( 2 ) );
+
+    EXPECT_CALL(*mock_sets, get_number_of_sets())
+                                                 .Times ( 1 )
+                                                 .WillRepeatedly ( testing::Return ( 1 ) );
 
     // Act
     MatchStatus actual = sut.get_status();

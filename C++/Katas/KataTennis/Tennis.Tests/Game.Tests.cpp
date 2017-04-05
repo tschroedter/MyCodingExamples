@@ -497,7 +497,7 @@ TEST(Game, get_score_for_player_as_string_returns_score_as_string_for_player_one
     sut->won_point ( One );
 
     // Act    
-    std::string actual = sut->get_score_for_player_as_string( One );
+    std::string actual = sut->get_score_for_player_as_string ( One );
 
     // Assert
     EXPECT_EQ("15", actual);
@@ -514,7 +514,7 @@ TEST(Game, get_score_for_player_as_string_returns_score_as_string_for_player_two
     sut->won_point ( Two );
 
     // Act    
-    std::string actual = sut->get_score_for_player_as_string( Two );
+    std::string actual = sut->get_score_for_player_as_string ( Two );
 
     // Assert
     EXPECT_EQ("30", actual);

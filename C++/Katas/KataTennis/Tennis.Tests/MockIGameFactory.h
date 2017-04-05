@@ -4,7 +4,7 @@
 #include <gmock/gmock-generated-function-mockers.h>
 
 class MockIGameFactory
-    : public Tennis::Logic::IGameFactory
+        : public Tennis::Logic::IGameFactory
 {
 public:
     // ReSharper disable CppOverridingFunctionWithoutOverrideSpecifier

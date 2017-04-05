@@ -8,9 +8,9 @@ namespace Tennis
         class IAwardPointsFactory
         {
         public:
-            virtual ~IAwardPointsFactory() = default;
+            virtual ~IAwardPointsFactory () = default;
 
-            virtual std::unique_ptr<IAwardPoints> create() const = 0;
+            virtual std::unique_ptr<IAwardPoints> create () const = 0;
         };
     }
 }

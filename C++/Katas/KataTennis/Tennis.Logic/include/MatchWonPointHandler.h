@@ -9,25 +9,25 @@ namespace Tennis
     namespace Logic
     {
         class MatchWonPointHandler
-            : public IMatchWonPointHandler
+                : public IMatchWonPointHandler
         {
         private:
-            Sets* m_sets;
+            ISets* m_sets;
 
-            bool is_tie_break_finsihed() const;
-            void create_new_set_and_call_won_point(Player player) const;
+            bool is_tie_break_finsihed () const;
+            void create_new_set_and_call_won_point ( Player player ) const;
 
         public:
-            MatchWonPointHandler(Sets* sets)
-                : m_sets(sets)
+            MatchWonPointHandler ( ISets* sets )
+                : m_sets ( sets )
             {
             }
 
-            ~MatchWonPointHandler()
+            ~MatchWonPointHandler ()
             {
             }
 
-            void won_point(const Player player) override;
+            void won_point ( const Player player ) override;
         };
     };
 };

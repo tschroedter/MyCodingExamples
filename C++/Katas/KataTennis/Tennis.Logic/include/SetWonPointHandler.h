@@ -18,14 +18,14 @@ namespace Tennis
             static const bool WonTieBreakPoint = true;
             static const int8_t MAX_GAME_SCORE = 6;
 
-            Games* m_games;
+            IGames* m_games;
             ITieBreak* m_tie_break;
             std::unique_ptr<IGamesCounter> m_counter;
 
         public:
             SetWonPointHandler (
                 std::unique_ptr<IGamesCounter> counter,
-                Games* games,
+                IGames* games,
                 ITieBreak* tie_break )
                 : m_games ( games )
                 , m_tie_break ( tie_break )
@@ -37,10 +37,10 @@ namespace Tennis
             {
             }
 
-            void won_game_point( Player player ) const override;
-            void won_tie_break_point( Player player ) const override;
-            void won_point( Player player ) const override;
-            bool is_tie_break_Required() const override;
+            void won_game_point ( Player player ) const override;
+            void won_tie_break_point ( Player player ) const override;
+            void won_point ( Player player ) const override;
+            bool is_tie_break_Required () const override;
         };
     }
 }

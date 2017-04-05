@@ -5,7 +5,7 @@
 #include "ISetFactory.h"
 
 class MockISetFactory
-    : public Tennis::Logic::ISetFactory
+        : public Tennis::Logic::ISetFactory
 {
 public:
     // ReSharper disable CppOverridingFunctionWithoutOverrideSpecifier

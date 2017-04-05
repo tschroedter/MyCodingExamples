@@ -2,44 +2,16 @@
 #include <gtest/gtest.h>
 #include <gmock/gmock-generated-function-mockers.h>
 #include "IGame.h"
-#include "Games.h"
-#include "MockIGameFactory.h"
+#include "IGames.h"
 
 class MockIGames
-        : public Tennis::Logic::Games
+        : public Tennis::Logic::IGames
 {
 public:
-    MockIGames()
-        : Games(std::move(factory))
-    {
-    }
-
-    std::unique_ptr<MockIGameFactory> factory = std::make_unique<MockIGameFactory>();
-
-    size_t mock_get_length_value = -1;
-
-    std::vector<Tennis::Logic::IGame*> sets;
-
     // ReSharper disable CppOverridingFunctionWithoutOverrideSpecifier
-    MOCK_METHOD0(new_item, Tennis::Logic::IGame*());
-    MOCK_CONST_METHOD0(get_current_item, Tennis::Logic::IGame* ());
-    //MOCK_CONST_METHOD1(operator[], IGame* (const size_t)); // todo how to mock operators
-    // virtual IGame* operator[] (const size_t index) const = 0;
-    Tennis::Logic::IGame* operator[] ( const size_t index ) const
-    {
-        return ( sets.at ( index ) );
-    };
-
-    // MOCK_CONST_METHOD0(get_length, size_t());
-    size_t get_length () const
-    {
-        if ( mock_get_length_value == -1 )
-        {
-            return sets.size();
-        }
-
-        return mock_get_length_value;
-    }
-
+    MOCK_METHOD0(create_new_game, Tennis::Logic::IGame*());
+    MOCK_CONST_METHOD0(get_current_game, Tennis::Logic::IGame* ());
+    MOCK_CONST_METHOD1(get_game_at_index, Tennis::Logic::IGame* (const size_t index));
+    MOCK_CONST_METHOD0(get_number_of_games, size_t());
     // ReSharper restore CppOverridingFunctionWithoutOverrideSpecifier
 };

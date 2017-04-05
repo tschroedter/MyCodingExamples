@@ -7,8 +7,8 @@ namespace Tennis
 {
     namespace Logic
     {
-        class SetFactory 
-            : public ISetFactory
+        class SetFactory
+                : public ISetFactory
         {
         private:
             std::shared_ptr<IGameFactory> m_game_factory;
@@ -23,14 +23,14 @@ namespace Tennis
             {
             }
 
-            ~SetFactory()
+            ~SetFactory ()
             {
                 m_game_factory.reset();
                 m_tie_break_factory.reset();
             }
 
             ISet* create () override;
-            void release(ISet* set) override;
+            void release ( ISet* set ) override;
         };
     }
 }

@@ -23,7 +23,6 @@ TEST(ScoreBoard, score_for_player_as_string_returns_string_for_player_one)
     MockIGamesCounter counter {};
     MockISet set {};
     MockISets sets {};
-    sets.sets.push_back ( &set );
 
     ScoreBoard sut {
         &manager,
@@ -56,6 +55,14 @@ TEST(ScoreBoard, score_for_player_as_string_returns_string_for_player_one)
                                         .Times ( 2 )
                                         .WillRepeatedly ( testing::Return ( TieBreakStatus_NotStarted ) );
 
+    EXPECT_CALL(sets, get_number_of_sets())
+                                           .Times ( 1 )
+                                           .WillOnce ( testing::Return ( 1 ) );
+
+    EXPECT_CALL(sets, get_set_at_index(0))
+                                          .Times ( 1 )
+                                          .WillOnce ( testing::Return ( &set ) );
+
     EXPECT_CALL(
         counter,
         count_games_for_player(One,
@@ -86,8 +93,6 @@ TEST(ScoreBoard, score_for_player_as_string_returns_string_for_player_one_with_m
     MockISet set_two {};
 
     MockISets sets {};
-    sets.sets.push_back ( &set_one );
-    sets.sets.push_back ( &set_two );
 
     MockIPlayerNameManager manager {};
     MockIGamesCounter counter {};
@@ -114,6 +119,18 @@ TEST(ScoreBoard, score_for_player_as_string_returns_string_for_player_one_with_m
     EXPECT_CALL(set_one_tie_break, get_status())
                                                 .Times ( 1 )
                                                 .WillRepeatedly ( testing::Return ( TieBreakStatus_NotStarted ) );
+
+    EXPECT_CALL(sets, get_number_of_sets())
+                                           .Times ( 1 )
+                                           .WillOnce ( testing::Return ( 2 ) );
+
+    EXPECT_CALL(sets, get_set_at_index(0))
+                                          .Times ( 1 )
+                                          .WillOnce ( testing::Return ( &set_one ) );
+
+    EXPECT_CALL(sets, get_set_at_index(1))
+                                          .Times ( 1 )
+                                          .WillOnce ( testing::Return ( &set_two ) );
 
     EXPECT_CALL(
         counter,
@@ -168,7 +185,6 @@ TEST(ScoreBoard, print_returns_string_for_players)
     MockIGamesCounter counter {};
     MockISet set {};
     MockISets sets {};
-    sets.sets.push_back ( &set );
 
     ScoreBoard sut {
         &manager,
@@ -208,6 +224,14 @@ TEST(ScoreBoard, print_returns_string_for_players)
     EXPECT_CALL(set, get_tie_break())
                                      .Times ( 4 )
                                      .WillRepeatedly ( testing::Return ( &tie_break ) );
+
+    EXPECT_CALL(sets, get_number_of_sets())
+                                           .Times ( 2 )
+                                           .WillRepeatedly ( testing::Return ( 1 ) );
+
+    EXPECT_CALL(sets, get_set_at_index(0))
+                                          .Times ( 2 )
+                                          .WillRepeatedly ( testing::Return ( &set ) );
 
     EXPECT_CALL(counter, count_games_for_player(One,
         &games))

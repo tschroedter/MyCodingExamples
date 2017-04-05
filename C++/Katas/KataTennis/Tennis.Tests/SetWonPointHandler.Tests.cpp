@@ -29,7 +29,7 @@ TEST(SetWonPointHandler, won_game_point_calls_current_game_won_point)
                                         .Times ( 1 )
                                         .WillOnce ( testing::Return ( GameStatus::NotStarted ) );
 
-    EXPECT_CALL(mock_games, get_current_item())
+    EXPECT_CALL(mock_games, get_current_game())
                                                .Times ( 1 )
                                                .WillOnce ( testing::Return ( &mock_game ) );
 
@@ -40,7 +40,7 @@ TEST(SetWonPointHandler, won_game_point_calls_current_game_won_point)
     sut.won_game_point ( One );
 }
 
-void won_game_point_calls_create_new_item_for_status_n_times (
+void won_game_point_calls_create_create_new_game_for_status_n_times (
     Tennis::Logic::GameStatus game_status,
     int times )
 {
@@ -64,71 +64,71 @@ void won_game_point_calls_create_new_item_for_status_n_times (
                                         .Times ( 1 )
                                         .WillOnce ( testing::Return ( game_status ) );
 
-    EXPECT_CALL(mock_games, get_current_item())
+    EXPECT_CALL(mock_games, get_current_game())
                                                .Times ( 1 )
                                                .WillOnce ( testing::Return ( &mock_game ) );
 
-    EXPECT_CALL(mock_games, new_item())
-                                       .Times ( times );
+    EXPECT_CALL(mock_games, create_new_game())
+                                              .Times ( times );
 
     // Act
     sut.won_game_point ( One );
 }
 
-TEST(SetWonPointHandler, won_game_point_creates_new_item_for_status_PlayerOneWon)
+TEST(SetWonPointHandler, won_game_point_creates_create_new_game_for_status_PlayerOneWon)
 {
     using namespace Tennis::Logic;
 
-    won_game_point_calls_create_new_item_for_status_n_times ( PlayerOneWon, 1 );
+    won_game_point_calls_create_create_new_game_for_status_n_times ( PlayerOneWon, 1 );
 }
 
-TEST(SetWonPointHandler, won_game_point_creates_new_item_for_status_PlayerOneTwo)
+TEST(SetWonPointHandler, won_game_point_creates_create_new_game_for_status_PlayerOneTwo)
 {
     using namespace Tennis::Logic;
 
-    won_game_point_calls_create_new_item_for_status_n_times ( PlayerTwoWon, 1 );
+    won_game_point_calls_create_create_new_game_for_status_n_times ( PlayerTwoWon, 1 );
 }
 
-TEST(SetWonPointHandler, won_game_point_does_not_create_new_item_for_status_NotStarted)
+TEST(SetWonPointHandler, won_game_point_does_not_create_create_new_game_for_status_NotStarted)
 {
     using namespace Tennis::Logic;
 
-    won_game_point_calls_create_new_item_for_status_n_times ( NotStarted, 0 );
+    won_game_point_calls_create_create_new_game_for_status_n_times ( NotStarted, 0 );
 }
 
-TEST(SetWonPointHandler, won_game_point_does_not_create_new_item_for_status_InProgress)
+TEST(SetWonPointHandler, won_game_point_does_not_create_create_new_game_for_status_InProgress)
 {
     using namespace Tennis::Logic;
 
-    won_game_point_calls_create_new_item_for_status_n_times ( InProgress, 0 );
+    won_game_point_calls_create_create_new_game_for_status_n_times ( InProgress, 0 );
 }
 
-TEST(SetWonPointHandler, won_game_point_does_not_create_new_item_for_status_Deuce)
+TEST(SetWonPointHandler, won_game_point_does_not_create_create_new_game_for_status_Deuce)
 {
     using namespace Tennis::Logic;
 
-    won_game_point_calls_create_new_item_for_status_n_times ( Deuce, 0 );
+    won_game_point_calls_create_create_new_game_for_status_n_times ( Deuce, 0 );
 }
 
-TEST(SetWonPointHandler, won_game_point_does_not_create_new_item_for_status_AdvandtagePlayerOne)
+TEST(SetWonPointHandler, won_game_point_does_not_create_create_new_game_for_status_AdvandtagePlayerOne)
 {
     using namespace Tennis::Logic;
 
-    won_game_point_calls_create_new_item_for_status_n_times ( AdvandtagePlayerOne, 0 );
+    won_game_point_calls_create_create_new_game_for_status_n_times ( AdvandtagePlayerOne, 0 );
 }
 
-TEST(SetWonPointHandler, won_game_point_does_not_create_new_item_for_status_AdvandtagePlayerTwo)
+TEST(SetWonPointHandler, won_game_point_does_not_create_create_new_game_for_status_AdvandtagePlayerTwo)
 {
     using namespace Tennis::Logic;
 
-    won_game_point_calls_create_new_item_for_status_n_times ( AdvandtagePlayerTwo, 0 );
+    won_game_point_calls_create_create_new_game_for_status_n_times ( AdvandtagePlayerTwo, 0 );
 }
 
-TEST(SetWonPointHandler, won_game_point_does_not_create_new_item_for_status_GameStatus_Max)
+TEST(SetWonPointHandler, won_game_point_does_not_create_create_new_game_for_status_GameStatus_Max)
 {
     using namespace Tennis::Logic;
 
-    won_game_point_calls_create_new_item_for_status_n_times ( GameStatus_Max, 0 );
+    won_game_point_calls_create_create_new_game_for_status_n_times ( GameStatus_Max, 0 );
 }
 
 TEST(SetWonPointHandler, won_tie_break_point_calls_tie_break_won_point_for_status_NotStarted)
@@ -276,7 +276,7 @@ TEST(SetWonPointHandler, won_tie_break_point_does_not_calls_tie_break_won_point_
     sut.won_tie_break_point ( One );
 }
 
-TEST(SetWonPointHandler, won_point_does_not_create_new_item_for_game_status_NotStarted)
+TEST(SetWonPointHandler, won_point_does_not_create_create_new_game_for_game_status_NotStarted)
 {
     using namespace Tennis::Logic;
 
@@ -298,18 +298,18 @@ TEST(SetWonPointHandler, won_point_does_not_create_new_item_for_game_status_NotS
                                         .Times ( 1 )
                                         .WillOnce ( testing::Return ( GameStatus::NotStarted ) );
 
-    EXPECT_CALL(mock_games, get_current_item())
+    EXPECT_CALL(mock_games, get_current_game())
                                                .Times ( 1 )
                                                .WillOnce ( testing::Return ( &mock_game ) );
 
-    EXPECT_CALL(mock_games, new_item())
-                                       .Times ( 0 );
+    EXPECT_CALL(mock_games, create_new_game())
+                                              .Times ( 0 );
 
     // Act
     sut.won_point ( One );
 }
 
-TEST(SetWonPointHandler, won_point_does_not_create_new_item_for_game_status_InProgress)
+TEST(SetWonPointHandler, won_point_does_not_create_create_new_game_for_game_status_InProgress)
 {
     using namespace Tennis::Logic;
 
@@ -331,18 +331,18 @@ TEST(SetWonPointHandler, won_point_does_not_create_new_item_for_game_status_InPr
                                         .Times ( 1 )
                                         .WillOnce ( testing::Return ( GameStatus::InProgress ) );
 
-    EXPECT_CALL(mock_games, get_current_item())
+    EXPECT_CALL(mock_games, get_current_game())
                                                .Times ( 1 )
                                                .WillOnce ( testing::Return ( &mock_game ) );
 
-    EXPECT_CALL(mock_games, new_item())
-                                       .Times ( 0 );
+    EXPECT_CALL(mock_games, create_new_game())
+                                              .Times ( 0 );
 
     // Act
     sut.won_point ( One );
 }
 
-TEST(SetWonPointHandler, won_point_does_not_create_new_item_for_game_status_Deuce)
+TEST(SetWonPointHandler, won_point_does_not_create_create_new_game_for_game_status_Deuce)
 {
     using namespace Tennis::Logic;
 
@@ -364,18 +364,18 @@ TEST(SetWonPointHandler, won_point_does_not_create_new_item_for_game_status_Deuc
                                         .Times ( 1 )
                                         .WillOnce ( testing::Return ( GameStatus::Deuce ) );
 
-    EXPECT_CALL(mock_games, get_current_item())
+    EXPECT_CALL(mock_games, get_current_game())
                                                .Times ( 1 )
                                                .WillOnce ( testing::Return ( &mock_game ) );
 
-    EXPECT_CALL(mock_games, new_item())
-                                       .Times ( 0 );
+    EXPECT_CALL(mock_games, create_new_game())
+                                              .Times ( 0 );
 
     // Act
     sut.won_point ( One );
 }
 
-TEST(SetWonPointHandler, won_point_does_not_create_new_item_for_game_status_AdvandtagePlayerOne)
+TEST(SetWonPointHandler, won_point_does_not_create_create_new_game_for_game_status_AdvandtagePlayerOne)
 {
     using namespace Tennis::Logic;
 
@@ -397,18 +397,18 @@ TEST(SetWonPointHandler, won_point_does_not_create_new_item_for_game_status_Adva
                                         .Times ( 1 )
                                         .WillOnce ( testing::Return ( GameStatus::AdvandtagePlayerOne ) );
 
-    EXPECT_CALL(mock_games, get_current_item())
+    EXPECT_CALL(mock_games, get_current_game())
                                                .Times ( 1 )
                                                .WillOnce ( testing::Return ( &mock_game ) );
 
-    EXPECT_CALL(mock_games, new_item())
-                                       .Times ( 0 );
+    EXPECT_CALL(mock_games, create_new_game())
+                                              .Times ( 0 );
 
     // Act
     sut.won_point ( One );
 }
 
-TEST(SetWonPointHandler, won_point_does_not_create_new_item_for_game_status_AdvandtagePlayerTwo)
+TEST(SetWonPointHandler, won_point_does_not_create_create_new_game_for_game_status_AdvandtagePlayerTwo)
 {
     using namespace Tennis::Logic;
 
@@ -430,18 +430,18 @@ TEST(SetWonPointHandler, won_point_does_not_create_new_item_for_game_status_Adva
                                         .Times ( 1 )
                                         .WillOnce ( testing::Return ( GameStatus::AdvandtagePlayerTwo ) );
 
-    EXPECT_CALL(mock_games, get_current_item())
+    EXPECT_CALL(mock_games, get_current_game())
                                                .Times ( 1 )
                                                .WillOnce ( testing::Return ( &mock_game ) );
 
-    EXPECT_CALL(mock_games, new_item())
-                                       .Times ( 0 );
+    EXPECT_CALL(mock_games, create_new_game())
+                                              .Times ( 0 );
 
     // Act
     sut.won_point ( One );
 }
 
-TEST(SetWonPointHandler, won_point_does_not_create_new_item_for_game_status_PlayerOneWon)
+TEST(SetWonPointHandler, won_point_does_not_create_create_new_game_for_game_status_PlayerOneWon)
 {
     using namespace Tennis::Logic;
 
@@ -463,18 +463,18 @@ TEST(SetWonPointHandler, won_point_does_not_create_new_item_for_game_status_Play
                                         .Times ( 1 )
                                         .WillOnce ( testing::Return ( GameStatus::PlayerOneWon ) );
 
-    EXPECT_CALL(mock_games, get_current_item())
+    EXPECT_CALL(mock_games, get_current_game())
                                                .Times ( 1 )
                                                .WillOnce ( testing::Return ( &mock_game ) );
 
-    EXPECT_CALL(mock_games, new_item())
-                                       .Times ( 1 );
+    EXPECT_CALL(mock_games, create_new_game())
+                                              .Times ( 1 );
 
     // Act
     sut.won_point ( One );
 }
 
-TEST(SetWonPointHandler, won_point_does_not_create_new_item_for_game_status_PlayerTwoWon)
+TEST(SetWonPointHandler, won_point_does_not_create_create_new_game_for_game_status_PlayerTwoWon)
 {
     using namespace Tennis::Logic;
 
@@ -496,18 +496,18 @@ TEST(SetWonPointHandler, won_point_does_not_create_new_item_for_game_status_Play
                                         .Times ( 1 )
                                         .WillOnce ( testing::Return ( GameStatus::PlayerTwoWon ) );
 
-    EXPECT_CALL(mock_games, get_current_item())
+    EXPECT_CALL(mock_games, get_current_game())
                                                .Times ( 1 )
                                                .WillOnce ( testing::Return ( &mock_game ) );
 
-    EXPECT_CALL(mock_games, new_item())
-                                       .Times ( 1 );
+    EXPECT_CALL(mock_games, create_new_game())
+                                              .Times ( 1 );
 
     // Act
     sut.won_point ( One );
 }
 
-TEST(SetWonPointHandler, won_point_does_not_create_new_item_for_game_status_GameStatus_Max)
+TEST(SetWonPointHandler, won_point_does_not_create_create_new_game_for_game_status_GameStatus_Max)
 {
     using namespace Tennis::Logic;
 
@@ -529,12 +529,12 @@ TEST(SetWonPointHandler, won_point_does_not_create_new_item_for_game_status_Game
                                         .Times ( 1 )
                                         .WillOnce ( testing::Return ( GameStatus::GameStatus_Max ) );
 
-    EXPECT_CALL(mock_games, get_current_item())
+    EXPECT_CALL(mock_games, get_current_game())
                                                .Times ( 1 )
                                                .WillOnce ( testing::Return ( &mock_game ) );
 
-    EXPECT_CALL(mock_games, new_item())
-                                       .Times ( 0 );
+    EXPECT_CALL(mock_games, create_new_game())
+                                              .Times ( 0 );
 
     // Act
     sut.won_point ( One );
@@ -690,7 +690,7 @@ TEST(SetWonPointHandler, won_point_calls_won_game_point_for_normal_game)
                                         .Times ( 1 )
                                         .WillOnce ( testing::Return ( GameStatus::InProgress ) );
 
-    EXPECT_CALL(mock_games, get_current_item())
+    EXPECT_CALL(mock_games, get_current_game())
                                                .Times ( 1 )
                                                .WillOnce ( testing::Return ( &mock_game ) );
 

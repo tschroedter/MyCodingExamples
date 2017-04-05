@@ -16,7 +16,7 @@ namespace Tennis
 
             virtual int8_t count_games_for_player (
                 const Player player,
-                const Games* games ) = 0;
+                const IGames* games ) = 0;
         };
     };
 };

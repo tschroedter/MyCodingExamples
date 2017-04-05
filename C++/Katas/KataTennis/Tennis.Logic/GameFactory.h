@@ -9,18 +9,18 @@ namespace Tennis
     namespace Logic
     {
         class GameFactory
-            :public IGameFactory
+                :public IGameFactory
         {
         private:
             std::shared_ptr<IAwardPointsFactory> m_factory;
 
         public:
-            GameFactory (std::shared_ptr<IAwardPointsFactory> factory)
-                : m_factory ( std::move(factory) )
+            GameFactory ( std::shared_ptr<IAwardPointsFactory> factory )
+                : m_factory ( std::move ( factory ) )
             {
             }
 
-            ~GameFactory()
+            ~GameFactory ()
             {
                 m_factory.reset();
             }

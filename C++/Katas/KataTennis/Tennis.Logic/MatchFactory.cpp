@@ -36,7 +36,7 @@ namespace Tennis
                                                        );
             std::shared_ptr<ISetFactory> set_factory ( p_set_factory );
 
-            std::unique_ptr<Sets> sets = std::make_unique<Sets>
+            std::unique_ptr<ISets> sets = std::make_unique<Sets>
             (
              std::move ( set_factory )
             );

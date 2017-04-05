@@ -8,13 +8,13 @@ namespace Tennis
         class ISet;
 
         class ISetFactory
-            : public IContainerFactory<ISet>
+                : public IContainerFactory<ISet>
         {
         public:
-            virtual ~ISetFactory() = default;
+            virtual ~ISetFactory () = default;
 
-            virtual ISet* create() = 0;
-            virtual void release(ISet* set) = 0;
+            virtual ISet* create () = 0;
+            virtual void release ( ISet* set ) = 0;
         };
     };
 }

@@ -46,16 +46,16 @@ TEST(GamesCounter, count_games_for_player_returns_number_of_games_won_by_player_
     int8_t expected = static_cast<int8_t> ( 0 );
 
     std::unique_ptr<IAwardPointsFactory> award_points_factory = std::make_unique<AwardPointsFactory>();
-    std::unique_ptr<GameFactory> factory = std::make_unique<GameFactory>(std::move(award_points_factory));
-    Games games { std::move ( factory ) };
-    games.new_item();
-    winOneGameForPlayer ( games.get_current_item(), One );
+    std::unique_ptr<GameFactory> factory = std::make_unique<GameFactory> ( std::move ( award_points_factory ) );
+    std::unique_ptr<IGames> games = std::make_unique<Games> ( std::move ( factory ) );
+    games->create_new_game();
+    winOneGameForPlayer ( games->get_current_game(), One );
 
     GamesCounter sut {};
 
     // Act
     const int8_t actual = sut.count_games_for_player ( Two,
-                                                       &games );
+                                                       games.get() );
 
     // Assert
     EXPECT_EQ(expected, actual);
@@ -69,16 +69,16 @@ TEST(GamesCounter, count_games_for_player_returns_number_of_games_won_by_player_
     int8_t expected = static_cast<int8_t> ( 0 );
 
     std::unique_ptr<IAwardPointsFactory> award_points_factory = std::make_unique<AwardPointsFactory>();
-    std::unique_ptr<GameFactory> factory = std::make_unique<GameFactory>(std::move(award_points_factory));
-    Games games { std::move ( factory ) };
-    games.new_item();
-    winOneGameForPlayer ( games.get_current_item(), Two );
+    std::unique_ptr<GameFactory> factory = std::make_unique<GameFactory> ( std::move ( award_points_factory ) );
+    std::unique_ptr<IGames> games = std::make_unique<Games> ( std::move ( factory ) );
+    games->create_new_game();
+    winOneGameForPlayer ( games->get_current_game(), Two );
 
     GamesCounter sut {};
 
     // Act
     const int8_t actual = sut.count_games_for_player ( One,
-                                                       &games );
+                                                       games.get() );
 
     // Assert
     EXPECT_EQ(expected, actual);
@@ -92,16 +92,16 @@ TEST(GamesCounter, count_games_for_player_returns_number_of_games_won_by_player_
     int8_t expected = static_cast<int8_t> ( 1 );
 
     std::unique_ptr<IAwardPointsFactory> award_points_factory = std::make_unique<AwardPointsFactory>();
-    std::unique_ptr<GameFactory> factory = std::make_unique<GameFactory>(std::move(award_points_factory));
-    Games games { std::move ( factory ) };
-    games.new_item();
-    winOneGameForPlayer ( games.get_current_item(), Two );
+    std::unique_ptr<GameFactory> factory = std::make_unique<GameFactory> ( std::move ( award_points_factory ) );
+    std::unique_ptr<IGames> games = std::make_unique<Games> ( std::move ( factory ) );
+    games->create_new_game();
+    winOneGameForPlayer ( games->get_current_game(), Two );
 
     GamesCounter sut {};
 
     // Act
     const int8_t actual = sut.count_games_for_player ( Two,
-                                                       &games );
+                                                       games.get() );
 
     // Assert
     EXPECT_EQ(expected, actual);

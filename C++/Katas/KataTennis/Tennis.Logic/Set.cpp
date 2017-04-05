@@ -7,27 +7,27 @@ namespace Tennis
     {
         void Set::initialize ()
         {
-            m_games->new_item();
+            m_games->create_new_game();
         }
 
         void Set::won_point ( Player player )
         {
-            m_handler->won_point( player );
+            m_handler->won_point ( player );
         }
 
         IGame* Set::get_current_game () const
         {
-            return m_games->get_current_item();
+            return m_games->get_current_game();
         }
 
-        const Games* Set::get_games () const
+        const IGames* Set::get_games () const
         {
             return m_games.get();
         }
 
         size_t Set::get_games_length () const
         {
-            return m_games->get_length();
+            return m_games->get_number_of_games();
         }
 
         const ITieBreak* Set::get_tie_break () const
@@ -35,7 +35,7 @@ namespace Tennis
             return m_tie_break.get();
         }
 
-        const SetStatus Set::get_status() const
+        const SetStatus Set::get_status () const
         {
             return m_calculator->get_status();
         }

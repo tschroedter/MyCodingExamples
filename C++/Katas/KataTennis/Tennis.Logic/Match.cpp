@@ -9,7 +9,7 @@ namespace Tennis
     {
         void Match::initialize ()
         {
-            m_sets->new_item();
+            m_sets->create_new_set();
         }
 
         void Match::won_point ( Player player )
@@ -37,7 +37,7 @@ namespace Tennis
             return m_required_sets_to_win;
         }
 
-        Sets* Match::get_sets () const // todo not nice, scoreboard needs it
+        ISets* Match::get_sets () const // todo not nice, scoreboard needs it
         {
             return m_sets.get();
         }

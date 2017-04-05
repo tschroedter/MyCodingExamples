@@ -1,37 +1,28 @@
-#include <cassert>
 #include "include/IGame.h"
-#include "include/Game.h"
 #include "include/Games.h"
-#include "GameFactory.h"
 
 namespace Tennis
 {
     namespace Logic
     {
-        IGame* Games::new_game ()
+        IGame* Games::create_new_game () // todo testing
         {
-            m_current_game = m_factory->create();
-
-            m_games.push_back ( m_current_game );
-
-            return m_current_game;
+            return new_item();
         }
 
-        IGame* Games::get_current_game () const
+        IGame* Games::get_current_game () const // todo testing
         {
-            return m_current_game;
+            return get_current_item();
         }
 
-        IGame* Games::operator[] ( const size_t index ) const
+        IGame* Games::get_game_at_index ( const size_t index ) const // todo testing
         {
-            assert(index >= 0 && index < m_games.size());
-
-            return ( m_games.at ( index ) );
+            return ( *this ) [ index ];
         }
 
-        size_t Games::get_length () const
+        size_t Games::get_number_of_games () const // todo testing
         {
-            return m_games.size();
+            return get_length();
         }
     };
 };

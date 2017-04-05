@@ -13,7 +13,7 @@ public:
 };
 
 class ItemFactory
- : public Tennis::Logic::IContainerFactory<Item> 
+        : public Tennis::Logic::IContainerFactory<Item>
 {
 public:
     Item* create () override

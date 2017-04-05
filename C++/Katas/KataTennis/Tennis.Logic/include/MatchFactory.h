@@ -21,7 +21,7 @@ namespace Tennis
             {
             }
 
-            std::unique_ptr<Tennis::Logic::IMatch> create() override;
+            std::unique_ptr<Tennis::Logic::IMatch> create () override;
         };
     }
 }

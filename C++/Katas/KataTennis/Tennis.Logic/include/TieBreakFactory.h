@@ -8,7 +8,7 @@ namespace Tennis
     namespace Logic
     {
         class TieBreakFactory
-            : public ITieBreakFactory
+                : public ITieBreakFactory
         {
         private:
             std::unique_ptr<ILogger> m_logger;

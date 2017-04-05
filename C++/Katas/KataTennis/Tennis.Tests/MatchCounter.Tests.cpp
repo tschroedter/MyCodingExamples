@@ -17,9 +17,6 @@ TEST(MatchCounter, count_sets_won_by_player_returns_sets_won_by_player)
     std::unique_ptr<ISet> set_two { mock_set_two };
 
     MockISets* mock_sets = new MockISets();
-    mock_sets->sets.clear();
-    mock_sets->sets.push_back ( set_one.get() );
-    mock_sets->sets.push_back ( set_two.get() );
 
     MatchCounter sut {};
 
@@ -31,6 +28,18 @@ TEST(MatchCounter, count_sets_won_by_player_returns_sets_won_by_player)
     EXPECT_CALL(*mock_set_two, get_status())
                                             .Times ( 1 )
                                             .WillOnce ( testing::Return ( SetStatus_PlayerOneWon ) );
+
+    EXPECT_CALL(*mock_sets, get_number_of_sets())
+                                                 .Times ( 1 )
+                                                 .WillOnce ( testing::Return ( 2 ) );
+
+    EXPECT_CALL(*mock_sets, get_set_at_index(0))
+                                                .Times ( 1 )
+                                                .WillOnce ( testing::Return ( set_one.get() ) );
+
+    EXPECT_CALL(*mock_sets, get_set_at_index(1))
+                                                .Times ( 1 )
+                                                .WillOnce ( testing::Return ( set_two.get() ) );
 
     // Act
     int8_t actual = sut.count_sets_won_by_player (
@@ -51,9 +60,6 @@ TEST(MatchCounter, count_sets_won_by_player_returns_sets_won_by_player_not_for_t
     std::unique_ptr<ISet> set_two { mock_set_two };
 
     MockISets* mock_sets = new MockISets();
-    mock_sets->sets.clear();
-    mock_sets->sets.push_back ( set_one.get() );
-    mock_sets->sets.push_back ( set_two.get() );
 
     MatchCounter sut {};
 
@@ -65,6 +71,18 @@ TEST(MatchCounter, count_sets_won_by_player_returns_sets_won_by_player_not_for_t
     EXPECT_CALL(*mock_set_two, get_status())
                                             .Times ( 1 )
                                             .WillOnce ( testing::Return ( SetStatus_PlayerOneWon ) );
+
+    EXPECT_CALL(*mock_sets, get_number_of_sets())
+                                                 .Times ( 1 )
+                                                 .WillOnce ( testing::Return ( 2 ) );
+
+    EXPECT_CALL(*mock_sets, get_set_at_index(0))
+                                                .Times ( 1 )
+                                                .WillOnce ( testing::Return ( set_one.get() ) );
+
+    EXPECT_CALL(*mock_sets, get_set_at_index(1))
+                                                .Times ( 1 )
+                                                .WillOnce ( testing::Return ( set_two.get() ) );
 
     // Act
     int8_t actual = sut.count_sets_won_by_player (

@@ -26,7 +26,7 @@ namespace Tennis
             {
             }
 
-            void award_point(
+            void award_point (
                 const Player player,
                 IGameScore* scorePlayerOne,
                 IGameScore* scorePlayerTwo ) override;

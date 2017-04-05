@@ -8,9 +8,9 @@ namespace Tennis
         class ISetStatusCalculator
         {
         public:
-            virtual ~ISetStatusCalculator() = default;
+            virtual ~ISetStatusCalculator () = default;
 
-            virtual const SetStatus get_status() const = 0;
+            virtual const SetStatus get_status () const = 0;
         };
     };
 };

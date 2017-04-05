@@ -1,7 +1,6 @@
 #pragma once
 
-#pragma once
-#include "Games.h"
+#include <string>
 
 namespace Tennis
 {

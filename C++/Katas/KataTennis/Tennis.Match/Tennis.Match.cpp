@@ -29,9 +29,9 @@ void memory_leak_test ()
     mi.print_delta();
 }
 
-void play_match()
+void play_match ()
 {
-    Tennis::Match::PlayMatch play_match{};
+    Tennis::Match::PlayMatch play_match {};
 
     play_match.run();
 }

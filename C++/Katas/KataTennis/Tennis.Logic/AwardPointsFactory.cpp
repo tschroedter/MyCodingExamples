@@ -11,8 +11,8 @@ namespace Tennis
     {
         std::unique_ptr<IAwardPoints> AwardPointsFactory::create () const
         {
-            std::unique_ptr<ILogger> logger = std::make_unique<Logger>(std::cout);
-            std::unique_ptr<IAwardPoints> award_points = std::make_unique<AwardPoints>(std::move(logger));
+            std::unique_ptr<ILogger> logger = std::make_unique<Logger> ( std::cout );
+            std::unique_ptr<IAwardPoints> award_points = std::make_unique<AwardPoints> ( std::move ( logger ) );
 
             return award_points;
         }

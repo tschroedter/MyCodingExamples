@@ -7,12 +7,12 @@ namespace Tennis
         class IContainer
         {
         public:
-            virtual ~IContainer() = default;
+            virtual ~IContainer () = default;
 
-            virtual T* new_item() = 0;
-            virtual T* get_current_item() const = 0;
-            virtual T* operator[] (const size_t index) const = 0;
-            virtual size_t get_length() const = 0;
+            virtual T* new_item () = 0;
+            virtual T* get_current_item () const = 0;
+            virtual T* operator[] ( const size_t index ) const = 0;
+            virtual size_t get_length () const = 0;
         };
     };
 };

@@ -8,10 +8,10 @@ namespace Tennis
     namespace Logic
     {
         class IGameFactory
-            : public IContainerFactory<IGame>
+                : public IContainerFactory<IGame>
         {
         public:
-            virtual ~IGameFactory() = default;
+            virtual ~IGameFactory () = default;
         };
     }
 }

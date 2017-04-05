@@ -9,10 +9,10 @@ namespace Tennis
         class IContainerFactory
         {
         public:
-            virtual ~IContainerFactory() = default;
+            virtual ~IContainerFactory () = default;
 
-            virtual T* create() = 0;
-            virtual void release(T* item) = 0;
+            virtual T* create () = 0;
+            virtual void release ( T* item ) = 0;
         };
     };
 };

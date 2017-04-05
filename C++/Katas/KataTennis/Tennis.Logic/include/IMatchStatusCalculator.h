@@ -8,9 +8,9 @@ namespace Tennis
         class IMatchStatusCalculator
         {
         public:
-            virtual ~IMatchStatusCalculator() = default;
+            virtual ~IMatchStatusCalculator () = default;
 
-            virtual const MatchStatus get_status() const = 0;
+            virtual const MatchStatus get_status () const = 0;
         };
     };
 };

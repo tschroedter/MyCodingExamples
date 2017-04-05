@@ -4,7 +4,7 @@
 #include "ISetStatusCalculator.h"
 
 class MockISetStatusCalculator
-    :public Tennis::Logic::ISetStatusCalculator
+        :public Tennis::Logic::ISetStatusCalculator
 {
 public:
     // ReSharper disable CppOverridingFunctionWithoutOverrideSpecifier

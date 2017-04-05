@@ -99,14 +99,14 @@ namespace Tennis
             return truncated;
         }
 
-        void padTo(std::string &str, const size_t num, const char paddingChar = ' ')
+        void padTo ( std::string& str, const size_t num, const char paddingChar = ' ' )
         {
-            if (num > str.size())
+            if ( num > str.size() )
             {
                 std::string padding = "";
-                padding.insert(0, num - str.size(), paddingChar);
+                padding.insert ( 0, num - str.size(), paddingChar );
 
-                str.append(padding);
+                str.append ( padding );
             }
         }
 
@@ -119,16 +119,16 @@ namespace Tennis
 
             // make sure displayed player names have fixed length
             std::string player_name = m_manager->get_player_name ( player );
-            player_name = reduce_to_n_digits(player_name, PLAYER_NAME_MAX);
-            padTo(player_name, PLAYER_NAME_MAX, ' ');
+            player_name = reduce_to_n_digits ( player_name, PLAYER_NAME_MAX );
+            padTo ( player_name, PLAYER_NAME_MAX, ' ' );
 
             std::string total_score = player_name;
 
-            size_t number_of_sets = m_sets->get_length();
+            size_t number_of_sets = m_sets->get_number_of_sets();
 
             for ( size_t i = 0 ; i < number_of_sets ; i++ )
             {
-                ISet* set = ( *m_sets ) [ i ];
+                ISet* set = m_sets->get_set_at_index ( i );
 
                 std::string games_for_player =
                         get_games_count_for_player (

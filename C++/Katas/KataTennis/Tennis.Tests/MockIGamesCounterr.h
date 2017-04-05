@@ -1,7 +1,7 @@
 #pragma once
 #include <gtest/gtest.h>
 #include <gmock/gmock-generated-function-mockers.h>
-#include "Games.h"
+#include "IGames.h"
 #include "IGamesCounter.h"
 
 class MockIGamesCounter
@@ -9,6 +9,6 @@ class MockIGamesCounter
 {
 public:
     // ReSharper disable CppOverridingFunctionWithoutOverrideSpecifier
-    MOCK_METHOD2(count_games_for_player, int8_t(const Tennis::Logic::Player player, const Tennis::Logic::Games* games));
+    MOCK_METHOD2(count_games_for_player, int8_t(const Tennis::Logic::Player player, const Tennis::Logic::IGames* games));
     // ReSharper restore CppOverridingFunctionWithoutOverrideSpecifier
 };

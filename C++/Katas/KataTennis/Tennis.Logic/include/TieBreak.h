@@ -3,6 +3,7 @@
 #include "ITieBreakScore.h"
 #include "TieBreakScore.h"
 #include "ILogger.h"
+#include <memory>
 
 namespace Tennis
 {

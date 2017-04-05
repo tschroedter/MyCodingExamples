@@ -14,13 +14,13 @@ namespace Tennis
         {
         private:
             std::unique_ptr<IMatchCounter> m_counter;
-            Sets* m_sets;
+            ISets* m_sets;
             RequiredSetsToWin m_required_sets_to_win;
 
         public:
             MatchStatusCalculator (
                 std::unique_ptr<IMatchCounter> counter,
-                Sets* sets,
+                ISets* sets,
                 RequiredSetsToWin required_sets_to_win )
                 : m_counter ( std::move ( counter ) )
                 , m_sets ( sets )

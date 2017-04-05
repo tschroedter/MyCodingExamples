@@ -10,7 +10,7 @@ namespace Tennis
     {
         void SetWonPointHandler::won_game_point ( Player player ) const
         {
-            IGame* m_current_game = m_games->get_current_item();
+            IGame* m_current_game = m_games->get_current_game();
 
             m_current_game->won_point ( player );
 
@@ -19,7 +19,7 @@ namespace Tennis
             if ( game_status == PlayerOneWon ||
                 game_status == PlayerTwoWon )
             {
-                m_games->new_item();
+                m_games->create_new_game();
             }
         }
 

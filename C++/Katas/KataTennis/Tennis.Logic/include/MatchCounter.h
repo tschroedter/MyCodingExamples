@@ -9,20 +9,20 @@ namespace Tennis
     namespace Logic
     {
         class MatchCounter
-            : public IMatchCounter
+                : public IMatchCounter
         {
         public:
-            MatchCounter()
+            MatchCounter ()
             {
             }
 
-            ~MatchCounter()
+            ~MatchCounter ()
             {
             }
 
-            int8_t count_sets_won_by_player(
+            int8_t count_sets_won_by_player (
                 const Player player,
-                const Sets* sets) const override;
+                const ISets* sets ) const override;
         };
     };
 };

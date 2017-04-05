@@ -23,14 +23,14 @@ void won_point_calls_sets_for_given_status_n_times (
 
     // Assert
     EXPECT_CALL(mock_sets,
-        get_current_item())
-                           .Times ( get_current_item_n_times )
-                           .WillRepeatedly ( testing::Return ( &mock_set ) );
+        get_current_set())
+                          .Times ( get_current_item_n_times )
+                          .WillRepeatedly ( testing::Return ( &mock_set ) );
 
     EXPECT_CALL(mock_sets,
-        new_item())
-                   .Times ( new_set_n_times )
-                   .WillRepeatedly ( testing::Return ( &mock_set ) );
+        create_new_set())
+                         .Times ( new_set_n_times )
+                         .WillRepeatedly ( testing::Return ( &mock_set ) );
 
     EXPECT_CALL(mock_set,
         get_status())
@@ -98,14 +98,14 @@ TEST(NewMatchWonPointHandler, won_point_calls_sets_for_status_InTieBreak_PlayerO
                                .WillOnce ( testing::Return ( TieBreakStatus_PlayerOneWon ) );
 
     EXPECT_CALL(mock_sets,
-        get_current_item())
-                           .Times ( 3 )
-                           .WillRepeatedly ( testing::Return ( &mock_set ) );
+        get_current_set())
+                          .Times ( 3 )
+                          .WillRepeatedly ( testing::Return ( &mock_set ) );
 
     EXPECT_CALL(mock_sets,
-        new_item())
-                   .Times ( 1 )
-                   .WillOnce ( testing::Return ( &mock_set ) );
+        create_new_set())
+                         .Times ( 1 )
+                         .WillOnce ( testing::Return ( &mock_set ) );
 
     EXPECT_CALL(mock_set,
         get_status())
@@ -137,9 +137,9 @@ TEST(NewMatchWonPointHandler, won_point_calls_sets_for_status_InTieBreak_InProgr
                                .WillOnce ( testing::Return ( TieBreakStatus_InProgress ) );
 
     EXPECT_CALL(mock_sets,
-        get_current_item())
-                           .Times ( 2 )
-                           .WillRepeatedly ( testing::Return ( &mock_set ) );
+        get_current_set())
+                          .Times ( 2 )
+                          .WillRepeatedly ( testing::Return ( &mock_set ) );
 
     EXPECT_CALL(mock_set,
         get_status())

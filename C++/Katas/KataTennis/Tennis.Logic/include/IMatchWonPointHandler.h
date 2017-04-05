@@ -7,9 +7,9 @@ namespace Tennis
         class IMatchWonPointHandler
         {
         public:
-            virtual ~IMatchWonPointHandler() = default;
+            virtual ~IMatchWonPointHandler () = default;
 
-            virtual void won_point(const Player player) = 0;
+            virtual void won_point ( const Player player ) = 0;
         };
     };
 };

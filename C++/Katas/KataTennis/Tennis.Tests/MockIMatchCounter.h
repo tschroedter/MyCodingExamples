@@ -6,12 +6,12 @@
 #include "Sets.h"
 
 class MockIMatchCounter
-    :public Tennis::Logic::IMatchCounter
+        :public Tennis::Logic::IMatchCounter
 {
 public:
     // ReSharper disable CppOverridingFunctionWithoutOverrideSpecifier
     MOCK_CONST_METHOD2(count_sets_won_by_player, int8_t(
-        const Tennis::Logic::Player, 
-        const Tennis::Logic::Sets*));
+        const Tennis::Logic::Player,
+        const Tennis::Logic::ISets*));
     // ReSharper restore CppOverridingFunctionWithoutOverrideSpecifier
 };

@@ -144,12 +144,14 @@
     <ClInclude Include="include\IContainer.h" />
     <ClInclude Include="include\IContainerFactory.h" />
     <ClInclude Include="include\IGameFactory.h" />
+    <ClInclude Include="include\IGames.h" />
     <ClInclude Include="include\IGameScore.h" />
     <ClInclude Include="include\IMatch.h" />
     <ClInclude Include="include\IMatchCounter.h" />
     <ClInclude Include="include\IMatchFactory.h" />
     <ClInclude Include="include\IMatchStatusCalculator.h" />
     <ClInclude Include="include\ISetFactory.h" />
+    <ClInclude Include="include\ISets.h" />
     <ClInclude Include="include\ISetStatusCalculator.h" />
     <ClInclude Include="include\ITieBreak.h" />
     <ClInclude Include="include\ITieBreakFactory.h" />
@@ -201,9 +203,11 @@
     <ClCompile Include="AwardPointsFactory.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameFactory.cpp" />
+    <ClCompile Include="Games.cpp" />
     <ClCompile Include="GameScore.cpp" />
     <ClCompile Include="GamesCounter.cpp" />
     <ClCompile Include="GameStatusCalculator.cpp" />
+    <ClCompile Include="Sets.cpp" />
     <ClCompile Include="MatchFactory.cpp" />
     <ClCompile Include="Match.cpp" />
     <ClCompile Include="MatchCounter.cpp" />

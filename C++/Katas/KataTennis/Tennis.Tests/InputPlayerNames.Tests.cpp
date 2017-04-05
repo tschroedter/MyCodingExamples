@@ -12,6 +12,7 @@ TEST(InputPlayerNames, get_player_name_returns_name)
     // Arrange
     std::stringstream ostream {};
     std::stringstream istream { "Joe" };
+
     InputPlayerNames sut
     {
         ostream,
@@ -32,6 +33,7 @@ TEST(InputPlayerNames, get_player_name_displays_default_text)
     // Arrange
     std::stringstream ostream {};
     std::stringstream istream { "Joe" };
+
     InputPlayerNames sut
     {
         ostream,

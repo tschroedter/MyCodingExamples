@@ -78,6 +78,12 @@
     <ClInclude Include="MockIGameFactory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="MockSets.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MockGames.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">

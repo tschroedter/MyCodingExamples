@@ -5,7 +5,7 @@
 #include "IMatchWonPointHandler.h"
 
 class MockIMatchWonPointHandler
-    :public Tennis::Logic::IMatchWonPointHandler
+        :public Tennis::Logic::IMatchWonPointHandler
 {
 public:
     // ReSharper disable CppOverridingFunctionWithoutOverrideSpecifier

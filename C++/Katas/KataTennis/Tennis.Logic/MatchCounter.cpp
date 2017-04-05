@@ -6,7 +6,7 @@ namespace Tennis
     {
         int8_t MatchCounter::count_sets_won_by_player (
             const Player player,
-            const Sets* sets ) const
+            const ISets* sets ) const
         {
             SetStatus set_status =
                     One == player
@@ -15,11 +15,11 @@ namespace Tennis
 
             int8_t counter = 0;
 
-            size_t number_of_sets = sets->get_length();
+            size_t number_of_sets = sets->get_number_of_sets();
 
             for ( size_t i = 0 ; i < number_of_sets ; i++ )
             {
-                ISet* set = ( *sets ) [ i ];
+                ISet* set = sets->get_set_at_index ( i );
 
                 if ( set_status == set->get_status() )
                 {

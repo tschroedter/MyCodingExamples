@@ -7,7 +7,7 @@ TEST(MatchFactory, create_returns_match)
     using namespace Tennis::Logic;
 
     // Arrange
-    MatchFactory factory{};
+    MatchFactory factory {};
 
     // Act
     std::unique_ptr<IMatch> actual = factory.create();

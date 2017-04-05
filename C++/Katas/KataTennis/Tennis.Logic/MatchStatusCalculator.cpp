@@ -7,7 +7,7 @@ namespace Tennis
     {
         const MatchStatus MatchStatusCalculator::get_status () const
         {
-            if ( m_sets->get_length() == 0 )
+            if ( m_sets->get_number_of_sets() == 0 )
             {
                 return MatchStatus_NotStarted;
             }

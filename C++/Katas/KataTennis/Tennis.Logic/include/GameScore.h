@@ -21,13 +21,13 @@ namespace Tennis
             {
             }
 
-            std::string to_string() const override;
+            std::string to_string () const override;
 
-            void won_point() override;
+            void won_point () override;
 
-            void lost_point() override;
+            void lost_point () override;
 
-            Scores get_score() const override;
+            Scores get_score () const override;
         };
     };
 };

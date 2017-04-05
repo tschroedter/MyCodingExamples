@@ -8,10 +8,10 @@ namespace Tennis
         class ITieBreakFactory
         {
         public:
-            virtual ~ITieBreakFactory() = default;
+            virtual ~ITieBreakFactory () = default;
 
-            virtual ITieBreak* create() = 0;
-            virtual void release(ITieBreak* tie_break) = 0;
+            virtual ITieBreak* create () = 0;
+            virtual void release ( ITieBreak* tie_break ) = 0;
         };
     }
 }
