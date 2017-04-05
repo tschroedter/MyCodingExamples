@@ -7,9 +7,10 @@ namespace Tennis
 {
     namespace Logic
     {
+        // todo testing
         // todo class too complex
         // todo maybe use IMatch as parameter so we can avoid printing 0 current score when Match was won
-        bool ScoreBoard::was_tie_break_won_by_player ( // todo testing
+        bool ScoreBoard::was_tie_break_won_by_player (
             const ITieBreak* tie_break,
             Player player )
         {
@@ -101,7 +102,12 @@ namespace Tennis
         void padTo(std::string &str, const size_t num, const char paddingChar = ' ')
         {
             if (num > str.size())
-                str.insert(0, num - str.size(), paddingChar);
+            {
+                std::string padding = "";
+                padding.insert(0, num - str.size(), paddingChar);
+
+                str.append(padding);
+            }
         }
 
         std::string ScoreBoard::score_for_player_as_string ( const Player player ) const
@@ -113,7 +119,7 @@ namespace Tennis
 
             // make sure displayed player names have fixed length
             std::string player_name = m_manager->get_player_name ( player );
-            player_name += reduce_to_n_digits(player_name, PLAYER_NAME_MAX);
+            player_name = reduce_to_n_digits(player_name, PLAYER_NAME_MAX);
             padTo(player_name, PLAYER_NAME_MAX, ' ');
 
             std::string total_score = player_name;
