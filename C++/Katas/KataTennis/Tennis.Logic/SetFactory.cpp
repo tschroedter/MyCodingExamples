@@ -39,6 +39,8 @@ namespace Tennis
                 std::move ( games ),
                 std::move ( tie_break ) };
 
+            set->initialize();
+
             return set;
         }
 

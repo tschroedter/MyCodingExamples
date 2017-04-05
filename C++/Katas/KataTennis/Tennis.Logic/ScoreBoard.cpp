@@ -43,9 +43,11 @@ namespace Tennis
             return false;
         }
 
-        std::string ScoreBoard::reduceTwo2Digits ( std::string scores_for_player_one )
+        std::string ScoreBoard::reduce_to_n_digits (
+            std::string scores_for_player_one,
+            size_t digits )
         {
-            return scores_for_player_one.substr ( 0, 2 );
+            return scores_for_player_one.substr ( 0, digits );
         }
 
         std::string ScoreBoard::get_games_count_for_player (
@@ -89,9 +91,17 @@ namespace Tennis
                 scores_for_player += "T";
             }
 
-            std::string truncated = reduceTwo2Digits ( scores_for_player );
+            std::string truncated = reduce_to_n_digits (
+                                                        scores_for_player,
+                                                        static_cast<size_t> ( 2 ) );
 
             return truncated;
+        }
+
+        void padTo(std::string &str, const size_t num, const char paddingChar = ' ')
+        {
+            if (num > str.size())
+                str.insert(0, num - str.size(), paddingChar);
         }
 
         std::string ScoreBoard::score_for_player_as_string ( const Player player ) const
@@ -101,7 +111,12 @@ namespace Tennis
                 return "Unknown Sets";
             }
 
-            std::string total_score = m_manager->get_player_name ( player );
+            // make sure displayed player names have fixed length
+            std::string player_name = m_manager->get_player_name ( player );
+            player_name += reduce_to_n_digits(player_name, PLAYER_NAME_MAX);
+            padTo(player_name, PLAYER_NAME_MAX, ' ');
+
+            std::string total_score = player_name;
 
             size_t number_of_sets = m_sets->get_length();
 
