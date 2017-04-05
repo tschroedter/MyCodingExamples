@@ -14,7 +14,7 @@ TEST(MatchStatusCalculator, get_status_returns_NotStarted_for_no_sets)
     std::unique_ptr<IMatchCounter> counter ( mock_counter );
 
     MockISets* mock_sets = new MockISets();
-    std::unique_ptr<ISets> sets ( mock_sets );
+    std::unique_ptr<Sets> sets ( mock_sets );
 
     MatchStatusCalculator sut {
         std::move ( counter ),
@@ -37,7 +37,7 @@ TEST(MatchStatusCalculator, get_status_returns_PlayerOneWon_for_player_one_won_r
     std::unique_ptr<IMatchCounter> counter ( mock_counter );
 
     MockISets* mock_sets = new MockISets();
-    std::unique_ptr<ISets> sets ( mock_sets );
+    std::unique_ptr<Sets> sets ( mock_sets );
     mock_sets->mock_get_length_value = 1;
 
     MatchStatusCalculator sut {
@@ -69,7 +69,7 @@ TEST(MatchStatusCalculator, get_status_returns_PlayerTwoWon_for_player_two_won_r
     std::unique_ptr<IMatchCounter> counter ( mock_counter );
 
     MockISets* mock_sets = new MockISets();
-    std::unique_ptr<ISets> sets ( mock_sets );
+    std::unique_ptr<Sets> sets ( mock_sets );
     mock_sets->mock_get_length_value = 1;
 
     MatchStatusCalculator sut {

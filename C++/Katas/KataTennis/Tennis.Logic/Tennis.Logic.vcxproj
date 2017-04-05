@@ -138,8 +138,11 @@
   <ItemGroup>
     <ClInclude Include="AwardPointsFactory.h" />
     <ClInclude Include="GameFactory.h" />
+    <ClInclude Include="include\Container.h" />
     <ClInclude Include="include\IAwardPoints.h" />
     <ClInclude Include="include\IAwardPointsFactory.h" />
+    <ClInclude Include="include\IContainer.h" />
+    <ClInclude Include="include\IContainerFactory.h" />
     <ClInclude Include="include\IGameFactory.h" />
     <ClInclude Include="include\IGameScore.h" />
     <ClInclude Include="include\IMatch.h" />
@@ -147,7 +150,6 @@
     <ClInclude Include="include\IMatchFactory.h" />
     <ClInclude Include="include\IMatchStatusCalculator.h" />
     <ClInclude Include="include\ISetFactory.h" />
-    <ClInclude Include="include\ISets.h" />
     <ClInclude Include="include\ISetStatusCalculator.h" />
     <ClInclude Include="include\ITieBreak.h" />
     <ClInclude Include="include\ITieBreakFactory.h" />
@@ -166,7 +168,6 @@
     <ClInclude Include="include\GameStatus.h" />
     <ClInclude Include="include\GameStatusCalculator.h" />
     <ClInclude Include="include\IGame.h" />
-    <ClInclude Include="include\IGames.h" />
     <ClInclude Include="include\InputPlayerNames.h" />
     <ClInclude Include="include\ISet.h" />
     <ClInclude Include="include\Match.h" />
@@ -200,7 +201,6 @@
     <ClCompile Include="AwardPointsFactory.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameFactory.cpp" />
-    <ClCompile Include="Games.cpp" />
     <ClCompile Include="GameScore.cpp" />
     <ClCompile Include="GamesCounter.cpp" />
     <ClCompile Include="GameStatusCalculator.cpp" />
@@ -208,7 +208,6 @@
     <ClCompile Include="Match.cpp" />
     <ClCompile Include="MatchCounter.cpp" />
     <ClCompile Include="MatchStatusCalculator.cpp" />
-    <ClCompile Include="include\Sets.cpp" />
     <ClCompile Include="SetStatusCalculator.cpp" />
     <ClCompile Include="MatchWonPointHandler.cpp" />
     <ClCompile Include="TieBreakFactory.cpp" />

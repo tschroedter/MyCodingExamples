@@ -7,7 +7,7 @@ namespace Tennis
     {
         void Set::initialize ()
         {
-            m_games->new_game();
+            m_games->new_item();
         }
 
         void Set::won_point ( Player player )
@@ -17,10 +17,10 @@ namespace Tennis
 
         IGame* Set::get_current_game () const
         {
-            return m_games->get_current_game();
+            return m_games->get_current_item();
         }
 
-        const IGames* Set::get_games () const
+        const Games* Set::get_games () const
         {
             return m_games.get();
         }

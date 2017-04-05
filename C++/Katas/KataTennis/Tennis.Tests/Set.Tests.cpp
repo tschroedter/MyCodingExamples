@@ -15,6 +15,9 @@
 #include "MockISetWonPointHandler.h"
 #include "SetStatusCalculator.h"
 #include "MockISetStatusCalculator.h"
+#include "IAwardPointsFactory.h"
+#include "AwardPointsFactory.h"
+#include "GameFactory.h"
 
 std::unique_ptr<Tennis::Logic::Set> createSet ()
 {
@@ -23,8 +26,8 @@ std::unique_ptr<Tennis::Logic::Set> createSet ()
     std::unique_ptr<IGamesCounter> counter_for_calculator = std::make_unique<GamesCounter>();
     std::unique_ptr<IGamesCounter> counter_for_handler = std::make_unique<GamesCounter>();
     std::unique_ptr<IAwardPointsFactory> award_points_factory = std::make_unique<AwardPointsFactory>();
-    std::unique_ptr<GameFactory> game_factory = std::make_unique<GameFactory> ( std::move ( award_points_factory ) );
-    std::unique_ptr<IGames> games = std::make_unique<Games> ( std::move ( game_factory ) );
+    std::shared_ptr<GameFactory> game_factory = std::make_shared<GameFactory> ( std::move ( award_points_factory ) );
+    std::unique_ptr<Games> games = std::make_unique<Games> ( std::move ( game_factory ) );
     std::unique_ptr<ILogger> logger = std::make_unique<MockILogger>();
     std::unique_ptr<TieBreakFactory> tie_break_factory = std::make_unique<TieBreakFactory> ( std::move ( logger ) );
     std::unique_ptr<ILogger> tie_break_logger = std::make_unique<MockILogger>();
@@ -231,7 +234,7 @@ TEST(Set, get_games_returns_games)
     MockISetStatusCalculator* mock_calculator = new MockISetStatusCalculator();
     std::unique_ptr<ISetStatusCalculator> calculator ( mock_calculator );
     MockIGames* mock_games = new MockIGames();
-    std::unique_ptr<IGames> games ( mock_games );
+    std::unique_ptr<Games> games ( mock_games );
     MockITieBreak* mock_tie_break = new MockITieBreak();
     std::unique_ptr<ITieBreak> tie_break ( mock_tie_break );
     MockISetWonPointHandler* mock_handler = new MockISetWonPointHandler();
@@ -246,7 +249,7 @@ TEST(Set, get_games_returns_games)
     };
 
     // Assert
-    const IGames* actual = sut.get_games();
+    const Games* actual = sut.get_games();
 
     // Act
     EXPECT_EQ(mock_games, actual);
@@ -261,7 +264,7 @@ TEST(Set, won_point_calls_handlers)
     std::unique_ptr<ISetStatusCalculator> calculator ( mock_calculator );
     MockIGame mock_game {};
     MockIGames* mock_games = new MockIGames();
-    std::unique_ptr<IGames> games ( mock_games );
+    std::unique_ptr<Games> games ( mock_games );
     MockITieBreak* mock_tie_break = new MockITieBreak();
     std::unique_ptr<ITieBreak> tie_break ( mock_tie_break );
     MockISetWonPointHandler* mock_handler = new MockISetWonPointHandler();
@@ -292,7 +295,7 @@ TEST(Set, get_status_calls_calculator)
     std::unique_ptr<ISetStatusCalculator> calculator ( mock_calculator );
     MockIGame mock_game {};
     MockIGames* mock_games = new MockIGames();
-    std::unique_ptr<IGames> games ( mock_games );
+    std::unique_ptr<Games> games ( mock_games );
     MockITieBreak* mock_tie_break = new MockITieBreak();
     std::unique_ptr<ITieBreak> tie_break ( mock_tie_break );
     MockISetWonPointHandler* mock_handler = new MockISetWonPointHandler();
@@ -324,7 +327,7 @@ TEST(Set, get_tie_break_calls_tie_break)
     std::unique_ptr<ISetStatusCalculator> calculator ( mock_calculator );
     MockIGame mock_game {};
     MockIGames* mock_games = new MockIGames();
-    std::unique_ptr<IGames> games ( mock_games );
+    std::unique_ptr<Games> games ( mock_games );
     MockITieBreak* mock_tie_break = new MockITieBreak();
     std::unique_ptr<ITieBreak> tie_break ( mock_tie_break );
     MockISetWonPointHandler* mock_handler = new MockISetWonPointHandler();
@@ -354,7 +357,7 @@ TEST(Set, get_tie_break_status_returns_status)
     std::unique_ptr<ISetStatusCalculator> calculator ( mock_calculator );
     MockIGame mock_game {};
     MockIGames* mock_games = new MockIGames();
-    std::unique_ptr<IGames> games ( mock_games );
+    std::unique_ptr<Games> games ( mock_games );
     MockITieBreak* mock_tie_break = new MockITieBreak();
     std::unique_ptr<ITieBreak> tie_break ( mock_tie_break );
     MockISetWonPointHandler* mock_handler = new MockISetWonPointHandler();
@@ -389,7 +392,7 @@ TEST(Set, initialize_calls_games_new_game)
     std::unique_ptr<ISetStatusCalculator> calculator ( mock_calculator );
     MockIGame mock_game {};
     MockIGames* mock_games = new MockIGames();
-    std::unique_ptr<IGames> games ( mock_games );
+    std::unique_ptr<Games> games ( mock_games );
     MockITieBreak* mock_tie_break = new MockITieBreak();
     std::unique_ptr<ITieBreak> tie_break ( mock_tie_break );
     MockISetWonPointHandler* mock_handler = new MockISetWonPointHandler();
@@ -404,7 +407,7 @@ TEST(Set, initialize_calls_games_new_game)
     };
 
     // Assert
-    EXPECT_CALL(*mock_games, new_game())
+    EXPECT_CALL(*mock_games, new_item())
                                         .Times ( 1 );
 
     // Act

@@ -38,9 +38,9 @@ void play_match()
 
 int main ()
 {
-    // run_memory_leak_test();
+    memory_leak_test();
 
-    play_match();
+    // play_match();
 
     return 0;
 }

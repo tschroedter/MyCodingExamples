@@ -15,7 +15,7 @@ namespace Tennis
 
             std::unique_ptr<IGamesCounter> counter_for_handler = std::make_unique<GamesCounter>();
 
-            std::unique_ptr<IGames> games = std::make_unique<Games> ( m_game_factory );
+            std::unique_ptr<Games> games = std::make_unique<Games> ( m_game_factory );
 
             std::unique_ptr<ILogger> logger = std::make_unique<Logger> ( std::cout );
 

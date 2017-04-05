@@ -6,7 +6,7 @@ namespace Tennis
     {
         bool MatchWonPointHandler::is_tie_break_finsihed() const
         {
-            ISet* current_set = m_sets->get_current_set();
+            ISet* current_set = m_sets->get_current_item();
 
             TieBreakStatus tie_break_status =
                 current_set->get_tie_break_status();
@@ -17,13 +17,13 @@ namespace Tennis
 
         void MatchWonPointHandler::create_new_set_and_call_won_point(Player player) const
         {
-            m_sets->new_set();
-            m_sets->get_current_set()->won_point(player);
+            m_sets->new_item();
+            m_sets->get_current_item()->won_point(player);
         }
 
         void MatchWonPointHandler::won_point(const Player player)
         {
-            ISet* current_set = m_sets->get_current_set();
+            ISet* current_set = m_sets->get_current_item();
 
             SetStatus status = current_set->get_status();
 

@@ -2,8 +2,7 @@
 #include "MatchStatus.h"
 #include "RequiredSetsToWin.h"
 #include "Player.h"
-#include "ISet.h"
-#include "ISets.h"
+#include "Sets.h"
 
 namespace Tennis
 {
@@ -18,7 +17,7 @@ namespace Tennis
             virtual void won_point(Player player) = 0;
             virtual MatchStatus get_status() const = 0;
             virtual RequiredSetsToWin get_required_sets_to_win() const = 0;
-            virtual ISets* get_sets() const = 0;
+            virtual Sets* get_sets() const = 0;
         };
     };
 };

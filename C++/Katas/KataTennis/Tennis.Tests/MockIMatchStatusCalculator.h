@@ -1,7 +1,6 @@
 #pragma once
 #include <gtest/gtest.h>
 #include <gmock/gmock-generated-function-mockers.h>
-#include "ISets.h"
 #include "IMatchStatusCalculator.h"
 
 class MockIMatchStatusCalculator

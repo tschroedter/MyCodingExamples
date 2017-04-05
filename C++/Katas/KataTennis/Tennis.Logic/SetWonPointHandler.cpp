@@ -2,7 +2,7 @@
 #include "include/Player.h"
 #include "include/IGame.h"
 #include "include/TieBreakStatus.h"
-#include "include/IGames.h"
+#include "include/Games.h"
 
 namespace Tennis
 {
@@ -10,7 +10,7 @@ namespace Tennis
     {
         void SetWonPointHandler::won_game_point ( Player player ) const
         {
-            IGame* m_current_game = m_games->get_current_game();
+            IGame* m_current_game = m_games->get_current_item();
 
             m_current_game->won_point ( player );
 
@@ -19,7 +19,7 @@ namespace Tennis
             if ( game_status == PlayerOneWon ||
                 game_status == PlayerTwoWon )
             {
-                m_games->new_game();
+                m_games->new_item();
             }
         }
 

@@ -7,7 +7,7 @@ namespace Tennis
 {
     namespace Logic
     {
-        IGame* GameFactory::create () const
+        IGame* GameFactory::create ()
         {
             std::unique_ptr<ILogger> logger = std::make_unique<Logger> ( std::cout );
             std::unique_ptr<IAwardPoints> award_points = m_factory->create();

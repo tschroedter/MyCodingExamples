@@ -1,6 +1,6 @@
 #include <cstdint>
 #include "include/Player.h"
-#include "include/IGames.h"
+#include "include/Games.h"
 #include "include/GamesCounter.h"
 
 namespace Tennis
@@ -9,7 +9,7 @@ namespace Tennis
     {
         int8_t GamesCounter::count_games_for_player (
             const Player player,
-            const IGames* games )
+            const Games* games )
         {
             GameStatus game_status =
                     One == player

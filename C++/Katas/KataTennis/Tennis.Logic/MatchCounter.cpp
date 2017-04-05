@@ -6,7 +6,7 @@ namespace Tennis
     {
         int8_t MatchCounter::count_sets_won_by_player (
             const Player player,
-            const ISets* sets ) const
+            const Sets* sets ) const
         {
             SetStatus set_status =
                     One == player

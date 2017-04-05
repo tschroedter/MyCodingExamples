@@ -25,7 +25,7 @@ namespace Tennis
                 m_factory.reset();
             }
 
-            IGame* create () const override;
+            IGame* create () override;
             void release ( IGame* game ) override;
         };
     }

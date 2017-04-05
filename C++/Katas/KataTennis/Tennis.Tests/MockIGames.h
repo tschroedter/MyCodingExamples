@@ -2,19 +2,27 @@
 #include <gtest/gtest.h>
 #include <gmock/gmock-generated-function-mockers.h>
 #include "IGame.h"
-#include "IGames.h"
+#include "Games.h"
+#include "MockIGameFactory.h"
 
 class MockIGames
-        : public Tennis::Logic::IGames
+        : public Tennis::Logic::Games
 {
 public:
+    MockIGames()
+        : Games(std::move(factory))
+    {
+    }
+
+    std::unique_ptr<MockIGameFactory> factory = std::make_unique<MockIGameFactory>();
+
     size_t mock_get_length_value = -1;
 
     std::vector<Tennis::Logic::IGame*> sets;
 
     // ReSharper disable CppOverridingFunctionWithoutOverrideSpecifier
-    MOCK_METHOD0(new_game, Tennis::Logic::IGame*());
-    MOCK_CONST_METHOD0(get_current_game, Tennis::Logic::IGame* ());
+    MOCK_METHOD0(new_item, Tennis::Logic::IGame*());
+    MOCK_CONST_METHOD0(get_current_item, Tennis::Logic::IGame* ());
     //MOCK_CONST_METHOD1(operator[], IGame* (const size_t)); // todo how to mock operators
     // virtual IGame* operator[] (const size_t index) const = 0;
     Tennis::Logic::IGame* operator[] ( const size_t index ) const

@@ -1,7 +1,7 @@
 #pragma once
 #include "ISetStatusCalculator.h"
 #include "ITieBreak.h"
-#include "IGames.h"
+#include "Games.h"
 #include "IGamesCounter.h"
 
 namespace Tennis
@@ -15,7 +15,7 @@ namespace Tennis
             static const int8_t MAX_GAME_SCORE = 6;
             static const int8_t WON_TIE_BREAK_SCORE = MAX_GAME_SCORE + 1;
 
-            IGames* m_games;
+            Games* m_games;
             ITieBreak* m_tie_break;
             std::unique_ptr<IGamesCounter> m_counter;
 
@@ -36,7 +36,7 @@ namespace Tennis
         public:
             SetStatusCalculator (
                 std::unique_ptr<IGamesCounter> counter,
-                IGames* games,
+                Games* games,
                 ITieBreak* tie_break )
                 : m_games ( games )
                 , m_tie_break ( tie_break )

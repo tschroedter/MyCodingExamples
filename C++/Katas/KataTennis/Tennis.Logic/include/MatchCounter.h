@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Player.h"
-#include "ISets.h"
+#include "Sets.h"
 #include "IMatchCounter.h"
 
 namespace Tennis
@@ -22,7 +22,7 @@ namespace Tennis
 
             int8_t count_sets_won_by_player(
                 const Player player,
-                const ISets* sets) const override;
+                const Sets* sets) const override;
         };
     };
 };

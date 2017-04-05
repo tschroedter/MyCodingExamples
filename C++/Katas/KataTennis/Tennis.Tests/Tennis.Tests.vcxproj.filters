@@ -69,13 +69,13 @@
     <ClInclude Include="MockIMatchStatusCalculator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MatchWonPointHandler.Tests.cpp">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="MockIMatchWonPointHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="MockISetWonPointHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MockIGameFactory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -134,9 +134,6 @@
     <ClCompile Include="Match.Tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Sets.Tests.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="MatchCounter.Tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -153,6 +150,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MatchStatusToStringConverter.Tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Container.Tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MatchWonPointHandler.Tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

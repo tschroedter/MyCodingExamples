@@ -1,4 +1,5 @@
 #pragma once
+#include "IContainerFactory.h"
 
 namespace Tennis
 {
@@ -7,6 +8,7 @@ namespace Tennis
         class ISet;
 
         class ISetFactory
+            : public IContainerFactory<ISet>
         {
         public:
             virtual ~ISetFactory() = default;

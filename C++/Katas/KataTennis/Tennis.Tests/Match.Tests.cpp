@@ -7,6 +7,7 @@
 #include "MockITieBreak.h"
 #include "MockIMatchWonPointHandler.h"
 #include "MockILogger.h"
+#include "MockISet.h"
 
 TEST(Match, constructor_sets_required_sets_to_win)
 {
@@ -23,7 +24,7 @@ TEST(Match, constructor_sets_required_sets_to_win)
     std::unique_ptr<IMatchStatusCalculator> calculator ( mock_calculator );
 
     MockISets* mock_sets = new MockISets();
-    std::unique_ptr<ISets> sets ( mock_sets );
+    std::unique_ptr<Sets> sets ( mock_sets );
 
     Match sut {
         std::move ( logger ),
@@ -55,7 +56,7 @@ TEST(Match, initialize_calls_sets)
     std::unique_ptr<IMatchStatusCalculator> calculator ( mock_calculator );
 
     MockISets* mock_sets = new MockISets();
-    std::unique_ptr<ISets> sets ( mock_sets );
+    std::unique_ptr<Sets> sets ( mock_sets );
 
     Match sut {
         std::move ( logger ),
@@ -66,7 +67,7 @@ TEST(Match, initialize_calls_sets)
     };
 
     // Assert
-    EXPECT_CALL(*mock_sets, new_set())
+    EXPECT_CALL(*mock_sets, new_item())
                                       .Times ( 1 );
 
     // Act
@@ -93,7 +94,7 @@ void won_point_calls_handler_for_given_status_n_times (
 
     MockISet mock_set {};
     MockISets* mock_sets = new MockISets();
-    std::unique_ptr<ISets> sets ( mock_sets );
+    std::unique_ptr<Sets> sets ( mock_sets );
 
     Match sut {
         std::move ( logger ),
@@ -159,7 +160,7 @@ TEST(Match, get_status_calls_calculator)
     std::unique_ptr<IMatchStatusCalculator> calculator ( mock_calculator );
 
     MockISets* mock_sets = new MockISets();
-    std::unique_ptr<ISets> sets ( mock_sets );
+    std::unique_ptr<Sets> sets ( mock_sets );
     mock_sets->mock_get_length_value = 1;
 
     Match sut {
@@ -195,7 +196,7 @@ TEST(Match, get_sets_returns_sets)
     std::unique_ptr<IMatchStatusCalculator> calculator ( mock_calculator );
 
     MockISets* mock_sets = new MockISets();
-    std::unique_ptr<ISets> sets ( mock_sets );
+    std::unique_ptr<Sets> sets ( mock_sets );
 
     Match sut {
         std::move ( logger ),
@@ -206,7 +207,7 @@ TEST(Match, get_sets_returns_sets)
     };
 
     // Act
-    ISets* actual = sut.get_sets();
+    Sets* actual = sut.get_sets();
 
     // Assert
     EXPECT_EQ(mock_sets, actual);
@@ -227,7 +228,7 @@ TEST(Match, won_point_logs_error_for_match_finished)
     std::unique_ptr<IMatchStatusCalculator> calculator ( mock_calculator );
 
     MockISets* mock_sets = new MockISets();
-    std::unique_ptr<ISets> sets ( mock_sets );
+    std::unique_ptr<Sets> sets ( mock_sets );
 
     Match sut {
         std::move ( logger ),

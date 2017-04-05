@@ -3,6 +3,9 @@
 #include <gtest/gtest.h>
 #include "GamesCounter.h"
 #include "MockIGames.h"
+#include "IAwardPointsFactory.h"
+#include "AwardPointsFactory.h"
+#include "GameFactory.h"
 
 void winOneGameForPlayer ( Tennis::Logic::IGame* game, Tennis::Logic::Player player )
 {
@@ -22,8 +25,8 @@ TEST(GamesCounter, count_games_for_player_returns_number_of_games_won_by_player_
     std::unique_ptr<IAwardPointsFactory> award_points_factory = std::make_unique<AwardPointsFactory>();
     std::unique_ptr<GameFactory> factory = std::make_unique<GameFactory> ( std::move ( award_points_factory ) );
     Games games { std::move ( factory ) };
-    games.new_game();
-    winOneGameForPlayer ( games.get_current_game(), One );
+    games.new_item();
+    winOneGameForPlayer ( games.get_current_item(), One );
 
     GamesCounter sut {};
 
@@ -45,8 +48,8 @@ TEST(GamesCounter, count_games_for_player_returns_number_of_games_won_by_player_
     std::unique_ptr<IAwardPointsFactory> award_points_factory = std::make_unique<AwardPointsFactory>();
     std::unique_ptr<GameFactory> factory = std::make_unique<GameFactory>(std::move(award_points_factory));
     Games games { std::move ( factory ) };
-    games.new_game();
-    winOneGameForPlayer ( games.get_current_game(), One );
+    games.new_item();
+    winOneGameForPlayer ( games.get_current_item(), One );
 
     GamesCounter sut {};
 
@@ -68,8 +71,8 @@ TEST(GamesCounter, count_games_for_player_returns_number_of_games_won_by_player_
     std::unique_ptr<IAwardPointsFactory> award_points_factory = std::make_unique<AwardPointsFactory>();
     std::unique_ptr<GameFactory> factory = std::make_unique<GameFactory>(std::move(award_points_factory));
     Games games { std::move ( factory ) };
-    games.new_game();
-    winOneGameForPlayer ( games.get_current_game(), Two );
+    games.new_item();
+    winOneGameForPlayer ( games.get_current_item(), Two );
 
     GamesCounter sut {};
 
@@ -91,8 +94,8 @@ TEST(GamesCounter, count_games_for_player_returns_number_of_games_won_by_player_
     std::unique_ptr<IAwardPointsFactory> award_points_factory = std::make_unique<AwardPointsFactory>();
     std::unique_ptr<GameFactory> factory = std::make_unique<GameFactory>(std::move(award_points_factory));
     Games games { std::move ( factory ) };
-    games.new_game();
-    winOneGameForPlayer ( games.get_current_game(), Two );
+    games.new_item();
+    winOneGameForPlayer ( games.get_current_item(), Two );
 
     GamesCounter sut {};
 

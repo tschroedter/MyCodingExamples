@@ -4,7 +4,6 @@
 #include <iostream>
 #include "include/SetFactory.h"
 #include "include/Logger.h"
-#include "include/ISets.h"
 #include "include/Sets.h"
 #include "include/IMatchCounter.h"
 #include "include/MatchCounter.h"
@@ -14,6 +13,9 @@
 #include "include/IMatchStatusCalculator.h"
 #include "include/MatchStatusCalculator.h"
 #include "include/Match.h"
+#include "include/IAwardPointsFactory.h"
+#include "AwardPointsFactory.h"
+#include "GameFactory.h"
 
 namespace Tennis
 {
@@ -32,9 +34,9 @@ namespace Tennis
                                                         std::move ( game_factory ),
                                                         std::move ( tie_break_factory )
                                                        );
-            std::unique_ptr<ISetFactory> set_factory ( p_set_factory );
+            std::shared_ptr<ISetFactory> set_factory ( p_set_factory );
 
-            std::unique_ptr<ISets> sets = std::make_unique<Sets>
+            std::unique_ptr<Sets> sets = std::make_unique<Sets>
             (
              std::move ( set_factory )
             );

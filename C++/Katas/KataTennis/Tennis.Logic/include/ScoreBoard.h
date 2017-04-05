@@ -1,10 +1,10 @@
 #pragma once
 #include <string>
-#include "include/ISet.h"
+#include "include/Set.h"
 #include "include/GamesCounter.h"
 #include "include/PlayerNameManager.h"
 #include "IMatch.h"
-#include "ISets.h"
+#include "Sets.h"
 
 namespace Tennis
 {
@@ -16,7 +16,7 @@ namespace Tennis
             const size_t PLAYER_NAME_MAX = 10;
             IPlayerNameManager* m_manager;
             IGamesCounter* m_counter;
-            ISets* m_sets;
+            Sets* m_sets;
             IMatch* m_match;
 
             static std::string ScoreBoard::reduce_to_n_digits(
@@ -33,7 +33,7 @@ namespace Tennis
             ScoreBoard (
                 IPlayerNameManager* manager,
                 IGamesCounter* counter,
-                ISets* set )
+                Sets* set )
                 : m_manager ( manager )
                 , m_counter ( counter )
                 , m_sets ( set )

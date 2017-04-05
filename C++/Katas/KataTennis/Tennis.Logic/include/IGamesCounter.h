@@ -1,8 +1,7 @@
 #pragma once
 
-#include "IGamesCounter.h"
 #include "Player.h"
-#include "IGames.h"
+#include "Games.h"
 
 namespace Tennis
 {
@@ -17,7 +16,7 @@ namespace Tennis
 
             virtual int8_t count_games_for_player (
                 const Player player,
-                const IGames* games ) = 0;
+                const Games* games ) = 0;
         };
     };
 };

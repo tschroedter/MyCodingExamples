@@ -15,7 +15,7 @@ public:
     MOCK_METHOD0(initialize, void());
     MOCK_METHOD1(won_point, void(Tennis::Logic::Player player));
     MOCK_CONST_METHOD0(get_current_game, Tennis::Logic::IGame*());
-    MOCK_CONST_METHOD0(get_games, Tennis::Logic::IGames*());
+    MOCK_CONST_METHOD0(get_games, Tennis::Logic::Games*());
     MOCK_CONST_METHOD0(get_games_length, size_t());
     MOCK_CONST_METHOD0(get_tie_break, Tennis::Logic::ITieBreak*());
     MOCK_CONST_METHOD0(get_status, const Tennis::Logic::SetStatus());
