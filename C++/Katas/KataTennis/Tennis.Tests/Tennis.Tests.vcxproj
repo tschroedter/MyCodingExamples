@@ -191,6 +191,7 @@
     <ClCompile Include="PossibleScores.Tests.cpp" />
     <ClCompile Include="ScoreBoard.Tests.cpp" />
     <ClCompile Include="Set.Tests.cpp" />
+    <ClCompile Include="Sets.Tests.cpp" />
     <ClCompile Include="SetStatusCalculator.Tests.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -198,7 +199,6 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="Tennis.Tests.cpp" />
     <ClCompile Include="MatchWonPointHandler.Tests.cpp" />
     <ClCompile Include="TieBreak.Tests.cpp" />
     <ClCompile Include="TieBreakScore.Tests.cpp" />

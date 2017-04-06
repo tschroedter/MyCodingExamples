@@ -5,22 +5,22 @@ namespace Tennis
 {
     namespace Logic
     {
-        IGame* Games::create_new_game () // todo testing
+        IGame* Games::create_new_game ()
         {
             return new_item();
         }
 
-        IGame* Games::get_current_game () const // todo testing
+        IGame* Games::get_current_game () const
         {
             return get_current_item();
         }
 
-        IGame* Games::get_game_at_index ( const size_t index ) const // todo testing
+        IGame* Games::get_game_at_index ( const size_t index ) const
         {
             return ( *this ) [ index ];
         }
 
-        size_t Games::get_number_of_games () const // todo testing
+        size_t Games::get_number_of_games () const
         {
             return get_length();
         }

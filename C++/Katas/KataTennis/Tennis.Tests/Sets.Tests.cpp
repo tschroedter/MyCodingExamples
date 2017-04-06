@@ -1,117 +1,88 @@
 #include "stdafx.h"
 #include <gtest/gtest.h>
 #include <memory>
-#include "SetFactory.h"
-#include "Logger.h"
 #include "Sets.h"
+#include "MockISetFactory.h"
+#include "MockISet.h"
 
-std::unique_ptr<Tennis::Logic::Sets> create_sut ()
-{
-    using namespace Tennis::Logic;
-
-    std::unique_ptr<IAwardPointsFactory> award_points_factory = std::make_unique<AwardPointsFactory>();
-    std::unique_ptr<GameFactory> game_factory = std::make_unique<GameFactory> ( std::move ( award_points_factory ) );
-
-    std::unique_ptr<ILogger> logger = std::make_unique<Logger> ( std::cout );
-    std::unique_ptr<TieBreakFactory> tie_break_factory = std::make_unique<TieBreakFactory> ( std::move ( logger ) );
-
-    std::unique_ptr<SetFactory> factory = std::make_unique<SetFactory> (
-                                                                        std::move ( game_factory ),
-                                                                        std::move ( tie_break_factory ) );;
-
-    std::unique_ptr<Sets> sut = std::make_unique<Sets> ( std::move ( factory ) );
-
-    return sut;
-}
-
-TEST(Sets, new_sets_returns_new_set)
+TEST(Sets, create_new_set_returns_new_item)
 {
     using namespace Tennis::Logic;
 
     // Arrange
-    std::unique_ptr<Sets> sut = create_sut();
-
-    // Act
-    ISet* actual = sut->new_set();
+    std::unique_ptr<MockISet> mock_set = std::make_unique<MockISet>();
+    std::shared_ptr<MockISetFactory> mock_set_factory = std::make_shared<MockISetFactory>();
+    std::shared_ptr<ISetFactory> factory ( mock_set_factory );
+    Sets sut { std::move ( factory ) };
 
     // Assert
-    EXPECT_NE(nullptr, &actual);
+    EXPECT_CALL(*mock_set_factory, create())
+                                            .Times ( 1 )
+                                            .WillOnce ( testing::Return ( mock_set.get() ) );
+
+    // Act
+    ISet* actual = sut.create_new_set();
+
+    // Assert
+    EXPECT_EQ(mock_set.get(), actual);
 }
 
-TEST(Sets, new_set_adds_new_set)
+TEST(Sets, create_new_set_adds_new_item)
 {
     using namespace Tennis::Logic;
 
     // Arrange
     size_t expected { 1 };
-    std::unique_ptr<Sets> sut = create_sut();
 
-    // Act
-    sut->new_set();
+    std::unique_ptr<MockISet> mock_set = std::make_unique<MockISet>();
+    std::shared_ptr<MockISetFactory> mock_set_factory = std::make_shared<MockISetFactory>();
+    std::shared_ptr<ISetFactory> factory ( mock_set_factory );
+    Sets sut { std::move ( factory ) };
 
     // Assert
-    EXPECT_EQ(expected, sut->get_length());
+    EXPECT_CALL(*mock_set_factory, create())
+                                            .Times ( 1 )
+                                            .WillOnce ( testing::Return ( mock_set.get() ) );
+
+    // Act
+    sut.create_new_set();
+
+    // Assert
+    EXPECT_EQ(expected, sut.get_length());
 }
 
-TEST(Sets, get_length_returns_number_of_sets)
+TEST(Sets, get_number_of_sets_returns_number_of_Sets)
 {
     using namespace Tennis::Logic;
 
     // Arrange
-    std::unique_ptr<Sets> sut = create_sut();
-    sut->new_set();
-    sut->new_set();
+    std::shared_ptr<MockISetFactory> mock_set_factory = std::make_shared<MockISetFactory>();
+    std::shared_ptr<ISetFactory> factory ( mock_set_factory );
+    Sets sut { std::move ( factory ) };
+    sut.create_new_set();
+    sut.create_new_set();
 
     // Act
-    size_t actual = sut->get_length();
+    size_t actual = sut.get_number_of_sets();
 
     // Assert
     EXPECT_EQ(2, actual);
 }
 
-TEST(Sets, get_current_set_returns_current_set)
+TEST(Sets, get_current_set_returns_current_game)
 {
     using namespace Tennis::Logic;
 
     // Arrange
-    std::unique_ptr<Sets> sut = create_sut();
-    sut->new_set();
+    std::unique_ptr<MockISet> mock_set = std::make_unique<MockISet>();
+    std::shared_ptr<MockISetFactory> mock_set_factory = std::make_shared<MockISetFactory>();
+    std::shared_ptr<ISetFactory> factory ( mock_set_factory );
+    Sets sut { std::move ( factory ) };
+    ISet* expected = sut.create_new_set();
 
     // Act
-    auto actual = sut->get_current_set();
+    auto actual = sut.get_current_set();
 
     // Assert
-    EXPECT_NE(nullptr, actual);
-}
-
-TEST(Sets, operator_index_returns_set_for_first_index)
-{
-    using namespace Tennis::Logic;
-
-    // Arrange
-    std::unique_ptr<Sets> sut = create_sut();
-    ISet* set_one = sut->new_set();
-    sut->new_set();
-
-    // Act
-    ISet* actual = ( *sut.get() ) [ 0 ];
-
-    // Assert
-    EXPECT_EQ(set_one, actual);
-}
-
-TEST(Sets, operator_index_returns_set_for_second_index)
-{
-    using namespace Tennis::Logic;
-
-    // Arrange
-    std::unique_ptr<Sets> sut = create_sut();
-    sut->new_set();
-    ISet* set_two = sut->new_set();
-
-    // Act
-    ISet* actual = ( *sut.get() ) [ 1 ];
-
-    // Assert
-    EXPECT_EQ(set_two, actual);
+    EXPECT_EQ(expected, actual);
 }
