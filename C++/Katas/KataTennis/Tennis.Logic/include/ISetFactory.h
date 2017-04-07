@@ -13,8 +13,8 @@ namespace Tennis
         public:
             virtual ~ISetFactory () = default;
 
-            virtual ISet* create () = 0;
-            virtual void release ( ISet* set ) = 0;
+            virtual ISet* create () override = 0;
+            virtual void release ( ISet* set ) override = 0;
         };
     };
 }

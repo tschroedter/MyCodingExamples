@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include <gtest/gtest.h>
-#include "AwardPoints.h"
 #include "MockILogger.h"
 #include "TieBreakWinnerCalculator.h"
 #include "MockITieBreak.h"

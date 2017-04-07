@@ -2,6 +2,7 @@
 #include <gtest/gtest.h>
 #include "Games.h"
 #include <memory>
+#include "IAwardPointsFactory.h"
 #include "AwardPointsFactory.h"
 #include "GameFactory.h"
 

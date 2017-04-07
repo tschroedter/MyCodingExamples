@@ -1,6 +1,6 @@
 #pragma once
 
-#include "ScoreBoard.h"
+#include "Player.h"
 
 namespace Tennis
 {
