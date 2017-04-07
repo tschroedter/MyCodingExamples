@@ -152,6 +152,8 @@
     <ClInclude Include="MemoryInfo.h" />
     <ClInclude Include="MockGames.h" />
     <ClInclude Include="MockIAwardPoints.h" />
+    <ClInclude Include="MockICountPlayerGames.h" />
+    <ClInclude Include="MockICurrentPlayerScoreCalculator.h" />
     <ClInclude Include="MockIGame.h" />
     <ClInclude Include="MockIGameFactory.h" />
     <ClInclude Include="MockIGames.h" />
@@ -161,6 +163,7 @@
     <ClInclude Include="MockIMatchCounter.h" />
     <ClInclude Include="MockIMatchStatusCalculator.h" />
     <ClInclude Include="MockIPlayerNameManager.h" />
+    <ClInclude Include="MockIScoresForPlayerCalculator.h" />
     <ClInclude Include="MockISet.h" />
     <ClInclude Include="MockISetFactory.h" />
     <ClInclude Include="MockISets.h" />
@@ -168,6 +171,7 @@
     <ClInclude Include="MockITieBreak.h" />
     <ClInclude Include="MockISetWonPointHandler.h" />
     <ClInclude Include="MockIMatchWonPointHandler.h" />
+    <ClInclude Include="MockITieBreakWinnerCalculator.h" />
     <ClInclude Include="MockSets.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
@@ -175,6 +179,8 @@
   <ItemGroup>
     <ClCompile Include="AwardPoints.Tests.cpp" />
     <ClCompile Include="Container.Tests.cpp" />
+    <ClCompile Include="CountPlayerGames.Tests.cpp" />
+    <ClCompile Include="CurrentPlayerScoreCalculator.Tests.cpp" />
     <ClCompile Include="Game.Tests.cpp" />
     <ClCompile Include="Games.Tests.cpp" />
     <ClCompile Include="GameScore.Tests.cpp" />
@@ -190,6 +196,7 @@
     <ClCompile Include="PlayerNameManager.Tests.cpp" />
     <ClCompile Include="PossibleScores.Tests.cpp" />
     <ClCompile Include="ScoreBoard.Tests.cpp" />
+    <ClCompile Include="ScoresForPlayerCalculator.Tests.cpp" />
     <ClCompile Include="Set.Tests.cpp" />
     <ClCompile Include="Sets.Tests.cpp" />
     <ClCompile Include="SetStatusCalculator.Tests.cpp" />
@@ -204,6 +211,7 @@
     <ClCompile Include="TieBreakScore.Tests.cpp" />
     <ClCompile Include="TieBreakStatusCalculator.Tests.cpp" />
     <ClCompile Include="SetWonPointHandler.Tests.cpp" />
+    <ClCompile Include="TieBreakWinnerCalculator.Tests.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Tennis.Logic\Tennis.Logic.vcxproj">

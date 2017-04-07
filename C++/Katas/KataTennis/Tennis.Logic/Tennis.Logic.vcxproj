@@ -139,10 +139,14 @@
     <ClInclude Include="AwardPointsFactory.h" />
     <ClInclude Include="GameFactory.h" />
     <ClInclude Include="include\Container.h" />
+    <ClInclude Include="include\CountPlayerGames.h" />
+    <ClInclude Include="include\CurrentPlayerScoreCalculator.h" />
     <ClInclude Include="include\IAwardPoints.h" />
     <ClInclude Include="include\IAwardPointsFactory.h" />
     <ClInclude Include="include\IContainer.h" />
     <ClInclude Include="include\IContainerFactory.h" />
+    <ClInclude Include="include\ICountPlayerGames.h" />
+    <ClInclude Include="include\ICurrentPlayerScoreCalculator.h" />
     <ClInclude Include="include\IGameFactory.h" />
     <ClInclude Include="include\IGames.h" />
     <ClInclude Include="include\IGameScore.h" />
@@ -150,6 +154,7 @@
     <ClInclude Include="include\IMatchCounter.h" />
     <ClInclude Include="include\IMatchFactory.h" />
     <ClInclude Include="include\IMatchStatusCalculator.h" />
+    <ClInclude Include="include\IScoresForPlayerCalculator.h" />
     <ClInclude Include="include\ISetFactory.h" />
     <ClInclude Include="include\ISets.h" />
     <ClInclude Include="include\ISetStatusCalculator.h" />
@@ -159,6 +164,7 @@
     <ClInclude Include="include\ITieBreakScore.h" />
     <ClInclude Include="include\ISetWonPointHandler.h" />
     <ClInclude Include="include\IMatchWonPointHandler.h" />
+    <ClInclude Include="include\ITieBreakWinnerCalculator.h" />
     <ClInclude Include="include\Logger.h" />
     <ClInclude Include="include\IGamesCounter.h" />
     <ClInclude Include="include\ILogger.h" />
@@ -184,6 +190,7 @@
     <ClInclude Include="include\IPlayerNameManager.h" />
     <ClInclude Include="include\RequiredSetsToWin.h" />
     <ClInclude Include="include\ScoreBoard.h" />
+    <ClInclude Include="include\ScoresForPlayerCalculator.h" />
     <ClInclude Include="include\Set.h" />
     <ClInclude Include="include\Scores.h" />
     <ClInclude Include="include\SetFactory.h" />
@@ -197,16 +204,21 @@
     <ClInclude Include="include\TieBreakStatusCalculator.h" />
     <ClInclude Include="include\SetWonPointHandler.h" />
     <ClInclude Include="include\MatchWonPointHandler.h" />
+    <ClInclude Include="include\TieBreakWinnerCalculator.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AwardPoints.cpp" />
     <ClCompile Include="AwardPointsFactory.cpp" />
+    <ClCompile Include="CountPlayerGames.cpp" />
+    <ClCompile Include="CurrentPlayerScoreCalculator.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameFactory.cpp" />
     <ClCompile Include="Games.cpp" />
     <ClCompile Include="GameScore.cpp" />
     <ClCompile Include="GamesCounter.cpp" />
     <ClCompile Include="GameStatusCalculator.cpp" />
+    <ClCompile Include="include\TieBreakWinnerCalculator.cpp" />
+    <ClCompile Include="ScoresForPlayerCalculator.cpp" />
     <ClCompile Include="Sets.cpp" />
     <ClCompile Include="MatchFactory.cpp" />
     <ClCompile Include="Match.cpp" />

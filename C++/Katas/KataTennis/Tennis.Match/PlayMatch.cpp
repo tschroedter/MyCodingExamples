@@ -10,6 +10,11 @@
 #include "PlayMatch.h"
 #include "PlayerNameManager.h"
 #include "GamesCounter.h"
+#include "ITieBreakWinnerCalculator.h"
+#include "TieBreakWinnerCalculator.h"
+#include "CountPlayerGames.h"
+#include "CurrentPlayerScoreCalculator.h"
+#include "ScoresForPlayerCalculator.h"
 
 namespace Tennis
 {
@@ -59,10 +64,25 @@ namespace Tennis
                                                                                                            player_name_one,
                                                                                                            player_name_two );
 
+            std::unique_ptr<IGamesCounter> count_player_games_games_counter = std::make_unique<GamesCounter>();
+
+            std::unique_ptr<ICurrentPlayerScoreCalculator> current_player_score_calculator = std::make_unique<CurrentPlayerScoreCalculator>();
+
+            std::unique_ptr<ITieBreakWinnerCalculator> tie_break_winner_calculator = std::make_unique<TieBreakWinnerCalculator>();
+
+            std::unique_ptr<ICountPlayerGames> count_player_games = std::make_unique<CountPlayerGames> (
+                                                                                                        std::move ( count_player_games_games_counter ),
+                                                                                                        std::move ( tie_break_winner_calculator ) );
+
+            std::unique_ptr<IScoresForPlayerCalculator> scores_for_player_calculator = std::make_unique<ScoresForPlayerCalculator> (
+                                                                                                                                    std::move ( current_player_score_calculator ),
+                                                                                                                                    std::move ( count_player_games ) );
+
             std::unique_ptr<IGamesCounter> games_counter = std::make_unique<GamesCounter>();
 
             ScoreBoard score_board
             {
+                std::move ( scores_for_player_calculator ),
                 player_name_manager.get(),
                 games_counter.get(),
                 match->get_sets()

@@ -4,6 +4,7 @@
 #include "Sets.h"
 #include "IPlayerNameManager.h"
 #include "IGamesCounter.h"
+#include "IScoresForPlayerCalculator.h"
 
 namespace Tennis
 {
@@ -13,29 +14,26 @@ namespace Tennis
         {
         private:
             const size_t PLAYER_NAME_MAX = 10;
+
+            std::unique_ptr<IScoresForPlayerCalculator> m_scores_for_player_calculator;
             IPlayerNameManager* m_manager;
             IGamesCounter* m_counter;
             ISets* m_sets;
             IMatch* m_match;
 
-            static std::string ScoreBoard::reduce_to_n_digits (
-                std::string scores_for_player_one,
-                size_t digits );
-            std::string ScoreBoard::get_games_count_for_player (
-                Player player,
-                ISet* set ) const;
-            std::string ScoreBoard::get_current_score_for_player (
-                Player player,
-                ISet* set ) const;
-
+            std::string get_player_name_to_display ( const Player player ) const;
+            
         public:
             ScoreBoard (
+                std::unique_ptr<IScoresForPlayerCalculator> scores_for_player_calculator,
                 IPlayerNameManager* manager,
                 IGamesCounter* counter,
                 ISets* set )
-                : m_manager ( manager )
+                : m_scores_for_player_calculator ( std::move ( scores_for_player_calculator ) )
+                , m_manager ( manager )
                 , m_counter ( counter )
                 , m_sets ( set )
+                , m_match ( nullptr )
             {
             }
 
@@ -43,10 +41,6 @@ namespace Tennis
 
             std::string ScoreBoard::score_for_player_as_string (
                 const Player player ) const;
-
-            static bool ScoreBoard::was_tie_break_won_by_player (
-                const ITieBreak* tie_break,
-                const Player player );
         };
     };
 };

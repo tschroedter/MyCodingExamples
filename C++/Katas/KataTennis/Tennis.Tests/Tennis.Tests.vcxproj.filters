@@ -84,6 +84,18 @@
     <ClInclude Include="MockGames.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="MockITieBreakWinnerCalculator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MockICountPlayerGames.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MockICurrentPlayerScoreCalculator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MockIScoresForPlayerCalculator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -162,6 +174,18 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Sets.Tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TieBreakWinnerCalculator.Tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CountPlayerGames.Tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CurrentPlayerScoreCalculator.Tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ScoresForPlayerCalculator.Tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

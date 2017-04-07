@@ -9,13 +9,18 @@
 #include "Logger.h"
 #include "GamesCounter.h"
 #include "PlayerNameManager.h"
+#include "ITieBreakWinnerCalculator.h"
+#include "TieBreakWinnerCalculator.h"
+#include "CountPlayerGames.h"
+#include "CurrentPlayerScoreCalculator.h"
+#include "ScoresForPlayerCalculator.h"
 
 namespace Tennis
 {
     namespace Match
     {
         void MemoryLeakTest::create_games_won (
-            Tennis::Logic::IMatch* match,
+            Logic::IMatch* match,
             Logic::Player player,
             size_t games_scored_by_player )
         {
@@ -29,7 +34,7 @@ namespace Tennis
         }
 
         void MemoryLeakTest::create_set_with_score (
-            Tennis::Logic::IMatch* match,
+            Logic::IMatch* match,
             size_t games_scored_by_player_one,
             size_t games_scored_by_player_two )
         {
@@ -61,23 +66,23 @@ namespace Tennis
             }
         }
 
-        void MemoryLeakTest::player_on_wins_tie_break ( Tennis::Logic::IMatch* match )
+        void MemoryLeakTest::player_on_wins_tie_break ( Logic::IMatch* match )
         {
-            match->won_point ( Tennis::Logic::One );
-            match->won_point ( Tennis::Logic::Two );
-            match->won_point ( Tennis::Logic::One );
-            match->won_point ( Tennis::Logic::Two );
-            match->won_point ( Tennis::Logic::Two );
-            match->won_point ( Tennis::Logic::One );
-            match->won_point ( Tennis::Logic::One );
-            match->won_point ( Tennis::Logic::One );
-            match->won_point ( Tennis::Logic::One );
-            match->won_point ( Tennis::Logic::One );
+            match->won_point ( Logic::One );
+            match->won_point ( Logic::Two );
+            match->won_point ( Logic::One );
+            match->won_point ( Logic::Two );
+            match->won_point ( Logic::Two );
+            match->won_point ( Logic::One );
+            match->won_point ( Logic::One );
+            match->won_point ( Logic::One );
+            match->won_point ( Logic::One );
+            match->won_point ( Logic::One );
         }
 
-        void MemoryLeakTest::print_status ( Tennis::Logic::IMatch* match )
+        void MemoryLeakTest::print_status ( Logic::IMatch* match )
         {
-            using namespace Tennis::Logic;
+            using namespace Logic;
 
             MatchStatus match_status = match->get_status();
 
@@ -88,25 +93,42 @@ namespace Tennis
 
         void MemoryLeakTest::run () const
         {
-            Logic::MatchFactory factory {};
+            using namespace Logic;
 
-            std::unique_ptr<Logic::IMatch> match = factory.create();
+            MatchFactory factory {};
 
-            std::unique_ptr<Logic::IGamesCounter> counter = std::make_unique<Logic::GamesCounter>();
+            std::unique_ptr<IMatch> match = factory.create();
 
-            Logic::Logger logger { std::cout };
+            std::unique_ptr<IGamesCounter> counter = std::make_unique<GamesCounter>();
 
-            Logic::PlayerNameManager player_name_manager {
+            Logger logger { std::cout };
+
+            PlayerNameManager player_name_manager {
                 &logger,
                 "John",
                 "Bill" };
 
-            Logic::GamesCounter games_counter {};
+            std::unique_ptr<IGamesCounter> count_player_games_games_counter = std::make_unique<GamesCounter>();
 
-            Logic::ScoreBoard score_board
+            std::unique_ptr<ICurrentPlayerScoreCalculator> current_player_score_calculator = std::make_unique<CurrentPlayerScoreCalculator>();
+
+            std::unique_ptr<ITieBreakWinnerCalculator> tie_break_winner_calculator = std::make_unique<TieBreakWinnerCalculator>();
+
+            std::unique_ptr<ICountPlayerGames> count_player_games = std::make_unique<CountPlayerGames> (
+                                                                                                        move ( count_player_games_games_counter ),
+                                                                                                        move ( tie_break_winner_calculator ) );
+
+            std::unique_ptr<IGamesCounter> games_counter = std::make_unique<GamesCounter>();
+
+            std::unique_ptr<IScoresForPlayerCalculator> scores_for_player_calculator = std::make_unique<ScoresForPlayerCalculator>(
+                std::move(current_player_score_calculator),
+                std::move(count_player_games));
+
+            ScoreBoard score_board
             {
+                std::move(scores_for_player_calculator),
                 &player_name_manager,
-                &games_counter,
+                games_counter.get(),
                 match->get_sets()
             };
 
