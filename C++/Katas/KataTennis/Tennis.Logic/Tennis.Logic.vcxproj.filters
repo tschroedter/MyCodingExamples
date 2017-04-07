@@ -84,12 +84,6 @@
     <ClInclude Include="include\ScoreBoard.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="GameFactory.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="AwardPointsFactory.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\SetFactory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -223,6 +217,24 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\IScoresForPlayerCalculator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BaseException.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\AwardPointsFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ContainerException.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PlayerException.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GameFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SetStatusException.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

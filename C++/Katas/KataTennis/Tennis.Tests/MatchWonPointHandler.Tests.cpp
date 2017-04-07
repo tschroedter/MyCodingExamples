@@ -19,7 +19,10 @@ void won_point_calls_sets_for_given_status_n_times (
     MockISet mock_set {};
     MockISets mock_sets {};
 
-    MatchWonPointHandler sut { &mock_sets };
+    MatchWonPointHandler sut 
+    { 
+        &mock_sets 
+    };
 
     // Assert
     EXPECT_CALL(mock_sets,
@@ -89,7 +92,10 @@ TEST(NewMatchWonPointHandler, won_point_calls_sets_for_status_InTieBreak_PlayerO
     MockISet mock_set {};
     MockISets mock_sets {};
 
-    MatchWonPointHandler sut { &mock_sets };
+    MatchWonPointHandler sut
+    {
+        &mock_sets
+    };
 
     // Assert
     EXPECT_CALL(mock_set,
@@ -128,7 +134,10 @@ TEST(NewMatchWonPointHandler, won_point_calls_sets_for_status_InTieBreak_InProgr
     MockISet mock_set {};
     MockISets mock_sets {};
 
-    MatchWonPointHandler sut { &mock_sets };
+    MatchWonPointHandler sut
+    {
+        &mock_sets
+    };
 
     // Assert
     EXPECT_CALL(mock_set,

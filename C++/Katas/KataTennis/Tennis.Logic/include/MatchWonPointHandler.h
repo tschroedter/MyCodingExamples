@@ -18,7 +18,8 @@ namespace Tennis
             void create_new_set_and_call_won_point ( Player player ) const;
 
         public:
-            MatchWonPointHandler ( ISets* sets )
+            MatchWonPointHandler ( 
+                ISets* sets )
                 : m_sets ( sets )
             {
             }

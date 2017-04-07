@@ -6,6 +6,7 @@
 #include "Sets.h"
 #include "IMatchStatusCalculator.h"
 #include "IMatchWonPointHandler.h"
+#include "ILogger.h"
 
 namespace Tennis
 {

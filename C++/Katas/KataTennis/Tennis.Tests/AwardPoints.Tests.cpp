@@ -4,14 +4,13 @@
 #include "MockILogger.h"
 #include "Scores.h"
 #include "GameScore.h"
+#include <memory>
 
 std::unique_ptr<Tennis::Logic::AwardPoints> create_sut ()
 {
     using namespace Tennis::Logic;
 
-    std::unique_ptr<ILogger> logger = std::make_unique<MockILogger>();
-
-    std::unique_ptr<AwardPoints> sut = std::make_unique<AwardPoints> ( std::move ( logger ) );
+    std::unique_ptr<AwardPoints> sut = std::make_unique<AwardPoints>();
 
     return sut;
 }

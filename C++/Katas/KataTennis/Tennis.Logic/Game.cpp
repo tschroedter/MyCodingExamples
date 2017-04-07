@@ -4,6 +4,7 @@
 #include "include/GameStatusCalculator.h"
 #include "include/Scores.h"
 #include <string>
+#include "include/PlayerException.h"
 
 namespace Tennis
 {
@@ -29,7 +30,7 @@ namespace Tennis
         void Game::updateStatus ()
         {
             m_game_status =
-                    GameStatusCalculator::calculate ( // todo depency injection
+                    GameStatusCalculator::calculate (
                                                      m_score_player_one->get_score(),
                                                      m_score_player_two->get_score() );
         }
@@ -54,8 +55,7 @@ namespace Tennis
                 case Two :
                     return m_score_player_two->get_score();
                 default :
-                    m_logger->error ( "Unknown Player type: " + std::to_string ( player ) );
-                    return Unknown;
+                    throw PlayerException ( "Unknown Player type: " + std::to_string ( player ) );
             }
         }
 
@@ -68,8 +68,7 @@ namespace Tennis
                 case Two :
                     return m_score_player_two->to_string();
                 default :
-                    m_logger->error ( "Unknown Player type: " + std::to_string ( player ) );
-                    return "Unknown";
+                    throw PlayerException ( "Unknown Player type: " + std::to_string ( player ) );
             }
         }
     };

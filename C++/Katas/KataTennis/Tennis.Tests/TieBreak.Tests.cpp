@@ -5,10 +5,8 @@
 
 std::unique_ptr<Tennis::Logic::ITieBreak> create_sut ()
 {
-    std::unique_ptr<Tennis::Logic::ILogger> logger = std::make_unique<MockILogger>();
-
     std::unique_ptr<Tennis::Logic::ITieBreak> sut =
-            std::make_unique<Tennis::Logic::TieBreak> ( std::move ( logger ) );
+            std::make_unique<Tennis::Logic::TieBreak> ();
 
     return sut;
 }

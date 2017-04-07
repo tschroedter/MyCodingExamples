@@ -17,9 +17,7 @@ namespace Tennis
 
             std::unique_ptr<IGames> games = std::make_unique<Games> ( m_game_factory );
 
-            std::unique_ptr<ILogger> logger = std::make_unique<Logger> ( std::cout );
-
-            std::unique_ptr<ITieBreak> tie_break = std::make_unique<TieBreak> ( std::move ( logger ) );
+            std::unique_ptr<ITieBreak> tie_break = std::make_unique<TieBreak> ();
 
             std::unique_ptr<ISetWonPointHandler> handler =
                     std::make_unique<SetWonPointHandler> (

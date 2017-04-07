@@ -18,14 +18,11 @@ std::unique_ptr<Tennis::Logic::Game> create_sut ()
 {
     using namespace Tennis::Logic;
 
-    std::unique_ptr<ILogger> logger = std::make_unique<MockILogger>();
-    std::unique_ptr<ILogger> logger1 = std::make_unique<MockILogger>();
-    std::unique_ptr<IAwardPoints> award_points = std::make_unique<AwardPoints> ( move ( logger1 ) );
+    std::unique_ptr<IAwardPoints> award_points = std::make_unique<AwardPoints>();
     std::unique_ptr<IGameScore> game_score_one = std::make_unique<GameScore>();
     std::unique_ptr<IGameScore> game_score_two = std::make_unique<GameScore>();
     std::unique_ptr<Game> sut =
             std::make_unique<Game> (
-                                    move ( logger ),
                                     move ( award_points ),
                                     move ( game_score_one ),
                                     move ( game_score_two ) );

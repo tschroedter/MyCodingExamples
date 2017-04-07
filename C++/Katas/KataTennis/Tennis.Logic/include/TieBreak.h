@@ -2,7 +2,6 @@
 #include "ITieBreak.h"
 #include "ITieBreakScore.h"
 #include "TieBreakScore.h"
-#include "ILogger.h"
 #include <memory>
 
 namespace Tennis
@@ -13,19 +12,13 @@ namespace Tennis
                 : public ITieBreak
         {
         private:
-            std::unique_ptr<ILogger> m_logger;
             std::unique_ptr<ITieBreakScore> m_score_player_one;
             std::unique_ptr<ITieBreakScore> m_score_player_two;
         public:
-            TieBreak ( std::unique_ptr<ILogger> logger )
-                : m_logger ( std::move ( logger ) )
+            TieBreak ()
             {
                 m_score_player_one = std::make_unique<TieBreakScore>();
                 m_score_player_two = std::make_unique<TieBreakScore>();
-            }
-
-            ~TieBreak ()
-            {
             }
 
             void won_point ( Player player ) override;

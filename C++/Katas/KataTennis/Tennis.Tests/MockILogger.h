@@ -11,5 +11,6 @@ public:
     MOCK_CONST_METHOD1(debug, void(std::string message));
     MOCK_CONST_METHOD1(error, void(std::string message));
     MOCK_CONST_METHOD1(info, void(std::string message));
+    MOCK_CONST_METHOD1(warning, void(std::string message));
     // ReSharper restore CppOverridingFunctionWithoutOverrideSpecifier
 };

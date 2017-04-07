@@ -136,11 +136,14 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AwardPointsFactory.h" />
-    <ClInclude Include="GameFactory.h" />
+    <ClInclude Include="include\AwardPointsFactory.h" />
+    <ClInclude Include="include\GameFactory.h" />
+    <ClInclude Include="include\PlayerException.h" />
+    <ClInclude Include="include\BaseException.h" />
     <ClInclude Include="include\Container.h" />
     <ClInclude Include="include\CountPlayerGames.h" />
     <ClInclude Include="include\CurrentPlayerScoreCalculator.h" />
+    <ClInclude Include="include\ContainerException.h" />
     <ClInclude Include="include\IAwardPoints.h" />
     <ClInclude Include="include\IAwardPointsFactory.h" />
     <ClInclude Include="include\IContainer.h" />
@@ -197,6 +200,7 @@
     <ClInclude Include="include\Sets.h" />
     <ClInclude Include="include\SetStatus.h" />
     <ClInclude Include="include\SetStatusCalculator.h" />
+    <ClInclude Include="include\SetStatusException.h" />
     <ClInclude Include="include\TieBreak.h" />
     <ClInclude Include="include\TieBreakFactory.h" />
     <ClInclude Include="include\TieBreakScore.h" />

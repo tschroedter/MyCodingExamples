@@ -1,9 +1,10 @@
 #pragma once
 #include <memory>
 #include "vector"
+#include "ContainerException.h"
 #include "IContainer.h"
-#include <cassert>
 #include "IContainerFactory.h"
+#include <string>
 
 namespace Tennis
 {
@@ -65,9 +66,15 @@ namespace Tennis
         template <class T, class TFactory>
         T* Container<T, TFactory>::operator[] ( const size_t index ) const
         {
-            assert(index >= 0 && index < m_items.size());
+            if (index < 0 || index >= m_items.size())
+            {
+                throw ContainerException ( "Given index "
+                                          + std::to_string ( index )
+                                          + " must be >= 0 and < "
+                                          + std::to_string ( m_items.size() ) );
+            }
 
-            return ( m_items.at ( index ) );
+            return (m_items.at(index));
         }
 
         template <class T, class TFactory>

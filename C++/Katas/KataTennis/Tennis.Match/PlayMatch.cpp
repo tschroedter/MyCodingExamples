@@ -5,7 +5,6 @@
 #include "ScoreBoard.h"
 #include "MatchStatusToStringConverter.h"
 #include <iostream>
-#include "Logger.h"
 #include "InputPlayerNames.h"
 #include "PlayMatch.h"
 #include "PlayerNameManager.h"
@@ -57,10 +56,7 @@ namespace Tennis
 
             std::unique_ptr<IMatch> match = factory.create();
 
-            std::unique_ptr<ILogger> logger = std::make_unique<Logger> ( std::cout );
-
             std::unique_ptr<IPlayerNameManager> player_name_manager = std::make_unique<PlayerNameManager> (
-                                                                                                           logger.get(),
                                                                                                            player_name_one,
                                                                                                            player_name_two );
 

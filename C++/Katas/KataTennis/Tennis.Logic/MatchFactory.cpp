@@ -14,22 +14,18 @@
 #include "include/MatchStatusCalculator.h"
 #include "include/Match.h"
 #include "include/IAwardPointsFactory.h"
-#include "AwardPointsFactory.h"
-#include "GameFactory.h"
+#include "include/AwardPointsFactory.h"
+#include "include/GameFactory.h"
 
 namespace Tennis
 {
     namespace Logic
     {
-        std::unique_ptr<Tennis::Logic::IMatch> MatchFactory::create ()
+        std::unique_ptr<IMatch> MatchFactory::create ()
         {
-            using namespace Tennis::Logic;
-
-            std::unique_ptr<ILogger> logger = std::make_unique<Logger> ( std::cout );
             std::shared_ptr<IAwardPointsFactory> award_points_factory = std::make_shared<AwardPointsFactory>();
             std::shared_ptr<IGameFactory> game_factory = std::make_shared<GameFactory> ( std::move ( award_points_factory ) );
-            std::unique_ptr<ILogger> tie_break_logger = std::make_unique<Logger> ( std::cout );
-            std::shared_ptr<ITieBreakFactory> tie_break_factory = std::make_shared<TieBreakFactory> ( std::move ( tie_break_logger ) );
+            std::shared_ptr<ITieBreakFactory> tie_break_factory = std::make_shared<TieBreakFactory> ();
             SetFactory* p_set_factory = new SetFactory (
                                                         std::move ( game_factory ),
                                                         std::move ( tie_break_factory )
@@ -54,6 +50,8 @@ namespace Tennis
              sets.get(), // todo maybe shared_ptr
              RequiredSetsToWin_Two
             );
+
+            std::unique_ptr<ILogger> logger = std::make_unique<Logger>(std::cout);
 
             Tennis::Logic::Match* match = new Tennis::Logic::Match
             {

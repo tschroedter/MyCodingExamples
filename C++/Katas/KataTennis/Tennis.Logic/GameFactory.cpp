@@ -1,6 +1,6 @@
 #include <algorithm>
 #include "include/Game.h"
-#include "GameFactory.h"
+#include "include/GameFactory.h"
 #include "include/Logger.h"
 
 namespace Tennis

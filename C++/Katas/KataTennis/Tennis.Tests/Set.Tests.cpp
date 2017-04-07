@@ -28,10 +28,9 @@ std::unique_ptr<Tennis::Logic::Set> createSet ()
     std::unique_ptr<IAwardPointsFactory> award_points_factory = std::make_unique<AwardPointsFactory>();
     std::shared_ptr<GameFactory> game_factory = std::make_shared<GameFactory> ( std::move ( award_points_factory ) );
     std::unique_ptr<IGames> games = std::make_unique<Games> ( std::move ( game_factory ) );
-    std::unique_ptr<ILogger> logger = std::make_unique<MockILogger>();
-    std::unique_ptr<TieBreakFactory> tie_break_factory = std::make_unique<TieBreakFactory> ( std::move ( logger ) );
+    std::unique_ptr<TieBreakFactory> tie_break_factory = std::make_unique<TieBreakFactory> ();
     std::unique_ptr<ILogger> tie_break_logger = std::make_unique<MockILogger>();
-    std::unique_ptr<ITieBreak> tie_break = std::make_unique<TieBreak> ( std::move ( tie_break_logger ) );
+    std::unique_ptr<ITieBreak> tie_break = std::make_unique<TieBreak> ();
 
     std::unique_ptr<ISetWonPointHandler> handler =
             std::make_unique<SetWonPointHandler> (

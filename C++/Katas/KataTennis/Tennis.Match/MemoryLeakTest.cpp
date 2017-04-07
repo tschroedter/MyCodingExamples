@@ -6,7 +6,6 @@
 #include "ScoreBoard.h"
 #include "MatchStatusToStringConverter.h"
 #include <iostream>
-#include "Logger.h"
 #include "GamesCounter.h"
 #include "PlayerNameManager.h"
 #include "ITieBreakWinnerCalculator.h"
@@ -101,10 +100,7 @@ namespace Tennis
 
             std::unique_ptr<IGamesCounter> counter = std::make_unique<GamesCounter>();
 
-            Logger logger { std::cout };
-
             PlayerNameManager player_name_manager {
-                &logger,
                 "John",
                 "Bill" };
 

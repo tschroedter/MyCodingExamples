@@ -37,7 +37,7 @@ namespace Tennis
             return m_required_sets_to_win;
         }
 
-        ISets* Match::get_sets () const // todo not nice, scoreboard needs it
+        ISets* Match::get_sets () const // todo not nice, scoreboard needs it, maybe singelton ISetsManager
         {
             return m_sets.get();
         }

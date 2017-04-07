@@ -178,6 +178,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AwardPoints.Tests.cpp" />
+    <ClCompile Include="BaseException.Tests.cpp" />
     <ClCompile Include="Container.Tests.cpp" />
     <ClCompile Include="CountPlayerGames.Tests.cpp" />
     <ClCompile Include="CurrentPlayerScoreCalculator.Tests.cpp" />

@@ -3,17 +3,15 @@
 #include <gtest/gtest.h>
 #include "PlayerNameManager.h"
 #include "MockILogger.h"
+#include "PlayerException.h"
 
 TEST(PlayerNameManager, constructor_sets_name_for_player_one)
 {
     using namespace Tennis::Logic;
 
     // Arrange
-    MockILogger logger {};
-
     PlayerNameManager sut
     {
-        &logger,
         "Player One",
         "Player Two"
     };
@@ -30,11 +28,8 @@ TEST(PlayerNameManager, constructor_sets_name_for_player_two)
     using namespace Tennis::Logic;
 
     // Arrange
-    MockILogger logger {};
-
     PlayerNameManager sut
     {
-        &logger,
         "Player One",
         "Player Two"
     };
@@ -46,24 +41,20 @@ TEST(PlayerNameManager, constructor_sets_name_for_player_two)
     EXPECT_EQ("Player Two", actual);
 }
 
-TEST(PlayerNameManager, get_player_name_log_error_for_unknown_player)
+TEST(PlayerNameManager, get_player_name_throws_for_unknown_player)
 {
     using namespace Tennis::Logic;
 
     // Arrange
-    MockILogger logger {};
-
     PlayerNameManager sut
     {
-        &logger,
         "Player One",
         "Player Two"
     };
 
-    // Expect
-    EXPECT_CALL(logger, error("Unknown Player type: -1"))
-                                                         .Times ( 1 );
-
     // Act
-    std::string actual = sut.get_player_name ( static_cast<Player> ( -1 ) );
+    // Assert
+    EXPECT_THROW(
+        sut.get_player_name(static_cast<Player> (-1)),
+        Tennis::Logic::PlayerException);
 }

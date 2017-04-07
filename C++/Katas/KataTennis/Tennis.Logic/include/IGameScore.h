@@ -1,5 +1,6 @@
 #pragma once
 #include "Scores.h"
+#include <string>
 
 namespace Tennis
 {

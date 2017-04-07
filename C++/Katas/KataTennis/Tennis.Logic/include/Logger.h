@@ -29,6 +29,7 @@ namespace Tennis
             void debug ( std::string message ) const override;
             void error ( std::string message ) const override;
             void info ( std::string message ) const override;
+            void warning(std::string message) const override;
         };
     };
 };

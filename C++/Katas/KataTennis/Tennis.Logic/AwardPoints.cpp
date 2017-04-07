@@ -2,6 +2,7 @@
 #include "include/AwardPoints.h"
 #include "include/IGameScore.h"
 #include <string>
+#include "include/PlayerException.h"
 
 namespace Tennis
 {
@@ -29,8 +30,7 @@ namespace Tennis
                     }
                     break;
                 default :
-                    m_logger->error ( "Unknown Player type: " + std::to_string ( player ) );
-                    break;
+                    throw PlayerException ( "Unknown Player type: " + std::to_string ( player ) );
             }
 
             switch ( player )
@@ -44,8 +44,7 @@ namespace Tennis
                     break;
 
                 default :
-                    m_logger->error ( "Unknown Player type: " + std::to_string ( player ) ); // todo exceptions
-                    break;
+                    throw PlayerException ( "Unknown Player type: " + std::to_string ( player ) );
             }
         }
     };

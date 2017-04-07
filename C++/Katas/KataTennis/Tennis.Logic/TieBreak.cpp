@@ -1,5 +1,6 @@
 #include "include/TieBreak.h"
 #include "include/TieBreakStatusCalculator.h"
+#include "include/PlayerException.h"
 
 namespace Tennis
 {
@@ -16,8 +17,7 @@ namespace Tennis
                     m_score_player_two->won_point();
                     break;
                 default :
-                    m_logger->error ( "Unknown Player type: " + std::to_string ( player ) );
-                    break;
+                    throw PlayerException ( "Unknown Player type: " + std::to_string ( player ) );
             }
         }
 
@@ -30,8 +30,7 @@ namespace Tennis
                 case Player::Two :
                     return m_score_player_two->get_score();
                 default :
-                    m_logger->error ( "Unknown Player type: " + std::to_string ( player ) );
-                    return -1;
+                    throw PlayerException("Unknown Player type: " + std::to_string(player));
             }
         }
 

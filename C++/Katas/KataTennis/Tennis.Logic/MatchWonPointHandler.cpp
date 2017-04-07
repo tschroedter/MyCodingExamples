@@ -1,4 +1,5 @@
 #include "include/MatchWonPointHandler.h"
+#include "include/SetStatusException.h"
 
 namespace Tennis
 {
@@ -42,8 +43,8 @@ namespace Tennis
                 case SetStatus_PlayerTwoWon :
                     create_new_set_and_call_won_point ( player );
                     break;
-                default : // todo log error
-                    break;
+                default :
+                    throw SetStatusException ( "Unknown SetStatus value " + std::to_string ( status ) + "!" );
             }
         }
     };

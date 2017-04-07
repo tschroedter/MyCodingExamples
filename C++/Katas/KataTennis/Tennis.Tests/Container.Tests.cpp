@@ -135,3 +135,31 @@ TEST(Container, operator_index_returns_set_for_second_index)
     // Assert
     EXPECT_EQ(set_two, actual);
 }
+
+TEST(Container, operator_index_throws_for_invalid_index_negative)
+{
+    using namespace Tennis::Logic;
+
+    // Arrange
+    std::unique_ptr<TestContainer> sut = create_sut();
+
+    // Act
+    // Assert
+    EXPECT_THROW(
+        (*sut.get())[-1],
+        Tennis::Logic::ContainerException);
+}
+
+TEST(Container, operator_index_throws_for_invalid_index_to_big)
+{
+    using namespace Tennis::Logic;
+
+    // Arrange
+    std::unique_ptr<TestContainer> sut = create_sut();
+
+    // Act
+    // Assert
+    EXPECT_THROW(
+        (*sut.get())[1000],
+        Tennis::Logic::ContainerException);
+}

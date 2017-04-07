@@ -7,6 +7,7 @@
 #include "MemoryLeakTest.h"
 #include "Logger.h"
 #include "PlayMatch.h"
+#include "BaseException.h"
 
 void memory_leak_test ()
 {
@@ -38,9 +39,30 @@ void play_match ()
 
 int main ()
 {
-    memory_leak_test();
+    Tennis::Logic::Logger logger { std::cout };
 
-    // play_match();
+    int return_value = 0;
 
-    return 0;
+    try
+    {
+        memory_leak_test();
+        // play_match();
+    }
+    catch ( Tennis::Logic::BaseException exception )
+    {
+        logger.error (
+                      "Abnormal termination: "
+                      + exception.get_error()
+                      + "\n" );
+
+        return_value = 1;
+    }
+    catch ( ... )
+    {
+        logger.error ( "Abnormal termination!!!\n" );
+
+        return_value = 1;
+    }
+
+    return return_value;
 }

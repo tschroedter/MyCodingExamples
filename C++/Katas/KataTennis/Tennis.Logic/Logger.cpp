@@ -26,5 +26,10 @@ namespace Tennis
         {
             log ( "INFO:", message );
         }
+
+        void Logger::warning(std::string message) const
+        {
+            log("WARNING:", message);
+        }
     };
 };

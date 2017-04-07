@@ -7,7 +7,7 @@ namespace Tennis
     {
         ITieBreak* TieBreakFactory::create ()
         {
-            ITieBreak* tie_break = new TieBreak ( std::move ( m_logger ) );
+            ITieBreak* tie_break = new TieBreak ();
 
             return tie_break;
         }

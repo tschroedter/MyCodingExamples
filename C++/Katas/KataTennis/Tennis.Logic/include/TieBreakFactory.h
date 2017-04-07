@@ -10,12 +10,8 @@ namespace Tennis
         class TieBreakFactory
                 : public ITieBreakFactory
         {
-        private:
-            std::unique_ptr<ILogger> m_logger;
-
         public:
-            TieBreakFactory ( std::unique_ptr<ILogger> logger )
-                : m_logger ( std::move ( logger ) )
+            TieBreakFactory ()
             {
             }
 

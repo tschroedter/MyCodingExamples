@@ -4,6 +4,7 @@
 #include "GameStatus.h"
 #include "Player.h"
 #include "IGame.h"
+#include "ILogger.h"
 #include "AwardPoints.h"
 #include <memory>
 
@@ -15,7 +16,6 @@ namespace Tennis
                 : public IGame
         {
         private:
-            std::unique_ptr<ILogger> m_logger;
             std::unique_ptr<IAwardPoints> m_award_points;
             std::unique_ptr<IGameScore> m_score_player_one;
             std::unique_ptr<IGameScore> m_score_player_two;
@@ -31,12 +31,10 @@ namespace Tennis
 
         public:
             Game (
-                std::unique_ptr<ILogger> logger,
                 std::unique_ptr<IAwardPoints> award_points,
                 std::unique_ptr<IGameScore> game_score_one,
                 std::unique_ptr<IGameScore> game_score_two )
-                : m_logger ( std::move ( logger ) )
-                , m_award_points ( std::move ( award_points ) )
+                : m_award_points ( std::move ( award_points ) )
                 , m_score_player_one ( std::move ( game_score_one ) )
                 , m_score_player_two ( std::move ( game_score_two ) )
             {
