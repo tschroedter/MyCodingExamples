@@ -45,8 +45,8 @@ int main ()
 
     try
     {
-        // memory_leak_test();
-        play_match();
+        memory_leak_test();
+        // play_match();
     }
     catch ( Tennis::Logic::BaseException exception )
     {

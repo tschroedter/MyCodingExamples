@@ -3,7 +3,6 @@
 #pragma once
 #include "IScoresForPlayerCalculator.h"
 #include "Player.h"
-#include <string>
 #include "ICountPlayerGames.h"
 #include "ICurrentPlayerScoreCalculator.h"
 
@@ -21,7 +20,6 @@ namespace Tennis
             std::unique_ptr<ICountPlayerGames> m_count_player_games;
 
         public:
-            // todo maybe, set manager, games manager???
             ScoresForPlayerCalculator (
                 std::unique_ptr<ICurrentPlayerScoreCalculator> current_player_score_calculator,
                 std::unique_ptr<ICountPlayerGames> count_player_games )
