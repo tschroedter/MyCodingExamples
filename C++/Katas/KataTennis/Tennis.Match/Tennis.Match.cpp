@@ -12,6 +12,8 @@
 #include "Hypodermic/ContainerBuilder.h"
 #include "IOCContainerBuilder.h"
 #include "IGameScore.h"
+#include "IPlayerNameManager.h"
+#include "ScoreBoard.h"
 
 void memory_leak_test ()
 {
@@ -27,7 +29,22 @@ void memory_leak_test ()
     int i = 0;
     while ( i < 1000 )
     {
-        MemoryLeakTest test { container };
+        using namespace Tennis::Logic;
+
+        IPlayerNameManager_Ptr player_name_manager = container->resolve<IPlayerNameManager>();
+
+        IMatch_Ptr match = container->resolve<IMatch>();
+        match->initialize();
+
+        IScoreBoard_Ptr score_board = container->resolve<IScoreBoard>();
+        score_board->initialize(match->get_sets(),
+            player_name_manager);
+
+        MemoryLeakTest test
+        { 
+            match,
+            score_board 
+        };
 
         test.run();
         i++;
@@ -56,8 +73,8 @@ int main ()
 
     try
     {
-        memory_leak_test();
-        // play_match();
+        // memory_leak_test();
+        play_match();
     }
     catch ( Tennis::Logic::BaseException exception )
     {

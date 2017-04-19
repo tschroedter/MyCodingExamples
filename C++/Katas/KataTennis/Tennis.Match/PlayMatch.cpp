@@ -47,12 +47,13 @@ namespace Tennis
 
             IPlayerNameManager_Ptr player_name_manager = m_container->resolve<IPlayerNameManager>();
             player_name_manager->set_player_name ( One, player_name_one );
-            player_name_manager->set_player_name ( Two, player_name_one );
+            player_name_manager->set_player_name ( Two, player_name_two );
 
             IMatch_Ptr match = m_container->resolve<IMatch>();
             match->initialize();
 
             IScoreBoard_Ptr score_board = m_container->resolve<IScoreBoard>();
+            score_board->initialize ( match->get_sets(), player_name_manager );
 
             MatchStatus match_status;
             do

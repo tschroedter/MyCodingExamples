@@ -24,11 +24,10 @@ void test_score_for_player_as_string_with_different_player_names (
     ScoreBoard sut
     {
         scores_for_player_calculator,
-        manager,
         counter
     };
 
-    sut.initialize ( sets );
+    sut.initialize ( sets, manager );
 
     EXPECT_CALL(*mock_manager, get_player_name(One))
                                                     .Times ( 1 )
@@ -78,11 +77,10 @@ TEST(ScoreBoard, score_for_player_as_string_returns_string_for_player_one)
     ScoreBoard sut
     {
         calculator,
-        manager,
         counter
     };
 
-    sut.initialize ( sets );
+    sut.initialize ( sets, manager );
 
     EXPECT_CALL(*mock_manager, get_player_name(One))
                                                     .Times ( 1 )

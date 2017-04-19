@@ -8,14 +8,14 @@ namespace Tennis
     {
         // todo maybe use IMatch as parameter so we can avoid printing 0 current score when Match was won
 
-        void padTo ( std::string& str, const size_t num, const char paddingChar = ' ' )
+        void ScoreBoard::padTo(std::string & str, const size_t num, const char paddingChar) const
         {
-            if ( num > str.size() )
+            if (num > str.size())
             {
                 std::string padding = "";
-                padding.insert ( 0, num - str.size(), paddingChar );
+                padding.insert(0, num - str.size(), paddingChar);
 
-                str.append ( padding );
+                str.append(padding);
             }
         }
 
@@ -49,9 +49,12 @@ namespace Tennis
             return total_score;
         }
 
-        void ScoreBoard::initialize ( const ISets_Ptr sets )
+        void ScoreBoard::initialize ( 
+            const ISets_Ptr sets,
+            const IPlayerNameManager_Ptr manager)
         {
             m_sets = sets;
+            m_manager = manager;
         }
 
         void ScoreBoard::print ( std::ostream& out ) const

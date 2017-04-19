@@ -41,11 +41,11 @@ TEST(PlayerNameManager, set_player_name_sets_name_for_player_one)
     PlayerNameManager sut {};
 
     // Act
-    sut.set_player_name ( One, "Player One" );
+    sut.set_player_name ( One, "One" );
 
     // Assert
     std::string actual = sut.get_player_name ( One );
-    EXPECT_EQ("Player One", actual);
+    EXPECT_EQ("One", actual);
 }
 
 TEST(PlayerNameManager, set_player_name_sets_name_for_player_two)
@@ -56,11 +56,11 @@ TEST(PlayerNameManager, set_player_name_sets_name_for_player_two)
     PlayerNameManager sut {};
 
     // Act
-    sut.set_player_name ( Two, "Player Two" );
+    sut.set_player_name ( Two, "Two" );
 
     // Assert
     std::string actual = sut.get_player_name ( Two );
-    EXPECT_EQ("Player Two", actual);
+    EXPECT_EQ("Two", actual);
 }
 
 TEST(PlayerNameManager, get_player_name_throws_for_unknown_player)

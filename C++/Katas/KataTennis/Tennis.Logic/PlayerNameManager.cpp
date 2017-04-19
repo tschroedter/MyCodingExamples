@@ -19,9 +19,19 @@ namespace Tennis
             }
         }
 
-        void PlayerNameManager::set_player_name ( const Player player, const std::string name ) const
+        void PlayerNameManager::set_player_name ( const Player player, const std::string name )
         {
-            // todo
+            switch ( player )
+            {
+                case One :
+                    m_player_name_one = name;
+                    break;
+                case Two :
+                    m_player_name_two = name;
+                    break;
+                default :
+                    throw PlayerException ( "Unknown Player type: " + std::to_string ( player ) );
+            }
         }
     };
 };

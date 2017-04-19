@@ -88,33 +88,25 @@ namespace Tennis
         {
             using namespace Tennis::Logic;
 
-            IPlayerNameManager_Ptr player_name_manager = m_container->resolve<IPlayerNameManager>();
-
-            IMatch_Ptr match = m_container->resolve<IMatch>();
-            match->initialize();
-
-            IScoreBoard_Ptr score_board = m_container->resolve<IScoreBoard>();
-            score_board->initialize ( match->get_sets() );
-
             // first set 6:6
-            create_set_with_score ( match, 6, 6 );
-            score_board->print ( std::cout );
-            print_status ( match );
+            create_set_with_score ( m_match, 6, 6 );
+            m_score_board->print ( std::cout );
+            print_status ( m_match );
 
             // first set - tiebreak points
-            player_on_wins_tie_break ( match );
-            score_board->print ( std::cout );
-            print_status ( match );
+            player_on_wins_tie_break ( m_match );
+            m_score_board->print ( std::cout );
+            print_status ( m_match );
 
             // second set 4:6
-            create_set_with_score ( match, 4, 6 );
-            score_board->print ( std::cout );
-            print_status ( match );
+            create_set_with_score ( m_match, 4, 6 );
+            m_score_board->print ( std::cout );
+            print_status ( m_match );
 
             // third set 4:6
-            create_set_with_score ( match, 4, 6 );
-            score_board->print ( std::cout );
-            print_status ( match );
+            create_set_with_score ( m_match, 4, 6 );
+            m_score_board->print ( std::cout );
+            print_status ( m_match );
         }
     }
 }

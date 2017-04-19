@@ -24,21 +24,22 @@ namespace Tennis
             ISets_Ptr m_sets;
             IMatch_Ptr m_match;
 
+            void padTo(std::string& str, const size_t num, const char paddingChar = ' ') const;
             std::string get_player_name_to_display ( const Player player ) const;
 
         public:
             ScoreBoard (
                 IScoresForPlayerCalculator_Ptr scores_for_player_calculator,
-                IPlayerNameManager_Ptr manager,
                 IGamesCounter_Ptr counter )
                 : m_scores_for_player_calculator ( scores_for_player_calculator )
-                , m_manager ( manager )
                 , m_counter ( counter )
                 , m_match ( nullptr )
             {
             }
 
-            void initialize ( const ISets_Ptr sets ) override;
+            void initialize ( 
+                const ISets_Ptr sets,
+                const IPlayerNameManager_Ptr manager) override;
 
             void print ( std::ostream& out = std::cout ) const override;
 

@@ -1,6 +1,6 @@
 #pragma once
-#include "IIOCContainerBuilder.h"
 #include "Match.h"
+#include "ScoreBoard.h"
 
 namespace Tennis
 {
@@ -21,12 +21,15 @@ namespace Tennis
                 size_t games_scored_by_player_one,
                 size_t games_scored_by_player_two );
 
-            Container_Ptr m_container;
+            Logic::IMatch_Ptr m_match;
+            Logic::IScoreBoard_Ptr m_score_board;
 
         public:
             MemoryLeakTest (
-                Container_Ptr container )
-                : m_container ( container )
+                Logic::IMatch_Ptr match,
+                Logic::IScoreBoard_Ptr score_board )
+                : m_match ( match )
+                , m_score_board ( score_board )
             {
             }
 

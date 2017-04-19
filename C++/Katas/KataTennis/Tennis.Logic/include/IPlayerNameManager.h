@@ -12,7 +12,7 @@ namespace Tennis
             virtual ~IPlayerNameManager () = default;
 
             virtual const std::string get_player_name ( const Player player ) const = 0;
-            virtual void set_player_name ( const Player player, const std::string name ) const = 0;
+            virtual void set_player_name ( const Player player, const std::string name ) = 0;
         };
 
         typedef std::shared_ptr<IPlayerNameManager> IPlayerNameManager_Ptr;
