@@ -6,7 +6,7 @@ namespace Tennis
 {
     namespace Logic
     {
-        std::string PlayerNameManager::get_player_name ( Player player ) const
+        const std::string PlayerNameManager::get_player_name ( const Player player ) const
         {
             switch ( player )
             {
@@ -17,6 +17,11 @@ namespace Tennis
                 default :
                     throw PlayerException ( "Unknown Player type: " + std::to_string ( player ) );
             }
+        }
+
+        void PlayerNameManager::set_player_name ( const Player player, const std::string name ) const
+        {
+            // todo
         }
     };
 };

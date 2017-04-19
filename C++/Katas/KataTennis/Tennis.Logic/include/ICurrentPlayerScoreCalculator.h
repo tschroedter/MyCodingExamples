@@ -14,7 +14,9 @@ namespace Tennis
 
             virtual std::string get_current_score_for_player (
                 const Player player,
-                const ISet* set ) const =0;
+                const ISet_Ptr set ) const =0;
         };
+
+        typedef std::shared_ptr<Logic::ICurrentPlayerScoreCalculator> ICurrentPlayerScoreCalculator_Ptr;
     };
 };

@@ -4,9 +4,8 @@
 #include "SetStatusCalculator.h"
 #include <memory>
 #include "MockIGame.h"
-#include "MockIGames.h"
-#include "MockIGamesCounterr.h"
-#include "MockITieBreak.h"
+#include "MockICountPlayerGames.h"
+#include "MockISet.h"
 
 void get_status_test_returned_status_for_given_score (
     Tennis::Logic::SetStatus exoected,
@@ -16,28 +15,28 @@ void get_status_test_returned_status_for_given_score (
     using namespace Tennis::Logic;
 
     // Arrange
-    MockIGamesCounter* mock_counter = new MockIGamesCounter();
-    std::unique_ptr<IGamesCounter> counter ( mock_counter );
-    MockIGame mock_game {};
-    MockIGames mock_games {};
-    MockITieBreak mock_tie_break {};
+    MockISet mock_set {};
+    MockICountPlayerGames* mock_counter = new MockICountPlayerGames();
+    ICountPlayerGames_Ptr counter ( mock_counter );
     SetStatusCalculator sut
     {
-        std::move ( counter ),
-        &mock_games,
-        &mock_tie_break
+        counter
     };
 
-    EXPECT_CALL(*mock_counter, count_games_for_player(One, &mock_games))
-                                                                        .Times ( 1 )
-                                                                        .WillOnce ( testing::Return ( static_cast<int8_t> ( score_player_one ) ) );
+    EXPECT_CALL(*mock_counter, calculate_games(
+        One,
+        &mock_set))
+                   .Times ( 1 )
+                   .WillOnce ( testing::Return ( static_cast<int8_t> ( score_player_one ) ) );
 
-    EXPECT_CALL(*mock_counter, count_games_for_player(Two, &mock_games))
-                                                                        .Times ( 1 )
-                                                                        .WillOnce ( testing::Return ( static_cast<int8_t> ( score_player_two ) ) );
+    EXPECT_CALL(*mock_counter, calculate_games(
+        Two,
+        &mock_set))
+                   .Times ( 1 )
+                   .WillOnce ( testing::Return ( static_cast<int8_t> ( score_player_two ) ) );
 
     // Act
-    SetStatus actual = sut.get_status();
+    SetStatus actual = sut.get_status ( &mock_set );
 
     // Assert
     EXPECT_EQ(exoected, actual);

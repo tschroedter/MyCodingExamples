@@ -2,7 +2,7 @@
 #include "IMatchStatusCalculator.h"
 #include "IMatchCounter.h"
 #include <memory>
-#include "Sets.h"
+#include "ISets.h"
 #include "RequiredSetsToWin.h"
 
 namespace Tennis
@@ -13,17 +13,15 @@ namespace Tennis
                 : public IMatchStatusCalculator
         {
         private:
-            std::unique_ptr<IMatchCounter> m_counter;
-            ISets* m_sets;
+            IMatchCounter_Ptr m_counter;
+            ISets_Ptr m_sets;
             RequiredSetsToWin m_required_sets_to_win;
 
         public:
             MatchStatusCalculator (
-                std::unique_ptr<IMatchCounter> counter,
-                ISets* sets,
-                RequiredSetsToWin required_sets_to_win )
-                : m_counter ( std::move ( counter ) )
-                , m_sets ( sets )
+                IMatchCounter_Ptr counter,
+                RequiredSetsToWin required_sets_to_win = RequiredSetsToWin_Two ) // todo add method to set
+                : m_counter ( counter )
                 , m_required_sets_to_win ( required_sets_to_win )
             {
             }
@@ -32,7 +30,8 @@ namespace Tennis
             {
             }
 
-            virtual const MatchStatus get_status () const override;
+            void initialize ( const ISets_Ptr sets ) override;
+            const MatchStatus get_status () const override;
         };
     };
 };

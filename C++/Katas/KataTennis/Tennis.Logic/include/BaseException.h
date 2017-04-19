@@ -11,7 +11,7 @@ namespace Tennis
 
         public:
             explicit BaseException (
-                std::string error )
+                const std::string error )
                 : m_error ( error )
             {
             }

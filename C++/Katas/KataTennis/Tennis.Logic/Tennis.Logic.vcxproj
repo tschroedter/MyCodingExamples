@@ -70,6 +70,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(ProjectDir)$(Configuration)\</OutDir>
+    <IncludePath>C:\Development\C++\Katas\Hypodermic-master;C:\Development\C++\Katas\boost_1_63_0;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Development\C++\Katas\boost_1_63_0\stage\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -136,34 +138,28 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\AwardPointsFactory.h" />
-    <ClInclude Include="include\GameFactory.h" />
+    <ClInclude Include="include\IContainer.h" />
+    <ClInclude Include="include\Container.h" />
+    <ClInclude Include="include\Games.h" />
+    <ClInclude Include="include\IScoreboard.h" />
+    <ClInclude Include="include\Sets.h" />
     <ClInclude Include="include\PlayerException.h" />
     <ClInclude Include="include\BaseException.h" />
-    <ClInclude Include="include\Container.h" />
     <ClInclude Include="include\CountPlayerGames.h" />
     <ClInclude Include="include\CurrentPlayerScoreCalculator.h" />
     <ClInclude Include="include\ContainerException.h" />
     <ClInclude Include="include\IAwardPoints.h" />
-    <ClInclude Include="include\IAwardPointsFactory.h" />
-    <ClInclude Include="include\IContainer.h" />
-    <ClInclude Include="include\IContainerFactory.h" />
     <ClInclude Include="include\ICountPlayerGames.h" />
     <ClInclude Include="include\ICurrentPlayerScoreCalculator.h" />
-    <ClInclude Include="include\IGameFactory.h" />
     <ClInclude Include="include\IGames.h" />
     <ClInclude Include="include\IGameScore.h" />
     <ClInclude Include="include\IMatch.h" />
     <ClInclude Include="include\IMatchCounter.h" />
-    <ClInclude Include="include\IMatchFactory.h" />
     <ClInclude Include="include\IMatchStatusCalculator.h" />
     <ClInclude Include="include\IScoresForPlayerCalculator.h" />
-    <ClInclude Include="include\ISetFactory.h" />
     <ClInclude Include="include\ISets.h" />
     <ClInclude Include="include\ISetStatusCalculator.h" />
     <ClInclude Include="include\ITieBreak.h" />
-    <ClInclude Include="include\ITieBreakFactory.h" />
-    <ClInclude Include="include\ITieBreaks.h" />
     <ClInclude Include="include\ITieBreakScore.h" />
     <ClInclude Include="include\ISetWonPointHandler.h" />
     <ClInclude Include="include\IMatchWonPointHandler.h" />
@@ -173,7 +169,6 @@
     <ClInclude Include="include\ILogger.h" />
     <ClInclude Include="include\AwardPoints.h" />
     <ClInclude Include="include\Game.h" />
-    <ClInclude Include="include\Games.h" />
     <ClInclude Include="include\GameScore.h" />
     <ClInclude Include="include\GamesCounter.h" />
     <ClInclude Include="include\GameStatus.h" />
@@ -183,7 +178,6 @@
     <ClInclude Include="include\ISet.h" />
     <ClInclude Include="include\Match.h" />
     <ClInclude Include="include\MatchCounter.h" />
-    <ClInclude Include="include\MatchFactory.h" />
     <ClInclude Include="include\MatchStatus.h" />
     <ClInclude Include="include\MatchStatusCalculator.h" />
     <ClInclude Include="include\MatchStatusToStringConverter.h" />
@@ -196,13 +190,10 @@
     <ClInclude Include="include\ScoresForPlayerCalculator.h" />
     <ClInclude Include="include\Set.h" />
     <ClInclude Include="include\Scores.h" />
-    <ClInclude Include="include\SetFactory.h" />
-    <ClInclude Include="include\Sets.h" />
     <ClInclude Include="include\SetStatus.h" />
     <ClInclude Include="include\SetStatusCalculator.h" />
     <ClInclude Include="include\SetStatusException.h" />
     <ClInclude Include="include\TieBreak.h" />
-    <ClInclude Include="include\TieBreakFactory.h" />
     <ClInclude Include="include\TieBreakScore.h" />
     <ClInclude Include="include\TieBreakStatus.h" />
     <ClInclude Include="include\TieBreakStatusCalculator.h" />
@@ -212,25 +203,21 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AwardPoints.cpp" />
-    <ClCompile Include="AwardPointsFactory.cpp" />
     <ClCompile Include="CountPlayerGames.cpp" />
     <ClCompile Include="CurrentPlayerScoreCalculator.cpp" />
     <ClCompile Include="Game.cpp" />
-    <ClCompile Include="GameFactory.cpp" />
-    <ClCompile Include="Games.cpp" />
     <ClCompile Include="GameScore.cpp" />
     <ClCompile Include="GamesCounter.cpp" />
     <ClCompile Include="GameStatusCalculator.cpp" />
-    <ClCompile Include="include\TieBreakWinnerCalculator.cpp" />
-    <ClCompile Include="ScoresForPlayerCalculator.cpp" />
     <ClCompile Include="Sets.cpp" />
-    <ClCompile Include="MatchFactory.cpp" />
+    <ClCompile Include="TieBreakWinnerCalculator.cpp" />
+    <ClCompile Include="Games.cpp" />
+    <ClCompile Include="ScoresForPlayerCalculator.cpp" />
     <ClCompile Include="Match.cpp" />
     <ClCompile Include="MatchCounter.cpp" />
     <ClCompile Include="MatchStatusCalculator.cpp" />
     <ClCompile Include="SetStatusCalculator.cpp" />
     <ClCompile Include="MatchWonPointHandler.cpp" />
-    <ClCompile Include="TieBreakFactory.cpp" />
     <ClCompile Include="TieBreakStatusCalculator.cpp" />
     <ClCompile Include="SetWonPointHandler.cpp" />
     <ClCompile Include="TieBreak.cpp" />
@@ -241,7 +228,6 @@
     <ClCompile Include="PossibleScores.cpp" />
     <ClCompile Include="ScoreBoard.cpp" />
     <ClCompile Include="Set.cpp" />
-    <ClCompile Include="SetFactory.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

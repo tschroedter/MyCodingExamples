@@ -49,6 +49,11 @@ namespace Tennis
             return total_score;
         }
 
+        void ScoreBoard::initialize ( const ISets_Ptr sets )
+        {
+            m_sets = sets;
+        }
+
         void ScoreBoard::print ( std::ostream& out ) const
         {
             out << score_for_player_as_string ( One ) << '\n';

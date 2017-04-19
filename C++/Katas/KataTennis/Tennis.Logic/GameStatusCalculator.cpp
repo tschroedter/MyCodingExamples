@@ -6,8 +6,8 @@ namespace Tennis
     namespace Logic
     {
         bool GameStatusCalculator::is_player_one_winner (
-            Scores player_one,
-            Scores player_two )
+            const Scores player_one,
+            const Scores player_two )
         {
             if ( Scores::AdvantageWon == player_one )
             {
@@ -26,8 +26,8 @@ namespace Tennis
         }
 
         bool GameStatusCalculator::has_player_one_won (
-            Scores player_one,
-            Scores player_two )
+            const Scores player_one,
+            const Scores player_two )
         {
             return is_player_one_winner (
                                          player_one,
@@ -35,8 +35,8 @@ namespace Tennis
         }
 
         bool GameStatusCalculator::has_player_two_won (
-            Scores player_one,
-            Scores player_two )
+            const Scores player_one,
+            const Scores player_two )
         {
             return is_player_one_winner (
                                          player_two,
@@ -44,8 +44,8 @@ namespace Tennis
         }
 
         GameStatus GameStatusCalculator::calculate (
-            Scores score_one,
-            Scores score_two )
+            const Scores score_one,
+            const Scores score_two )
         {
             if ( is_player_one_winner (
                                        score_one,

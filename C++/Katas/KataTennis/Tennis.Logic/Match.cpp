@@ -10,9 +10,12 @@ namespace Tennis
         void Match::initialize ()
         {
             m_sets->create_new_set();
+
+            m_calculator->initialize ( m_sets );
+            m_handler->initialize ( m_sets );
         }
 
-        void Match::won_point ( Player player )
+        void Match::won_point ( const Player player )
         {
             MatchStatus status = get_status();
 
@@ -37,9 +40,9 @@ namespace Tennis
             return m_required_sets_to_win;
         }
 
-        ISets* Match::get_sets () const // todo not nice, scoreboard needs it, maybe singelton ISetsManager
+        ISets_Ptr Match::get_sets () const // todo not nice, scoreboard needs it, maybe singelton ISetsManager
         {
-            return m_sets.get();
+            return m_sets;
         }
     };
 };

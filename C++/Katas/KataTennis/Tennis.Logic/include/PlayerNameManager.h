@@ -11,19 +11,24 @@ namespace Tennis
                 : public IPlayerNameManager
         {
         private:
-            std::string m_player_name_one = "Player One";
-            std::string m_player_name_two = "Player Two";
+            std::string m_player_name_one;
+            std::string m_player_name_two;
 
         public:
             PlayerNameManager (
-                const std::string player_name_one,
-                const std::string player_name_two )
+                std::string player_name_one = std::string ( "Player One" ),
+                std::string player_name_two = std::string ( "Player Two" ) )
                 : m_player_name_one ( player_name_one )
                 , m_player_name_two ( player_name_two )
             {
             }
 
-            std::string PlayerNameManager::get_player_name ( Player player ) const override;
+            ~PlayerNameManager ()
+            {
+            }
+
+            const std::string PlayerNameManager::get_player_name ( const Player player ) const override;
+            void PlayerNameManager::set_player_name ( const Player player, const std::string name ) const override;
         };
     };
 };

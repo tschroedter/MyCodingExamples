@@ -1,25 +1,19 @@
 #include "stdafx.h"
 #include <memory>
 #include "IMatch.h"
-#include "MatchFactory.h"
 #include "MemoryLeakTest.h"
 #include "ScoreBoard.h"
 #include "MatchStatusToStringConverter.h"
 #include <iostream>
-#include "GamesCounter.h"
 #include "PlayerNameManager.h"
 #include "ITieBreakWinnerCalculator.h"
-#include "TieBreakWinnerCalculator.h"
-#include "CountPlayerGames.h"
-#include "CurrentPlayerScoreCalculator.h"
-#include "ScoresForPlayerCalculator.h"
 
 namespace Tennis
 {
     namespace Match
     {
         void MemoryLeakTest::create_games_won (
-            Logic::IMatch* match,
+            Logic::IMatch_Ptr match,
             Logic::Player player,
             size_t games_scored_by_player )
         {
@@ -33,7 +27,7 @@ namespace Tennis
         }
 
         void MemoryLeakTest::create_set_with_score (
-            Logic::IMatch* match,
+            Logic::IMatch_Ptr match,
             size_t games_scored_by_player_one,
             size_t games_scored_by_player_two )
         {
@@ -65,7 +59,7 @@ namespace Tennis
             }
         }
 
-        void MemoryLeakTest::player_on_wins_tie_break ( Logic::IMatch* match )
+        void MemoryLeakTest::player_on_wins_tie_break ( Logic::IMatch_Ptr match )
         {
             match->won_point ( Logic::One );
             match->won_point ( Logic::Two );
@@ -79,7 +73,7 @@ namespace Tennis
             match->won_point ( Logic::One );
         }
 
-        void MemoryLeakTest::print_status ( Logic::IMatch* match )
+        void MemoryLeakTest::print_status ( Logic::IMatch_Ptr match )
         {
             using namespace Logic;
 
@@ -92,61 +86,35 @@ namespace Tennis
 
         void MemoryLeakTest::run () const
         {
-            using namespace Logic;
+            using namespace Tennis::Logic;
 
-            MatchFactory factory {};
+            IPlayerNameManager_Ptr player_name_manager = m_container->resolve<IPlayerNameManager>();
 
-            std::unique_ptr<IMatch> match = factory.create();
+            IMatch_Ptr match = m_container->resolve<IMatch>();
+            match->initialize();
 
-            std::unique_ptr<IGamesCounter> counter = std::make_unique<GamesCounter>();
-
-            PlayerNameManager player_name_manager {
-                "John",
-                "Bill" };
-
-            std::unique_ptr<IGamesCounter> count_player_games_games_counter = std::make_unique<GamesCounter>();
-
-            std::unique_ptr<ICurrentPlayerScoreCalculator> current_player_score_calculator = std::make_unique<CurrentPlayerScoreCalculator>();
-
-            std::unique_ptr<ITieBreakWinnerCalculator> tie_break_winner_calculator = std::make_unique<TieBreakWinnerCalculator>();
-
-            std::unique_ptr<ICountPlayerGames> count_player_games = std::make_unique<CountPlayerGames> (
-                                                                                                        move ( count_player_games_games_counter ),
-                                                                                                        move ( tie_break_winner_calculator ) );
-
-            std::unique_ptr<IGamesCounter> games_counter = std::make_unique<GamesCounter>();
-
-            std::unique_ptr<IScoresForPlayerCalculator> scores_for_player_calculator = std::make_unique<ScoresForPlayerCalculator>(
-                std::move(current_player_score_calculator),
-                std::move(count_player_games));
-
-            ScoreBoard score_board
-            {
-                std::move(scores_for_player_calculator),
-                &player_name_manager,
-                games_counter.get(),
-                match->get_sets()
-            };
+            IScoreBoard_Ptr score_board = m_container->resolve<IScoreBoard>();
+            score_board->initialize ( match->get_sets() );
 
             // first set 6:6
-            create_set_with_score ( match.get(), 6, 6 );
-            score_board.print ( std::cout );
-            print_status ( match.get() );
+            create_set_with_score ( match, 6, 6 );
+            score_board->print ( std::cout );
+            print_status ( match );
 
             // first set - tiebreak points
-            player_on_wins_tie_break ( match.get() );
-            score_board.print ( std::cout );
-            print_status ( match.get() );
+            player_on_wins_tie_break ( match );
+            score_board->print ( std::cout );
+            print_status ( match );
 
             // second set 4:6
-            create_set_with_score ( match.get(), 4, 6 );
-            score_board.print ( std::cout );
-            print_status ( match.get() );
+            create_set_with_score ( match, 4, 6 );
+            score_board->print ( std::cout );
+            print_status ( match );
 
             // third set 4:6
-            create_set_with_score ( match.get(), 4, 6 );
-            score_board.print ( std::cout );
-            print_status ( match.get() );
+            create_set_with_score ( match, 4, 6 );
+            score_board->print ( std::cout );
+            print_status ( match );
         }
     }
 }

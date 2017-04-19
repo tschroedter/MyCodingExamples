@@ -2,7 +2,6 @@
 #include <gtest/gtest.h>
 #include <memory>
 #include "Container.h"
-#include "IContainerFactory.h"
 
 class Item
 {
@@ -12,36 +11,32 @@ public:
     }
 };
 
-class ItemFactory
-        : public Tennis::Logic::IContainerFactory<Item>
-{
-public:
-    Item* create () override
-    {
-        return new Item();
-    }
+typedef std::shared_ptr<Item> Item_Ptr;
 
-    void release ( Item* item ) override
-    {
-        delete item;
-    }
-};
+std::function<std::shared_ptr<Item> ()> create_factory ()
+{
+    return []
+            {
+                return std::make_shared<Item>();
+            };
+}
+
+Hypodermic::FactoryWrapper<Item> wrapper { create_factory() };
 
 class TestContainer
-        : public Tennis::Logic::Container<Item, ItemFactory>
+        : public Tennis::Logic::Container<Item>
 {
 public:
-    TestContainer ( std::unique_ptr<ItemFactory> factory )
-        : Container<Item, ItemFactory> ( std::move ( factory ) )
+    TestContainer (
+        const Hypodermic::FactoryWrapper<Item>& factory_wrapper )
+        : Container<Item> ( factory_wrapper )
     {
     }
 };
 
 std::unique_ptr<TestContainer> create_sut ()
 {
-    std::unique_ptr<ItemFactory> factory = std::make_unique<ItemFactory>();
-
-    std::unique_ptr<TestContainer> sut = std::make_unique<TestContainer> ( std::move ( factory ) );
+    std::unique_ptr<TestContainer> sut = std::make_unique<TestContainer> ( wrapper );
 
     return sut;
 }
@@ -52,7 +47,7 @@ TEST(Container, new_item_returns_new_item)
     std::unique_ptr<TestContainer> sut = create_sut();
 
     // Act
-    Item* actual = sut->new_item();
+    Item_Ptr actual = sut->new_item();
 
     // Assert
     EXPECT_NE(nullptr, actual);
@@ -110,11 +105,11 @@ TEST(Container, operator_index_returns_set_for_first_index)
 
     // Arrange
     std::unique_ptr<TestContainer> sut = create_sut();
-    Item* item_one = sut->new_item();
+    Item_Ptr item_one = sut->new_item();
     sut->new_item();
 
     // Act
-    Item* actual = ( *sut.get() ) [ 0 ];
+    Item_Ptr actual = ( *sut.get() ) [ 0 ];
 
     // Assert
     EXPECT_EQ(item_one, actual);
@@ -127,10 +122,10 @@ TEST(Container, operator_index_returns_set_for_second_index)
     // Arrange
     std::unique_ptr<TestContainer> sut = create_sut();
     sut->new_item();
-    Item* set_two = sut->new_item();
+    Item_Ptr set_two = sut->new_item();
 
     // Act
-    Item* actual = ( *sut.get() ) [ 1 ];
+    Item_Ptr actual = ( *sut.get() ) [ 1 ];
 
     // Assert
     EXPECT_EQ(set_two, actual);

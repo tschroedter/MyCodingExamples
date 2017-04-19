@@ -6,16 +6,10 @@ namespace Tennis
 {
     namespace Logic
     {
-        class IGameScore;
-
         class AwardPoints
                 : public IAwardPoints
         {
         public:
-            AwardPoints ()
-            {
-            }
-
             ~AwardPoints ()
             {
             }

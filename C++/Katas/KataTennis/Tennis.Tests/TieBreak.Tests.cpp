@@ -6,7 +6,7 @@
 std::unique_ptr<Tennis::Logic::ITieBreak> create_sut ()
 {
     std::unique_ptr<Tennis::Logic::ITieBreak> sut =
-            std::make_unique<Tennis::Logic::TieBreak> ();
+            std::make_unique<Tennis::Logic::TieBreak>();
 
     return sut;
 }

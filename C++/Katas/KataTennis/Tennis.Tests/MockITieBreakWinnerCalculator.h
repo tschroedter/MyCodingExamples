@@ -10,7 +10,7 @@ public:
     // ReSharper disable CppOverridingFunctionWithoutOverrideSpecifier
     MOCK_CONST_METHOD2(was_tie_break_won_by_player,
         bool(
-            const Tennis::Logic::ITieBreak* tie_break,
-            Tennis::Logic::Player player));
+            const Tennis::Logic::ITieBreak_Ptr tie_break,
+            const Tennis::Logic::Player player));
     // ReSharper restore CppOverridingFunctionWithoutOverrideSpecifier
 };

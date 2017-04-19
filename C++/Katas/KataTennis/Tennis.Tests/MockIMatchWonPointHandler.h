@@ -10,5 +10,6 @@ class MockIMatchWonPointHandler
 public:
     // ReSharper disable CppOverridingFunctionWithoutOverrideSpecifier
     MOCK_METHOD1(won_point, void(const Tennis::Logic::Player));
+    MOCK_METHOD1(initialize, void(const Tennis::Logic::ISets_Ptr));
     // ReSharper restore CppOverridingFunctionWithoutOverrideSpecifier
 };

@@ -6,7 +6,7 @@ namespace Tennis
 {
     namespace Logic
     {
-        void TieBreak::won_point ( Player player )
+        void TieBreak::won_point ( const Player player )
         {
             switch ( player )
             {
@@ -21,7 +21,7 @@ namespace Tennis
             }
         }
 
-        uint8_t TieBreak::get_score ( Player player ) const
+        uint8_t TieBreak::get_score ( const Player player ) const
         {
             switch ( player )
             {
@@ -30,7 +30,7 @@ namespace Tennis
                 case Player::Two :
                     return m_score_player_two->get_score();
                 default :
-                    throw PlayerException("Unknown Player type: " + std::to_string(player));
+                    throw PlayerException ( "Unknown Player type: " + std::to_string ( player ) );
             }
         }
 

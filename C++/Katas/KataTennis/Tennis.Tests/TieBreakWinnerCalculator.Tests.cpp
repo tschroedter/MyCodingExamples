@@ -12,17 +12,18 @@ void test_was_tie_break_won_by_player (
     using namespace Tennis::Logic;
 
     // Arrange
-    MockITieBreak mock_tie_break {};
+    MockITieBreak* mock_tie_break = new MockITieBreak();
+    ITieBreak_Ptr tie_break ( mock_tie_break );
 
     TieBreakWinnerCalculator sut {};
 
-    EXPECT_CALL(mock_tie_break, get_status())
-                                             .Times ( 1 )
-                                             .WillRepeatedly ( testing::Return ( tie_break_status ) );
+    EXPECT_CALL(*mock_tie_break, get_status())
+                                              .Times ( 1 )
+                                              .WillRepeatedly ( testing::Return ( tie_break_status ) );
 
     // Act
     auto actual = sut.was_tie_break_won_by_player (
-                                                   &mock_tie_break,
+                                                   tie_break,
                                                    player );
 
     // Assert

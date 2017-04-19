@@ -8,19 +8,19 @@ namespace Tennis
     {
         std::string CurrentPlayerScoreCalculator::get_current_score_for_player (
             const Player player,
-            const ISet* set ) const
+            const ISet_Ptr set ) const
         {
             if ( !set )
             {
                 return "Unknown Set";
             }
 
-            IGame* current_game = set->get_current_game();
+            IGame_Ptr current_game = set->get_current_game();
 
             std::string scores_for_player =
                     current_game->get_score_for_player_as_string ( player );
 
-            const ITieBreak* tie_break = set->get_tie_break();
+            const ITieBreak_Ptr tie_break = set->get_tie_break();
 
             if ( tie_break->get_status() == TieBreakStatus_InProgress )
             {

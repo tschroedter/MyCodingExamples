@@ -16,9 +16,9 @@ namespace Tennis
                 : public IGame
         {
         private:
-            std::unique_ptr<IAwardPoints> m_award_points;
-            std::unique_ptr<IGameScore> m_score_player_one;
-            std::unique_ptr<IGameScore> m_score_player_two;
+            IAwardPoints_Ptr m_award_points;
+            IGameScore_Ptr m_score_player_one;
+            IGameScore_Ptr m_score_player_two;
             GameStatus m_game_status = NotStarted;
 
             static bool isDeuce (
@@ -31,12 +31,12 @@ namespace Tennis
 
         public:
             Game (
-                std::unique_ptr<IAwardPoints> award_points,
-                std::unique_ptr<IGameScore> game_score_one,
-                std::unique_ptr<IGameScore> game_score_two )
-                : m_award_points ( std::move ( award_points ) )
-                , m_score_player_one ( std::move ( game_score_one ) )
-                , m_score_player_two ( std::move ( game_score_two ) )
+                IAwardPoints_Ptr award_points,
+                IGameScore_Ptr game_score_one,
+                IGameScore_Ptr game_score_two )
+                : m_award_points ( award_points )
+                , m_score_player_one ( game_score_one )
+                , m_score_player_two ( game_score_two )
             {
             }
 

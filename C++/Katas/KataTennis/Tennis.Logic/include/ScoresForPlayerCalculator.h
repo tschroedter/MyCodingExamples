@@ -16,21 +16,21 @@ namespace Tennis
                 : public IScoresForPlayerCalculator
         {
         private:
-            std::unique_ptr<ICurrentPlayerScoreCalculator> m_current_player_score_calculator;
-            std::unique_ptr<ICountPlayerGames> m_count_player_games;
+            ICurrentPlayerScoreCalculator_Ptr m_current_player_score_calculator;
+            ICountPlayerGames_Ptr m_count_player_games;
 
         public:
             ScoresForPlayerCalculator (
-                std::unique_ptr<ICurrentPlayerScoreCalculator> current_player_score_calculator,
-                std::unique_ptr<ICountPlayerGames> count_player_games )
-                : m_current_player_score_calculator ( std::move ( current_player_score_calculator ) )
-                , m_count_player_games ( std::move ( count_player_games ) )
+                ICurrentPlayerScoreCalculator_Ptr current_player_score_calculator,
+                ICountPlayerGames_Ptr count_player_games )
+                : m_current_player_score_calculator ( current_player_score_calculator )
+                , m_count_player_games ( count_player_games )
             {
             }
 
             std::string get_scores_for_player (
                 const Player player,
-                const ISets* sets ) const override;
+                const ISets_Ptr sets ) const override;
         };
     }
 }

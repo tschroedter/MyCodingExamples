@@ -21,8 +21,8 @@ namespace Tennis
                 m_score_player_two = std::make_unique<TieBreakScore>();
             }
 
-            void won_point ( Player player ) override;
-            uint8_t get_score ( Player player ) const override;
+            void won_point ( const Player player ) override;
+            uint8_t get_score ( const Player player ) const override;
             TieBreakStatus get_status () const override;
         };
     }

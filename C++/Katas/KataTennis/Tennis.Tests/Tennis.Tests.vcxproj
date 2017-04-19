@@ -71,8 +71,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Development\C++\Katas\KataTennis\Tennis.Logic;C:\Development\C++\Katas\KataTennis\Tennis.Logic\include;C:\Development\C++\Katas\googletest-master\googlemock\include;C:\Development\C++\Katas\googletest-master\googlemock;C:\Development\C++\Katas\googletest-master\googletest\include;C:\Development\C++\Katas\googletest-master\googletest;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Development\C++\Katas\KataTennis\Tennis.Logic\Debug;C:\Development\C++\Katas\googletest-master\googlemock\msvc\2015\Debug;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Development\C++\Katas\Hypodermic-master;C:\Development\C++\Katas\boost_1_63_0;C:\Development\C++\Katas\KataTennis\Tennis.Logic;C:\Development\C++\Katas\KataTennis\Tennis.Logic\include;C:\Development\C++\Katas\googletest-master\googlemock\include;C:\Development\C++\Katas\googletest-master\googlemock;C:\Development\C++\Katas\googletest-master\googletest\include;C:\Development\C++\Katas\googletest-master\googletest;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Development\C++\Katas\boost_1_63_0\stage\lib;C:\Development\C++\Katas\KataTennis\Tennis.Logic\Debug;C:\Development\C++\Katas\googletest-master\googlemock\msvc\2015\Debug;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -150,29 +150,25 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MemoryInfo.h" />
-    <ClInclude Include="MockGames.h" />
     <ClInclude Include="MockIAwardPoints.h" />
     <ClInclude Include="MockICountPlayerGames.h" />
     <ClInclude Include="MockICurrentPlayerScoreCalculator.h" />
     <ClInclude Include="MockIGame.h" />
-    <ClInclude Include="MockIGameFactory.h" />
     <ClInclude Include="MockIGames.h" />
     <ClInclude Include="MockIGameScore.h" />
-    <ClInclude Include="MockIGamesCounterr.h" />
+    <ClInclude Include="MockIGamesCounter.h" />
     <ClInclude Include="MockILogger.h" />
     <ClInclude Include="MockIMatchCounter.h" />
     <ClInclude Include="MockIMatchStatusCalculator.h" />
     <ClInclude Include="MockIPlayerNameManager.h" />
     <ClInclude Include="MockIScoresForPlayerCalculator.h" />
     <ClInclude Include="MockISet.h" />
-    <ClInclude Include="MockISetFactory.h" />
     <ClInclude Include="MockISets.h" />
     <ClInclude Include="MockISetStatusCalculator.h" />
     <ClInclude Include="MockITieBreak.h" />
     <ClInclude Include="MockISetWonPointHandler.h" />
     <ClInclude Include="MockIMatchWonPointHandler.h" />
     <ClInclude Include="MockITieBreakWinnerCalculator.h" />
-    <ClInclude Include="MockSets.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
@@ -191,7 +187,6 @@
     <ClCompile Include="Logger.Tests.cpp" />
     <ClCompile Include="Match.Tests.cpp" />
     <ClCompile Include="MatchCounter.Tests.cpp" />
-    <ClCompile Include="MatchFactory.Tests.cpp" />
     <ClCompile Include="MatchStatusCalculator.Tests.cpp" />
     <ClCompile Include="MatchStatusToStringConverter.Tests.cpp" />
     <ClCompile Include="PlayerNameManager.Tests.cpp" />

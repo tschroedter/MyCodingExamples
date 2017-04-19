@@ -2,10 +2,9 @@
 #include <gtest/gtest.h>
 #include "ScoreBoard.h"
 #include <gmock/gmock-generated-function-mockers.h>
-#include <strstream>
 #include "MockIGame.h"
 #include "MockIPlayerNameManager.h"
-#include "MockIGamesCounterr.h"
+#include "MockIGamesCounter.h"
 #include "MockISets.h"
 #include "MockIScoresForPlayerCalculator.h"
 
@@ -16,20 +15,24 @@ void test_score_for_player_as_string_with_different_player_names (
     using namespace Tennis::Logic;
 
     // Arrange
-    std::unique_ptr<MockIScoresForPlayerCalculator> scores_for_player_calculator = std::make_unique<MockIScoresForPlayerCalculator>();
-    MockIPlayerNameManager manager {};
-    MockIGamesCounter counter {};
+    ISets_Ptr sets {};
+    IScoresForPlayerCalculator_Ptr scores_for_player_calculator = std::make_shared<MockIScoresForPlayerCalculator>();
+    MockIPlayerNameManager* mock_manager = new MockIPlayerNameManager{};
+    IPlayerNameManager_Ptr manager ( mock_manager );
+    IGamesCounter_Ptr counter = std::make_shared<MockIGamesCounter>();
 
-    ScoreBoard sut {
-        std::move ( scores_for_player_calculator ),
-        &manager,
-        &counter,
-        nullptr
+    ScoreBoard sut
+    {
+        scores_for_player_calculator,
+        manager,
+        counter
     };
 
-    EXPECT_CALL(manager, get_player_name(One))
-                                              .Times ( 1 )
-                                              .WillOnce ( testing::Return ( player_name ) );
+    sut.initialize ( sets );
+
+    EXPECT_CALL(*mock_manager, get_player_name(One))
+                                                    .Times ( 1 )
+                                                    .WillOnce ( testing::Return ( player_name ) );
 
     // Act
     std::string actual = sut.score_for_player_as_string ( One );
@@ -64,27 +67,30 @@ TEST(ScoreBoard, score_for_player_as_string_returns_string_for_player_one)
     using namespace Tennis::Logic;
 
     // Arrange
-    MockISets sets {};
+    ISets_Ptr sets = std::make_shared<MockISets>();
 
     MockIScoresForPlayerCalculator* mock_calculator = new MockIScoresForPlayerCalculator{};
-    std::unique_ptr<MockIScoresForPlayerCalculator> scores_for_player_calculator ( mock_calculator );
-    MockIPlayerNameManager manager {};
-    MockIGamesCounter counter {};
+    IScoresForPlayerCalculator_Ptr calculator ( mock_calculator );
+    MockIPlayerNameManager* mock_manager = new MockIPlayerNameManager{};
+    IPlayerNameManager_Ptr manager ( mock_manager );
+    IGamesCounter_Ptr counter = std::make_shared<MockIGamesCounter>();
 
-    ScoreBoard sut {
-        std::move ( scores_for_player_calculator ),
-        &manager,
-        &counter,
-        &sets
+    ScoreBoard sut
+    {
+        calculator,
+        manager,
+        counter
     };
 
-    EXPECT_CALL(manager, get_player_name(One))
-                                              .Times ( 1 )
-                                              .WillOnce ( testing::Return ( "Player One" ) );
+    sut.initialize ( sets );
 
-    EXPECT_CALL(*mock_calculator, get_scores_for_player(One, &sets))
-                                                                    .Times ( 1 )
-                                                                    .WillOnce ( testing::Return ( "3 15" ) );
+    EXPECT_CALL(*mock_manager, get_player_name(One))
+                                                    .Times ( 1 )
+                                                    .WillOnce ( testing::Return ( "Player One" ) );
+
+    EXPECT_CALL(*mock_calculator, get_scores_for_player(One, sets))
+                                                                   .Times ( 1 )
+                                                                   .WillOnce ( testing::Return ( "3 15" ) );
 
     // Act
     std::string actual = sut.score_for_player_as_string ( One );

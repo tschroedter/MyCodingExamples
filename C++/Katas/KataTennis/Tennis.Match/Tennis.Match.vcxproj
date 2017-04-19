@@ -71,8 +71,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Development\C++\Katas\KataTennis\Tennis.Logic\include;C:\Development\C++\Katas\KataTennis\Tennis.Logic;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Development\C++\Katas\KataTennis\Tennis.Logic\Debug;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Development\C++\Katas\boost_1_63_0;C:\Development\C++\Katas\Hypodermic-master;C:\Development\C++\Katas\KataTennis\Tennis.Logic\include;C:\Development\C++\Katas\KataTennis\Tennis.Logic;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Development\C++\Katas\boost_1_63_0\stage\lib;C:\Development\C++\Katas\KataTennis\Tennis.Logic\Debug;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -89,7 +89,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <SDLCheck>true</SDLCheck>
+      <SDLCheck>false</SDLCheck>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -148,6 +148,8 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="IIOCContainerBuilder.h" />
+    <ClInclude Include="IOCContainerBuilder.h" />
     <ClInclude Include="MemoryInfo.h" />
     <ClInclude Include="MemoryLeakTest.h" />
     <ClInclude Include="PlayMatch.h" />
@@ -155,6 +157,7 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="IOCContainerBuilder.cpp" />
     <ClCompile Include="MemoryLeakTest.cpp" />
     <ClCompile Include="PlayMatch.cpp" />
     <ClCompile Include="stdafx.cpp">

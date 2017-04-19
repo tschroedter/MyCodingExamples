@@ -5,17 +5,17 @@ namespace Tennis
 {
     namespace Logic
     {
-        IGame* Games::create_new_game ()
+        IGame_Ptr Games::create_new_game ()
         {
             return new_item();
         }
 
-        IGame* Games::get_current_game () const
+        IGame_Ptr Games::get_current_game () const
         {
             return get_current_item();
         }
 
-        IGame* Games::get_game_at_index ( const size_t index ) const
+        IGame_Ptr Games::get_game_at_index ( const size_t index ) const
         {
             return ( *this ) [ index ];
         }

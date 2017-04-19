@@ -8,6 +8,7 @@ class MockISetStatusCalculator
 {
 public:
     // ReSharper disable CppOverridingFunctionWithoutOverrideSpecifier
-    MOCK_CONST_METHOD0(get_status, const Tennis::Logic::SetStatus());
+    MOCK_CONST_METHOD1(get_status, const Tennis::Logic::SetStatus(const Tennis::Logic::ISet*));
+    MOCK_CONST_METHOD1(get_status, const Tennis::Logic::SetStatus(const Tennis::Logic::ISet_Ptr));
     // ReSharper restore CppOverridingFunctionWithoutOverrideSpecifier
 };

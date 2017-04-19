@@ -1,46 +1,48 @@
 #pragma once
-#include <string>
 #include "IMatch.h"
-#include "Sets.h"
+#include "ISets.h"
 #include "IPlayerNameManager.h"
 #include "IGamesCounter.h"
 #include "IScoresForPlayerCalculator.h"
+#include "Match.h"
+#include "IScoreboard.h"
+#include <iostream>
 
 namespace Tennis
 {
     namespace Logic
     {
         class ScoreBoard
+                : public IScoreBoard
         {
         private:
             const size_t PLAYER_NAME_MAX = 10;
 
-            std::unique_ptr<IScoresForPlayerCalculator> m_scores_for_player_calculator;
-            IPlayerNameManager* m_manager;
-            IGamesCounter* m_counter;
-            ISets* m_sets;
-            IMatch* m_match;
+            IScoresForPlayerCalculator_Ptr m_scores_for_player_calculator;
+            IPlayerNameManager_Ptr m_manager;
+            IGamesCounter_Ptr m_counter;
+            ISets_Ptr m_sets;
+            IMatch_Ptr m_match;
 
             std::string get_player_name_to_display ( const Player player ) const;
-            
+
         public:
             ScoreBoard (
-                std::unique_ptr<IScoresForPlayerCalculator> scores_for_player_calculator,
-                IPlayerNameManager* manager,
-                IGamesCounter* counter,
-                ISets* set )
-                : m_scores_for_player_calculator ( std::move ( scores_for_player_calculator ) )
+                IScoresForPlayerCalculator_Ptr scores_for_player_calculator,
+                IPlayerNameManager_Ptr manager,
+                IGamesCounter_Ptr counter )
+                : m_scores_for_player_calculator ( scores_for_player_calculator )
                 , m_manager ( manager )
                 , m_counter ( counter )
-                , m_sets ( set )
                 , m_match ( nullptr )
             {
             }
 
-            void print ( std::ostream& out ) const;
+            void initialize ( const ISets_Ptr sets ) override;
 
-            std::string ScoreBoard::score_for_player_as_string (
-                const Player player ) const;
+            void print ( std::ostream& out = std::cout ) const override;
+
+            std::string ScoreBoard::score_for_player_as_string ( const Player player ) const override;
         };
     };
 };

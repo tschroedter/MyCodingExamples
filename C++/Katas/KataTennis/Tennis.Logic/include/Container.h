@@ -3,70 +3,57 @@
 #include "vector"
 #include "ContainerException.h"
 #include "IContainer.h"
-#include "IContainerFactory.h"
 #include <string>
+#include <functional>
+#include <Hypodermic/FactoryWrapper.h>
 
 namespace Tennis
 {
     namespace Logic
     {
-        template <class T, class TFactory>
+        template <class T>
         class Container
                 : public IContainer<T>
         {
         protected:
-            std::shared_ptr<TFactory> m_factory;
-            T* m_current_item;
-            std::vector<T*> m_items;
+            std::function<std::shared_ptr<T> ()> m_factory;
+            std::shared_ptr<T> m_current_item;
+            std::vector<std::shared_ptr<T>> m_items;
 
         public:
-            static_assert(
-                std::is_base_of<IContainerFactory<T>,
-                                TFactory>::value,
-                "TFactory must inherit from IContainerFactory<T>");
-
-            Container ( std::shared_ptr<TFactory> factory )
-                : m_factory ( std::move ( factory ) )
+            Container (
+                const Hypodermic::FactoryWrapper<T>& factory_wrapper )
+                : m_factory ( factory_wrapper.getFactory() )
                 , m_current_item ( nullptr )
             {
             }
 
-            ~Container ()
-            {
-                for ( T* set : m_items )
-                {
-                    m_factory->release ( set );
-                }
-
-                m_items.clear();
-            }
-
-            T* new_item () override;
-            T* get_current_item () const override;
-            T* operator[] ( const size_t index ) const override;
+            std::shared_ptr<T> new_item () override;
+            std::shared_ptr<T> get_current_item () const override;
+            std::shared_ptr<T> operator[] ( const size_t index ) const override;
             size_t get_length () const override;
         };
 
-        template <class T, class TFactory>
-        T* Container<T, TFactory>::new_item ()
+        template <class T>
+        std::shared_ptr<T> Container<T>::new_item ()
         {
-            m_current_item = m_factory->create();
+            m_current_item = m_factory();
 
             m_items.push_back ( m_current_item );
 
             return m_current_item;
         }
 
-        template <class T, class TFactory>
-        T* Container<T, TFactory>::get_current_item () const
+        template <class T>
+        std::shared_ptr<T> Container<T>::get_current_item () const
         {
             return m_current_item;
         }
 
-        template <class T, class TFactory>
-        T* Container<T, TFactory>::operator[] ( const size_t index ) const
+        template <class T>
+        std::shared_ptr<T> Container<T>::operator[] ( const size_t index ) const
         {
-            if (index < 0 || index >= m_items.size())
+            if ( index < 0 || index >= m_items.size() )
             {
                 throw ContainerException ( "Given index "
                                           + std::to_string ( index )
@@ -74,11 +61,13 @@ namespace Tennis
                                           + std::to_string ( m_items.size() ) );
             }
 
-            return (m_items.at(index));
+            std::shared_ptr<T> item = ( m_items.at ( index ) );
+
+            return item;
         }
 
-        template <class T, class TFactory>
-        size_t Container<T, TFactory>::get_length () const
+        template <class T>
+        size_t Container<T>::get_length () const
         {
             return m_items.size();
         }

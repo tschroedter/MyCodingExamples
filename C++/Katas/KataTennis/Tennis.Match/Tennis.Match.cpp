@@ -9,6 +9,10 @@
 #include "PlayMatch.h"
 #include "BaseException.h"
 
+#include "Hypodermic/ContainerBuilder.h"
+#include "IOCContainerBuilder.h"
+#include "IGameScore.h"
+
 void memory_leak_test ()
 {
     MemoryInfo mi {};
@@ -16,10 +20,14 @@ void memory_leak_test ()
 
     std::cout << "Running memory leak test..." << "\n";
 
+    using namespace Tennis::Match;
+    IOCContainerBuilder builder;
+    Container_Ptr container = builder.build();
+
     int i = 0;
     while ( i < 1000 )
     {
-        Tennis::Match::MemoryLeakTest test {};
+        MemoryLeakTest test { container };
 
         test.run();
         i++;
@@ -32,7 +40,10 @@ void memory_leak_test ()
 
 void play_match ()
 {
-    Tennis::Match::PlayMatch play_match {};
+    using namespace Tennis::Match;
+    IOCContainerBuilder builder;
+    Container_Ptr container = builder.build();
+    PlayMatch play_match { container };
 
     play_match.run();
 }

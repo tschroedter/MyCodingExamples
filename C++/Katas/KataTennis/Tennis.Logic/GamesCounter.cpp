@@ -9,7 +9,7 @@ namespace Tennis
     {
         int8_t GamesCounter::count_games_for_player (
             const Player player,
-            const IGames* games )
+            const IGames_Ptr games )
         {
             GameStatus game_status =
                     One == player
@@ -22,7 +22,7 @@ namespace Tennis
 
             for ( size_t i = 0 ; i < number_of_games ; i++ )
             {
-                IGame* game = games->get_game_at_index ( i );
+                IGame_Ptr game = games->get_game_at_index ( i );
 
                 if ( game_status == game->get_status() )
                 {

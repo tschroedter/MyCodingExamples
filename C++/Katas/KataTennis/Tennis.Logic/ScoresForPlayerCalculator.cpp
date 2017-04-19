@@ -9,7 +9,7 @@ namespace Tennis
     {
         std::string ScoresForPlayerCalculator::get_scores_for_player (
             const Player player,
-            const ISets* sets ) const
+            const ISets_Ptr sets ) const
         {
             std::string text = "";
 
@@ -17,12 +17,11 @@ namespace Tennis
 
             for ( size_t i = 0 ; i < number_of_sets ; i++ )
             {
-                ISet* set = sets->get_set_at_index ( i );
+                ISet_Ptr set = sets->get_set_at_index ( i );
 
                 std::string games_for_player =
-                        m_count_player_games->count_games (
-                                                           player,
-                                                           set );
+                        m_count_player_games->count_games ( player,
+                                                            set.get() ); // todo a bit odd
 
                 if ( i != number_of_sets - 1 )
                 {

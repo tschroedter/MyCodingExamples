@@ -9,8 +9,8 @@ class MockITieBreak
 {
 public:
     // ReSharper disable CppOverridingFunctionWithoutOverrideSpecifier
-    MOCK_METHOD1(won_point, void(Tennis::Logic::Player));
-    MOCK_CONST_METHOD1(get_score, uint8_t(Tennis::Logic::Player));
+    MOCK_METHOD1(won_point, void(const Tennis::Logic::Player));
+    MOCK_CONST_METHOD1(get_score, uint8_t(const Tennis::Logic::Player));
     MOCK_CONST_METHOD0(get_status, Tennis::Logic::TieBreakStatus());
     // ReSharper restore CppOverridingFunctionWithoutOverrideSpecifier
 };

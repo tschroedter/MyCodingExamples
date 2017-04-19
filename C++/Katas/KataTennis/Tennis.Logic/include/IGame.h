@@ -2,6 +2,7 @@
 #include "Player.h"
 #include "PossibleScores.h"
 #include "GameStatus.h"
+#include <memory>
 
 namespace Tennis
 {
@@ -17,5 +18,7 @@ namespace Tennis
             virtual Scores get_score_for_player ( const Player player ) const = 0;
             virtual std::string get_score_for_player_as_string ( const Player player ) const = 0;
         };
+
+        typedef std::shared_ptr<Logic::IGame> IGame_Ptr;
     };
 };

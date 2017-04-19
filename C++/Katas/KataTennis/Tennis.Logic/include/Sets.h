@@ -1,27 +1,25 @@
 #pragma once
-#include <memory>
-#include "SetFactory.h"
 #include "ISet.h"
-#include "Container.h"
 #include "ISets.h"
+#include "Container.h"
 
 namespace Tennis
 {
     namespace Logic
     {
         class Sets
-                : public Container<ISet, ISetFactory>
+                : public Container<ISet>
                   , public ISets
         {
         public:
-            Sets ( std::shared_ptr<ISetFactory> factory )
-                : Container<ISet, ISetFactory> ( std::move ( factory ) )
+            Sets ( const Hypodermic::FactoryWrapper<ISet>& factory_wrapper )
+                : Container<ISet> ( factory_wrapper )
             {
             }
 
-            ISet* create_new_set () override;
-            ISet* get_current_set () const override;
-            ISet* get_set_at_index ( const size_t index ) const override;
+            ISet_Ptr create_new_set () override;
+            ISet_Ptr get_current_set () const override;
+            ISet_Ptr get_set_at_index ( const size_t index ) const override;
             size_t get_number_of_sets () const override;
         };
     };

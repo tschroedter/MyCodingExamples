@@ -1,5 +1,6 @@
 #include "include/MatchWonPointHandler.h"
 #include "include/SetStatusException.h"
+#include <iostream>
 
 namespace Tennis
 {
@@ -7,7 +8,7 @@ namespace Tennis
     {
         bool MatchWonPointHandler::is_tie_break_finsihed () const
         {
-            ISet* current_set = m_sets->get_current_set();
+            ISet_Ptr current_set = m_sets->get_current_set();
 
             TieBreakStatus tie_break_status =
                     current_set->get_tie_break_status();
@@ -18,13 +19,18 @@ namespace Tennis
 
         void MatchWonPointHandler::create_new_set_and_call_won_point ( Player player ) const
         {
-            m_sets->create_new_set();
-            m_sets->get_current_set()->won_point ( player );
+            ISet_Ptr set = m_sets->create_new_set();
+            set->won_point ( player );
+        }
+
+        void MatchWonPointHandler::initialize ( ISets_Ptr sets )
+        {
+            m_sets = sets;
         }
 
         void MatchWonPointHandler::won_point ( const Player player )
         {
-            ISet* current_set = m_sets->get_current_set();
+            ISet_Ptr current_set = m_sets->get_current_set();
 
             SetStatus status = current_set->get_status();
 

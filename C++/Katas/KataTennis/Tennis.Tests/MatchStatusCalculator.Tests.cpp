@@ -11,16 +11,17 @@ TEST(MatchStatusCalculator, get_status_returns_NotStarted_for_no_sets)
 
     // Arrange
     MockIMatchCounter* mock_counter = new MockIMatchCounter();
-    std::unique_ptr<IMatchCounter> counter ( mock_counter );
+    IMatchCounter_Ptr counter ( mock_counter );
 
     MockISets* mock_sets = new MockISets();
-    std::unique_ptr<ISets> sets ( mock_sets );
+    ISets_Ptr sets ( mock_sets );
 
     MatchStatusCalculator sut {
-        std::move ( counter ),
-        sets.get(),
+        counter,
         RequiredSetsToWin_Two
     };
+
+    sut.initialize ( sets );
 
     // Assert
     // Act
@@ -34,25 +35,26 @@ TEST(MatchStatusCalculator, get_status_returns_PlayerOneWon_for_player_one_won_r
 
     // Arrange
     MockIMatchCounter* mock_counter = new MockIMatchCounter();
-    std::unique_ptr<IMatchCounter> counter ( mock_counter );
+    IMatchCounter_Ptr counter ( mock_counter );
 
     MockISets* mock_sets = new MockISets();
-    std::unique_ptr<ISets> sets ( mock_sets );
+    ISets_Ptr sets ( mock_sets );
 
     MatchStatusCalculator sut {
-        std::move ( counter ),
-        sets.get(),
+        counter,
         RequiredSetsToWin_Two
     };
 
-    // Assert
-    EXPECT_CALL(*mock_counter, count_sets_won_by_player(One, mock_sets))
-                                                                        .Times ( 1 )
-                                                                        .WillRepeatedly ( testing::Return ( 2 ) );
+    sut.initialize ( sets );
 
-    EXPECT_CALL(*mock_counter, count_sets_won_by_player(Two, mock_sets))
-                                                                        .Times ( 0 )
-                                                                        .WillRepeatedly ( testing::Return ( 0 ) );
+    // Assert
+    EXPECT_CALL(*mock_counter, count_sets_won_by_player(One, sets))
+                                                                   .Times ( 1 )
+                                                                   .WillRepeatedly ( testing::Return ( 2 ) );
+
+    EXPECT_CALL(*mock_counter, count_sets_won_by_player(Two, sets))
+                                                                   .Times ( 0 )
+                                                                   .WillRepeatedly ( testing::Return ( 0 ) );
 
     EXPECT_CALL(*mock_sets, get_number_of_sets())
                                                  .Times ( 1 )
@@ -69,25 +71,26 @@ TEST(MatchStatusCalculator, get_status_returns_PlayerTwoWon_for_player_two_won_r
 
     // Arrange
     MockIMatchCounter* mock_counter = new MockIMatchCounter();
-    std::unique_ptr<IMatchCounter> counter ( mock_counter );
+    IMatchCounter_Ptr counter ( mock_counter );
 
     MockISets* mock_sets = new MockISets();
-    std::unique_ptr<ISets> sets ( mock_sets );
+    ISets_Ptr sets ( mock_sets );
 
     MatchStatusCalculator sut {
-        std::move ( counter ),
-        sets.get(),
+        counter,
         RequiredSetsToWin_Two
     };
 
-    // Assert
-    EXPECT_CALL(*mock_counter, count_sets_won_by_player(One, mock_sets))
-                                                                        .Times ( 1 )
-                                                                        .WillRepeatedly ( testing::Return ( 0 ) );
+    sut.initialize ( sets );
 
-    EXPECT_CALL(*mock_counter, count_sets_won_by_player(Two, mock_sets))
-                                                                        .Times ( 1 )
-                                                                        .WillRepeatedly ( testing::Return ( 2 ) );
+    // Assert
+    EXPECT_CALL(*mock_counter, count_sets_won_by_player(One, sets))
+                                                                   .Times ( 1 )
+                                                                   .WillRepeatedly ( testing::Return ( 0 ) );
+
+    EXPECT_CALL(*mock_counter, count_sets_won_by_player(Two, sets))
+                                                                   .Times ( 1 )
+                                                                   .WillRepeatedly ( testing::Return ( 2 ) );
 
     EXPECT_CALL(*mock_sets, get_number_of_sets())
                                                  .Times ( 1 )

@@ -4,7 +4,7 @@
 #include "Game.h"
 #include "MockILogger.h"
 
-static void createDeuce ( Tennis::Logic::Game* sut )
+static void create_deuce ( Tennis::Logic::IGame_Ptr sut )
 {
     sut->won_point ( Tennis::Logic::One );
     sut->won_point ( Tennis::Logic::One );
@@ -14,15 +14,15 @@ static void createDeuce ( Tennis::Logic::Game* sut )
     sut->won_point ( Tennis::Logic::Two );
 }
 
-std::unique_ptr<Tennis::Logic::Game> create_sut ()
+Tennis::Logic::IGame_Ptr create_sut ()
 {
     using namespace Tennis::Logic;
 
-    std::unique_ptr<IAwardPoints> award_points = std::make_unique<AwardPoints>();
-    std::unique_ptr<IGameScore> game_score_one = std::make_unique<GameScore>();
-    std::unique_ptr<IGameScore> game_score_two = std::make_unique<GameScore>();
-    std::unique_ptr<Game> sut =
-            std::make_unique<Game> (
+    IAwardPoints_Ptr award_points = std::make_shared<AwardPoints>();
+    IGameScore_Ptr game_score_one = std::make_shared<GameScore>();
+    IGameScore_Ptr game_score_two = std::make_shared<GameScore>();
+    IGame_Ptr sut =
+            std::make_shared<Game> (
                                     move ( award_points ),
                                     move ( game_score_one ),
                                     move ( game_score_two ) );
@@ -35,7 +35,7 @@ TEST(Game, constructor_sets_default_value_for_game_status)
     using namespace Tennis::Logic;
 
     // Arrange
-    std::unique_ptr<Game> sut = create_sut();
+    IGame_Ptr sut = create_sut();
 
     // Act
     GameStatus actual = sut->get_status();
@@ -49,7 +49,7 @@ TEST(Game, won_point_changes_status_to_InProgress)
     using namespace Tennis::Logic;
 
     // Arrange
-    std::unique_ptr<Game> sut = create_sut();
+    IGame_Ptr sut = create_sut();
 
     // Act
     sut->won_point ( Player::One );
@@ -65,7 +65,7 @@ TEST(Game, won_point_does_not_changes_status_for_score_15_to_0)
     using namespace Tennis::Logic;
 
     // Arrange
-    std::unique_ptr<Game> sut = create_sut();
+    IGame_Ptr sut = create_sut();
 
     // Act    
     sut->won_point ( One );
@@ -79,7 +79,7 @@ TEST(Game, won_point_does_not_changes_status_for_score_15_to_15)
     using namespace Tennis::Logic;
 
     // Arrange
-    std::unique_ptr<Game> sut = create_sut();
+    IGame_Ptr sut = create_sut();
 
     // Act    
     sut->won_point ( One );
@@ -94,7 +94,7 @@ TEST(Game, won_point_does_not_changes_status_for_score_30_to_0)
     using namespace Tennis::Logic;
 
     // Arrange
-    std::unique_ptr<Game> sut = create_sut();
+    IGame_Ptr sut = create_sut();
 
     // Act    
     sut->won_point ( One );
@@ -109,7 +109,7 @@ TEST(Game, won_point_does_not_changes_status_for_score_30_to_15)
     using namespace Tennis::Logic;
 
     // Arrange
-    std::unique_ptr<Game> sut = create_sut();
+    IGame_Ptr sut = create_sut();
 
     // Act    
     sut->won_point ( One );
@@ -125,7 +125,7 @@ TEST(Game, won_point_does_not_changes_status_for_score_30_to_30)
     using namespace Tennis::Logic;
 
     // Arrange
-    std::unique_ptr<Game> sut = create_sut();
+    IGame_Ptr sut = create_sut();
 
     // Act    
     sut->won_point ( One );
@@ -142,7 +142,7 @@ TEST(Game, won_point_does_not_changes_status_for_score_40_to_0)
     using namespace Tennis::Logic;
 
     // Arrange
-    std::unique_ptr<Game> sut = create_sut();
+    IGame_Ptr sut = create_sut();
 
     // Act    
     sut->won_point ( One );
@@ -158,7 +158,7 @@ TEST(Game, won_point_does_not_changes_status_for_score_40_to_15)
     using namespace Tennis::Logic;
 
     // Arrange
-    std::unique_ptr<Game> sut = create_sut();
+    IGame_Ptr sut = create_sut();
 
     // Act    
     sut->won_point ( One );
@@ -175,7 +175,7 @@ TEST(Game, won_point_does_not_changes_status_for_score_40_to_30)
     using namespace Tennis::Logic;
 
     // Arrange
-    std::unique_ptr<Game> sut = create_sut();
+    IGame_Ptr sut = create_sut();
 
     // Act    
     sut->won_point ( One );
@@ -193,7 +193,7 @@ TEST(Game, won_point_does_not_changes_status_for_score_0_to_15)
     using namespace Tennis::Logic;
 
     // Arrange
-    std::unique_ptr<Game> sut = create_sut();
+    IGame_Ptr sut = create_sut();
 
     // Act    
     sut->won_point ( Two );
@@ -207,7 +207,7 @@ TEST(Game, won_point_does_not_changes_status_for_score_0_to_30)
     using namespace Tennis::Logic;
 
     // Arrange
-    std::unique_ptr<Game> sut = create_sut();
+    IGame_Ptr sut = create_sut();
 
     // Act    
     sut->won_point ( Two );
@@ -222,7 +222,7 @@ TEST(Game, won_point_does_not_changes_status_for_score_15_to_30)
     using namespace Tennis::Logic;
 
     // Arrange
-    std::unique_ptr<Game> sut = create_sut();
+    IGame_Ptr sut = create_sut();
 
     // Act    
     sut->won_point ( One );
@@ -238,7 +238,7 @@ TEST(Game, won_point_does_not_changes_status_for_score_0_to_40)
     using namespace Tennis::Logic;
 
     // Arrange
-    std::unique_ptr<Game> sut = create_sut();
+    IGame_Ptr sut = create_sut();
 
     // Act    
     sut->won_point ( Two );
@@ -254,7 +254,7 @@ TEST(Game, won_point_does_not_changes_status_for_score_15_to_40)
     using namespace Tennis::Logic;
 
     // Arrange
-    std::unique_ptr<Game> sut = create_sut();
+    IGame_Ptr sut = create_sut();
 
     // Act    
     sut->won_point ( One );
@@ -271,7 +271,7 @@ TEST(Game, won_point_does_not_changes_status_for_score_30_to_40)
     using namespace Tennis::Logic;
 
     // Arrange
-    std::unique_ptr<Game> sut = create_sut();
+    IGame_Ptr sut = create_sut();
 
     // Act    
     sut->won_point ( One );
@@ -289,10 +289,10 @@ TEST(Game, won_point_changes_status_to_Deuce_for_score_40_to_40)
     using namespace Tennis::Logic;
 
     // Arrange
-    std::unique_ptr<Game> sut = create_sut();
+    IGame_Ptr sut = create_sut();
 
     // Act    
-    createDeuce ( sut.get() );
+    create_deuce ( sut );
 
     // Assert
     EXPECT_EQ(GameStatus::Deuce, sut->get_status());
@@ -303,7 +303,7 @@ TEST(Game, won_point_changes_status_to_PlayerOneWon_for_player_one_won_without_D
     using namespace Tennis::Logic;
 
     // Arrange
-    std::unique_ptr<Game> sut = create_sut();
+    IGame_Ptr sut = create_sut();
 
     // Act    
     sut->won_point ( One );
@@ -320,7 +320,7 @@ TEST(Game, won_point_changes_status_to_PlayerTwoWon_for_player_two_won_without_D
     using namespace Tennis::Logic;
 
     // Arrange
-    std::unique_ptr<Game> sut = create_sut();
+    IGame_Ptr sut = create_sut();
 
     // Act    
     sut->won_point ( Two );
@@ -337,7 +337,7 @@ TEST(Game, player_one_won_point_after_Deuce_changes_status_to_AdvantagePlayerOne
     using namespace Tennis::Logic;
 
     // Arrange
-    std::unique_ptr<Game> sut = create_sut();
+    IGame_Ptr sut = create_sut();
 
     // Act    
     sut->won_point ( One );
@@ -357,8 +357,8 @@ TEST(Game, player_two_won_point_after_Deuce_changes_status_to_AdvantagePlayerTwo
     using namespace Tennis::Logic;
 
     // Arrange
-    std::unique_ptr<Game> sut = create_sut();
-    createDeuce ( sut.get() );
+    IGame_Ptr sut = create_sut();
+    create_deuce ( sut );
 
     // Act    
     sut->won_point ( Two );
@@ -372,8 +372,8 @@ TEST(Game, player_one_won_point_after_Advantage_changes_status_to_PlayerOneWon)
     using namespace Tennis::Logic;
 
     // Arrange
-    std::unique_ptr<Game> sut = create_sut();
-    createDeuce ( sut.get() );
+    IGame_Ptr sut = create_sut();
+    create_deuce ( sut );
 
     // Act    
     sut->won_point ( One );
@@ -388,8 +388,8 @@ TEST(Game, player_two_won_point_after_Advantage_changes_status_to_PlayerTwoWon)
     using namespace Tennis::Logic;
 
     // Arrange
-    std::unique_ptr<Game> sut = create_sut();
-    createDeuce ( sut.get() );
+    IGame_Ptr sut = create_sut();
+    create_deuce ( sut );
 
     // Act    
     sut->won_point ( Two );
@@ -404,8 +404,8 @@ TEST(Game, player_one_won_point_after_Advantage_for_player_two_changes_status_to
     using namespace Tennis::Logic;
 
     // Arrange
-    std::unique_ptr<Game> sut = create_sut();
-    createDeuce ( sut.get() );
+    IGame_Ptr sut = create_sut();
+    create_deuce ( sut );
     sut->won_point ( Two );
 
     // Act    
@@ -420,8 +420,8 @@ TEST(Game, player_two_won_point_after_Advantage_for_player_one_changes_status_to
     using namespace Tennis::Logic;
 
     // Arrange
-    std::unique_ptr<Game> sut = create_sut();
-    createDeuce ( sut.get() );
+    IGame_Ptr sut = create_sut();
+    create_deuce ( sut );
 
     // Act    
     sut->won_point ( One );
@@ -436,8 +436,8 @@ TEST(Game, won_point_handles_multiple_Advantage_Deuce_points)
     using namespace Tennis::Logic;
 
     // Arrange
-    std::unique_ptr<Game> sut = create_sut();
-    createDeuce ( sut.get() );
+    IGame_Ptr sut = create_sut();
+    create_deuce ( sut );
 
     // Act    
     sut->won_point ( One );
@@ -456,7 +456,7 @@ TEST(Game, getScoreForPlayer_returns_score_for_player_one)
     using namespace Tennis::Logic;
 
     // Arrange
-    std::unique_ptr<Game> sut = create_sut();
+    IGame_Ptr sut = create_sut();
 
     sut->won_point ( One );
 
@@ -472,7 +472,7 @@ TEST(Game, get_score_for_player_returns_score_for_player_two)
     using namespace Tennis::Logic;
 
     // Arrange
-    std::unique_ptr<Game> sut = create_sut();
+    IGame_Ptr sut = create_sut();
 
     sut->won_point ( Two );
     sut->won_point ( Two );
@@ -489,7 +489,7 @@ TEST(Game, get_score_for_player_as_string_returns_score_as_string_for_player_one
     using namespace Tennis::Logic;
 
     // Arrange
-    std::unique_ptr<Game> sut = create_sut();
+    IGame_Ptr sut = create_sut();
 
     sut->won_point ( One );
 
@@ -505,7 +505,7 @@ TEST(Game, get_score_for_player_as_string_returns_score_as_string_for_player_two
     using namespace Tennis::Logic;
 
     // Arrange
-    std::unique_ptr<Game> sut = create_sut();
+    IGame_Ptr sut = create_sut();
 
     sut->won_point ( Two );
     sut->won_point ( Two );

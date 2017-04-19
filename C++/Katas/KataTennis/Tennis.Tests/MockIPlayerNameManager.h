@@ -9,6 +9,9 @@ class MockIPlayerNameManager
 {
 public:
     // ReSharper disable CppOverridingFunctionWithoutOverrideSpecifier
-    MOCK_CONST_METHOD1(get_player_name, std::string(Tennis::Logic::Player));
+    MOCK_CONST_METHOD1(get_player_name,
+        const std::string(const Tennis::Logic::Player));
+    MOCK_CONST_METHOD2(set_player_name,
+        void(const Tennis::Logic::Player, const std::string));
     // ReSharper restore CppOverridingFunctionWithoutOverrideSpecifier
 };

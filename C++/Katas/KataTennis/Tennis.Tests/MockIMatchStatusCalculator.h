@@ -9,5 +9,6 @@ class MockIMatchStatusCalculator
 public:
     // ReSharper disable CppOverridingFunctionWithoutOverrideSpecifier
     MOCK_CONST_METHOD0(get_status, const Tennis::Logic::MatchStatus());
+    MOCK_METHOD1(initialize, void(const Tennis::Logic::ISets_Ptr));
     // ReSharper restore CppOverridingFunctionWithoutOverrideSpecifier
 };

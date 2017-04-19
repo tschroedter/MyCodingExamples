@@ -9,9 +9,9 @@ class MockICurrentPlayerScoreCalculator
 {
 public:
     // ReSharper disable CppOverridingFunctionWithoutOverrideSpecifier
-    MOCK_CONST_METHOD2(get_current_score_for_player,
-        std::string(
-            const Tennis::Logic::Player player,
-            const Tennis::Logic::ISet* set));
+    MOCK_CONST_METHOD2(
+        get_current_score_for_player,
+        std::string(const Tennis::Logic::Player player,
+            const Tennis::Logic::ISet_Ptr set));
     // ReSharper restore CppOverridingFunctionWithoutOverrideSpecifier
 };

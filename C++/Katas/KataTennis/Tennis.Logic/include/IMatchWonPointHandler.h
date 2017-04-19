@@ -1,5 +1,7 @@
 #pragma once
 
+#include "ISets.h"
+
 namespace Tennis
 {
     namespace Logic
@@ -9,6 +11,7 @@ namespace Tennis
         public:
             virtual ~IMatchWonPointHandler () = default;
 
+            virtual void initialize ( const ISets_Ptr sets ) = 0;
             virtual void won_point ( const Player player ) = 0;
         };
     };

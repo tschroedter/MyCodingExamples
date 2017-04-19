@@ -24,9 +24,6 @@
     <ClInclude Include="include\Game.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\Games.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\GameScore.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -84,9 +81,6 @@
     <ClInclude Include="include\ScoreBoard.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\SetFactory.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\TieBreak.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -103,12 +97,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\TieBreakStatusCalculator.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\TieBreakFactory.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\ITieBreaks.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\SetStatus.h">
@@ -130,12 +118,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\RequiredSetsToWin.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Sets.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\ISetFactory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\MatchCounter.h">
@@ -163,30 +145,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\MatchStatusToStringConverter.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\MatchFactory.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\IMatchFactory.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\IAwardPointsFactory.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\IGameFactory.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\ITieBreakFactory.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Container.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\IContainer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\IContainerFactory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\ISets.h">
@@ -222,19 +180,28 @@
     <ClInclude Include="include\BaseException.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\AwardPointsFactory.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\ContainerException.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\PlayerException.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\GameFactory.h">
+    <ClInclude Include="include\SetStatusException.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\SetStatusException.h">
+    <ClInclude Include="include\IContainer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Container.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Games.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Sets.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\IScoreboard.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -272,22 +239,10 @@
     <ClCompile Include="Logger.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GameFactory.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="AwardPointsFactory.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SetFactory.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="TieBreakScore.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="TieBreak.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="TieBreakFactory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="TieBreakStatusCalculator.cpp">
@@ -311,18 +266,6 @@
     <ClCompile Include="Match.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MatchFactory.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Sets.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Games.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="include\TieBreakWinnerCalculator.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="CountPlayerGames.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -330,6 +273,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ScoresForPlayerCalculator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Games.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Sets.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TieBreakWinnerCalculator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

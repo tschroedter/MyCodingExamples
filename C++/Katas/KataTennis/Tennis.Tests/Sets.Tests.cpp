@@ -2,29 +2,30 @@
 #include <gtest/gtest.h>
 #include <memory>
 #include "Sets.h"
-#include "MockISetFactory.h"
 #include "MockISet.h"
+
+std::function<std::shared_ptr<Tennis::Logic::ISet> ()> create_factory ()
+{
+    return []
+            {
+                return std::make_shared<MockISet>();
+            };
+}
+
+Hypodermic::FactoryWrapper<Tennis::Logic::ISet> wrapper { create_factory() };
 
 TEST(Sets, create_new_set_returns_new_item)
 {
     using namespace Tennis::Logic;
 
     // Arrange
-    std::unique_ptr<MockISet> mock_set = std::make_unique<MockISet>();
-    std::shared_ptr<MockISetFactory> mock_set_factory = std::make_shared<MockISetFactory>();
-    std::shared_ptr<ISetFactory> factory ( mock_set_factory );
-    Sets sut { std::move ( factory ) };
-
-    // Assert
-    EXPECT_CALL(*mock_set_factory, create())
-                                            .Times ( 1 )
-                                            .WillOnce ( testing::Return ( mock_set.get() ) );
+    Sets sut { wrapper };
 
     // Act
-    ISet* actual = sut.create_new_set();
+    ISet_Ptr actual = sut.create_new_set();
 
     // Assert
-    EXPECT_EQ(mock_set.get(), actual);
+    EXPECT_NE(nullptr, actual);
 }
 
 TEST(Sets, create_new_set_adds_new_item)
@@ -34,15 +35,7 @@ TEST(Sets, create_new_set_adds_new_item)
     // Arrange
     size_t expected { 1 };
 
-    std::unique_ptr<MockISet> mock_set = std::make_unique<MockISet>();
-    std::shared_ptr<MockISetFactory> mock_set_factory = std::make_shared<MockISetFactory>();
-    std::shared_ptr<ISetFactory> factory ( mock_set_factory );
-    Sets sut { std::move ( factory ) };
-
-    // Assert
-    EXPECT_CALL(*mock_set_factory, create())
-                                            .Times ( 1 )
-                                            .WillOnce ( testing::Return ( mock_set.get() ) );
+    Sets sut { wrapper };
 
     // Act
     sut.create_new_set();
@@ -56,9 +49,10 @@ TEST(Sets, get_number_of_sets_returns_number_of_Sets)
     using namespace Tennis::Logic;
 
     // Arrange
-    std::shared_ptr<MockISetFactory> mock_set_factory = std::make_shared<MockISetFactory>();
-    std::shared_ptr<ISetFactory> factory ( mock_set_factory );
-    Sets sut { std::move ( factory ) };
+    size_t expected { 2 };
+
+    Sets sut { wrapper };
+
     sut.create_new_set();
     sut.create_new_set();
 
@@ -66,7 +60,7 @@ TEST(Sets, get_number_of_sets_returns_number_of_Sets)
     size_t actual = sut.get_number_of_sets();
 
     // Assert
-    EXPECT_EQ(2, actual);
+    EXPECT_EQ(expected, actual);
 }
 
 TEST(Sets, get_current_set_returns_current_game)
@@ -74,15 +68,15 @@ TEST(Sets, get_current_set_returns_current_game)
     using namespace Tennis::Logic;
 
     // Arrange
-    std::unique_ptr<MockISet> mock_set = std::make_unique<MockISet>();
-    std::shared_ptr<MockISetFactory> mock_set_factory = std::make_shared<MockISetFactory>();
-    std::shared_ptr<ISetFactory> factory ( mock_set_factory );
-    Sets sut { std::move ( factory ) };
-    ISet* expected = sut.create_new_set();
+    Sets sut { wrapper };
+    ISet_Ptr expected = sut.create_new_set();
+
+    auto first = sut.create_new_set();
+    auto second = sut.create_new_set();
 
     // Act
     auto actual = sut.get_current_set();
 
     // Assert
-    EXPECT_EQ(expected, actual);
+    EXPECT_EQ(second, actual);
 }

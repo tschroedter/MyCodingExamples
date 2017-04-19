@@ -3,10 +3,10 @@
 #include "RequiredSetsToWin.h"
 #include "Player.h"
 #include <memory>
-#include "Sets.h"
+#include "ISets.h"
 #include "IMatchStatusCalculator.h"
-#include "IMatchWonPointHandler.h"
 #include "ILogger.h"
+#include "MatchWonPointHandler.h"
 
 namespace Tennis
 {
@@ -16,24 +16,23 @@ namespace Tennis
                 : public IMatch
         {
         private:
-            std::unique_ptr<IMatchWonPointHandler> m_handler;
-            std::unique_ptr<IMatchStatusCalculator> m_calculator;
+            ILogger_Ptr m_logger;
+            IMatchWonPointHandler_Ptr m_handler;
+            IMatchStatusCalculator_Ptr m_calculator;
+            ISets_Ptr m_sets;
             RequiredSetsToWin m_required_sets_to_win;
-            std::unique_ptr<ISets> m_sets;
-            std::unique_ptr<ILogger> m_logger;
 
         public:
             Match (
-                std::unique_ptr<ILogger> logger,
-                std::unique_ptr<IMatchWonPointHandler> handler,
-                std::unique_ptr<IMatchStatusCalculator> calculator,
-                std::unique_ptr<ISets> sets,
-                RequiredSetsToWin required_sets_to_win )
-                : m_handler ( std::move ( handler ) )
-                , m_calculator ( std::move ( calculator ) )
-                , m_required_sets_to_win ( required_sets_to_win )
-                , m_sets ( std::move ( sets ) )
-                , m_logger ( std::move ( logger ) )
+                ILogger_Ptr logger,
+                IMatchWonPointHandler_Ptr handler,
+                IMatchStatusCalculator_Ptr calculator,
+                ISets_Ptr sets )
+                : m_logger ( logger )
+                , m_handler ( handler )
+                , m_calculator ( calculator )
+                , m_sets ( sets )
+                , m_required_sets_to_win ( RequiredSetsToWin_Two )
             {
             }
 
@@ -42,10 +41,12 @@ namespace Tennis
             }
 
             void initialize () override;
-            void won_point ( Player player ) override;
+            void won_point ( const Player player ) override;
             MatchStatus get_status () const override;
             RequiredSetsToWin get_required_sets_to_win () const override;
-            ISets* get_sets () const override;
+            ISets_Ptr get_sets () const override;
         };
+
+        typedef std::shared_ptr<IMatch> IMatch_Ptr;
     };
 };

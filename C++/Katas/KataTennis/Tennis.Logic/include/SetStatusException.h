@@ -7,12 +7,12 @@ namespace Tennis
     namespace Logic
     {
         class SetStatusException
-            : public BaseException
+                : public BaseException
         {
         public:
-            explicit SetStatusException(
-                std::string error)
-                : BaseException(error)
+            explicit SetStatusException (
+                const std::string error )
+                : BaseException ( error )
             {
             }
         };

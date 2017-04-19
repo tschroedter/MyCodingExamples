@@ -15,23 +15,22 @@ TEST(Match, constructor_sets_required_sets_to_win)
 
     // Arrange
     MockILogger* mock_logger = new MockILogger();
-    std::unique_ptr<ILogger> logger ( mock_logger );
+    ILogger_Ptr logger ( mock_logger );
 
     MockIMatchWonPointHandler* mock_handler = new MockIMatchWonPointHandler();
-    std::unique_ptr<IMatchWonPointHandler> handler ( mock_handler );
+    IMatchWonPointHandler_Ptr handler ( mock_handler );
 
     MockIMatchStatusCalculator* mock_calculator = new MockIMatchStatusCalculator();
-    std::unique_ptr<IMatchStatusCalculator> calculator ( mock_calculator );
+    IMatchStatusCalculator_Ptr calculator ( mock_calculator );
 
     MockISets* mock_sets = new MockISets();
-    std::unique_ptr<ISets> sets ( mock_sets );
+    ISets_Ptr sets ( mock_sets );
 
     Match sut {
-        std::move ( logger ),
-        std::move ( handler ),
-        std::move ( calculator ),
-        std::move ( sets ),
-        RequiredSetsToWin_Two
+        logger,
+        handler,
+        calculator,
+        sets
     };
 
     // Act
@@ -41,34 +40,44 @@ TEST(Match, constructor_sets_required_sets_to_win)
     EXPECT_EQ(RequiredSetsToWin_Two, actual);
 }
 
-TEST(Match, initialize_calls_sets)
+TEST(Match, initialize_calls_initialize)
 {
     using namespace Tennis::Logic;
 
     // Arrange
+    ISet_Ptr set = std::make_shared<MockISet>();
+
     MockILogger* mock_logger = new MockILogger();
-    std::unique_ptr<ILogger> logger ( mock_logger );
+    ILogger_Ptr logger ( mock_logger );
 
     MockIMatchWonPointHandler* mock_handler = new MockIMatchWonPointHandler();
-    std::unique_ptr<IMatchWonPointHandler> handler ( mock_handler );
+    IMatchWonPointHandler_Ptr handler ( mock_handler );
 
     MockIMatchStatusCalculator* mock_calculator = new MockIMatchStatusCalculator();
-    std::unique_ptr<IMatchStatusCalculator> calculator ( mock_calculator );
+    IMatchStatusCalculator_Ptr calculator ( mock_calculator );
 
     MockISets* mock_sets = new MockISets();
-    std::unique_ptr<ISets> sets ( mock_sets );
+    ISets_Ptr sets ( mock_sets );
 
     Match sut {
-        std::move ( logger ),
-        std::move ( handler ),
-        std::move ( calculator ),
-        std::move ( sets ),
-        RequiredSetsToWin_Two
+        logger,
+        handler,
+        calculator,
+        sets
     };
 
     // Assert
-    EXPECT_CALL(*mock_sets, create_new_set())
-                                             .Times ( 1 );
+    EXPECT_CALL(*mock_sets,
+        create_new_set())
+                         .Times ( 1 ).WillRepeatedly ( testing::Return ( set ) );
+
+    EXPECT_CALL(*mock_calculator,
+        initialize(sets))
+                         .Times ( 1 );
+
+    EXPECT_CALL(*mock_handler,
+        initialize(sets))
+                         .Times ( 1 );
 
     // Act
     sut.initialize();
@@ -84,24 +93,23 @@ void won_point_calls_handler_for_given_status_n_times (
     MockITieBreak mock_tie_break {};
 
     MockILogger* mock_logger = new MockILogger();
-    std::unique_ptr<ILogger> logger ( mock_logger );
+    ILogger_Ptr logger ( mock_logger );
 
     MockIMatchWonPointHandler* mock_handler = new MockIMatchWonPointHandler();
-    std::unique_ptr<IMatchWonPointHandler> handler ( mock_handler );
+    IMatchWonPointHandler_Ptr handler ( mock_handler );
 
     MockIMatchStatusCalculator* mock_calculator = new MockIMatchStatusCalculator();
-    std::unique_ptr<IMatchStatusCalculator> calculator ( mock_calculator );
+    IMatchStatusCalculator_Ptr calculator ( mock_calculator );
 
     MockISet mock_set {};
     MockISets* mock_sets = new MockISets();
-    std::unique_ptr<ISets> sets ( mock_sets );
+    ISets_Ptr sets ( mock_sets );
 
     Match sut {
-        std::move ( logger ),
-        std::move ( handler ),
-        std::move ( calculator ),
-        std::move ( sets ),
-        RequiredSetsToWin_Two
+        logger,
+        handler,
+        calculator,
+        sets,
     };
 
     // Assert
@@ -151,23 +159,22 @@ TEST(Match, get_status_calls_calculator)
 
     // Arrange
     MockILogger* mock_logger = new MockILogger();
-    std::unique_ptr<ILogger> logger ( mock_logger );
+    ILogger_Ptr logger ( mock_logger );
 
     MockIMatchWonPointHandler* mock_handler = new MockIMatchWonPointHandler();
-    std::unique_ptr<IMatchWonPointHandler> handler ( mock_handler );
+    IMatchWonPointHandler_Ptr handler ( mock_handler );
 
     MockIMatchStatusCalculator* mock_calculator = new MockIMatchStatusCalculator();
-    std::unique_ptr<IMatchStatusCalculator> calculator ( mock_calculator );
+    IMatchStatusCalculator_Ptr calculator ( mock_calculator );
 
     MockISets* mock_sets = new MockISets();
-    std::unique_ptr<ISets> sets ( mock_sets );
+    ISets_Ptr sets ( mock_sets );
 
     Match sut {
-        std::move ( logger ),
-        std::move ( handler ),
-        std::move ( calculator ),
-        std::move ( sets ),
-        RequiredSetsToWin_Two
+        logger,
+        handler,
+        calculator,
+        sets
     };
 
     // Assert
@@ -186,30 +193,29 @@ TEST(Match, get_sets_returns_sets)
 
     // Arrange
     MockILogger* mock_logger = new MockILogger();
-    std::unique_ptr<ILogger> logger ( mock_logger );
+    ILogger_Ptr logger ( mock_logger );
 
     MockIMatchWonPointHandler* mock_handler = new MockIMatchWonPointHandler();
-    std::unique_ptr<IMatchWonPointHandler> handler ( mock_handler );
+    IMatchWonPointHandler_Ptr handler ( mock_handler );
 
     MockIMatchStatusCalculator* mock_calculator = new MockIMatchStatusCalculator();
-    std::unique_ptr<IMatchStatusCalculator> calculator ( mock_calculator );
+    IMatchStatusCalculator_Ptr calculator ( mock_calculator );
 
     MockISets* mock_sets = new MockISets();
-    std::unique_ptr<ISets> sets ( mock_sets );
+    ISets_Ptr sets ( mock_sets );
 
     Match sut {
-        std::move ( logger ),
-        std::move ( handler ),
-        std::move ( calculator ),
-        std::move ( sets ),
-        RequiredSetsToWin_Two
+        logger,
+        handler,
+        calculator,
+        sets
     };
 
     // Act
-    ISets* actual = sut.get_sets();
+    ISets_Ptr actual = sut.get_sets();
 
     // Assert
-    EXPECT_EQ(mock_sets, actual);
+    EXPECT_EQ(sets, actual);
 }
 
 TEST(Match, won_point_logs_error_for_match_finished)
@@ -218,23 +224,22 @@ TEST(Match, won_point_logs_error_for_match_finished)
 
     // Arrange
     MockILogger* mock_logger = new MockILogger();
-    std::unique_ptr<ILogger> logger ( mock_logger );
+    ILogger_Ptr logger ( mock_logger );
 
     MockIMatchWonPointHandler* mock_handler = new MockIMatchWonPointHandler();
-    std::unique_ptr<IMatchWonPointHandler> handler ( mock_handler );
+    IMatchWonPointHandler_Ptr handler ( mock_handler );
 
     MockIMatchStatusCalculator* mock_calculator = new MockIMatchStatusCalculator();
-    std::unique_ptr<IMatchStatusCalculator> calculator ( mock_calculator );
+    IMatchStatusCalculator_Ptr calculator ( mock_calculator );
 
     MockISets* mock_sets = new MockISets();
-    std::unique_ptr<ISets> sets ( mock_sets );
+    ISets_Ptr sets ( mock_sets );
 
     Match sut {
-        std::move ( logger ),
-        std::move ( handler ),
-        std::move ( calculator ),
-        std::move ( sets ),
-        RequiredSetsToWin_Two
+        logger,
+        handler,
+        calculator,
+        sets
     };
 
     // Assert

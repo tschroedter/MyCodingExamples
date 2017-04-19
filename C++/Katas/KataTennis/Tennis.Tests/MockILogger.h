@@ -8,9 +8,9 @@ class MockILogger
 {
 public:
     // ReSharper disable CppOverridingFunctionWithoutOverrideSpecifier
-    MOCK_CONST_METHOD1(debug, void(std::string message));
-    MOCK_CONST_METHOD1(error, void(std::string message));
-    MOCK_CONST_METHOD1(info, void(std::string message));
-    MOCK_CONST_METHOD1(warning, void(std::string message));
+    MOCK_CONST_METHOD1(debug, void(const std::string message));
+    MOCK_CONST_METHOD1(error, void(const std::string message));
+    MOCK_CONST_METHOD1(info, void(const std::string message));
+    MOCK_CONST_METHOD1(warning, void(const std::string message));
     // ReSharper restore CppOverridingFunctionWithoutOverrideSpecifier
 };

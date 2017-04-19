@@ -13,11 +13,11 @@ namespace Tennis
             std::ostream& m_ostream;
 
             void Logger::log (
-                std::string type,
-                std::string message ) const;
+                const std::string type,
+                const std::string message ) const;
 
         public:
-            Logger ( std::ostream& out )
+            Logger ( std::ostream& out = std::cout )
                 : m_ostream ( out )
             {
             }
@@ -26,10 +26,10 @@ namespace Tennis
             {
             }
 
-            void debug ( std::string message ) const override;
-            void error ( std::string message ) const override;
-            void info ( std::string message ) const override;
-            void warning(std::string message) const override;
+            void debug ( const std::string message ) const override;
+            void error ( const std::string message ) const override;
+            void info ( const std::string message ) const override;
+            void warning ( const std::string message ) const override;
         };
     };
 };

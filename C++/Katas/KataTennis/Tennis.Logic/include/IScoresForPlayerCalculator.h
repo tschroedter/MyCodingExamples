@@ -3,13 +3,12 @@
 #pragma once
 #include "Player.h"
 #include <string>
+#include "ISets.h"
 
 namespace Tennis
 {
     namespace Logic
     {
-        class ISets;
-
         class IScoresForPlayerCalculator
         {
         public:
@@ -17,7 +16,9 @@ namespace Tennis
 
             virtual std::string get_scores_for_player (
                 const Player player,
-                const ISets* sets ) const = 0;
+                const ISets_Ptr sets ) const = 0;
         };
+
+        typedef std::shared_ptr<IScoresForPlayerCalculator> IScoresForPlayerCalculator_Ptr;
     }
 }

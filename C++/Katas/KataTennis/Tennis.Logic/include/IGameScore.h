@@ -1,6 +1,7 @@
 #pragma once
 #include "Scores.h"
 #include <string>
+#include <memory>
 
 namespace Tennis
 {
@@ -16,5 +17,7 @@ namespace Tennis
             virtual void lost_point () = 0;
             virtual Scores get_score () const = 0;
         };
+
+        typedef std::shared_ptr<Logic::IGameScore> IGameScore_Ptr;
     };
 };

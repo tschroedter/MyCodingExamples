@@ -2,21 +2,28 @@
 #include <gtest/gtest.h>
 #include "Games.h"
 #include <memory>
-#include "IAwardPointsFactory.h"
-#include "AwardPointsFactory.h"
-#include "GameFactory.h"
+#include "MockIGames.h"
+#include "MockIGame.h"
+
+std::function<std::shared_ptr<Tennis::Logic::IGame> ()> create_factory ()
+{
+    return []
+            {
+                return std::make_shared<MockIGame>();
+            };
+}
+
+Hypodermic::FactoryWrapper<Tennis::Logic::IGame> wrapper { create_factory() };
 
 TEST(Games, create_new_game_returns_new_item)
 {
     using namespace Tennis::Logic;
 
     // Arrange
-    std::unique_ptr<IAwardPointsFactory> award_points_factory = std::make_unique<AwardPointsFactory>();
-    std::unique_ptr<GameFactory> factory = std::make_unique<GameFactory> ( std::move ( award_points_factory ) );
-    Games sut { std::move ( factory ) };
+    Games sut { wrapper };
 
     // Act
-    IGame* actual = sut.create_new_game();
+    IGame_Ptr actual = sut.create_new_game();
 
     // Assert
     EXPECT_NE(nullptr, &actual);
@@ -28,9 +35,7 @@ TEST(Games, create_new_game_adds_new_item)
 
     // Arrange
     size_t expected { 1 };
-    std::unique_ptr<IAwardPointsFactory> award_points_factory = std::make_unique<AwardPointsFactory>();
-    std::unique_ptr<GameFactory> factory = std::make_unique<GameFactory> ( std::move ( award_points_factory ) );
-    Games sut { std::move ( factory ) };
+    Games sut { wrapper };
 
     // Act
     sut.create_new_game();
@@ -44,9 +49,7 @@ TEST(Games, get_number_of_games_returns_number_of_games)
     using namespace Tennis::Logic;
 
     // Arrange
-    std::unique_ptr<IAwardPointsFactory> award_points_factory = std::make_unique<AwardPointsFactory>();
-    std::unique_ptr<GameFactory> factory = std::make_unique<GameFactory> ( std::move ( award_points_factory ) );
-    Games sut { std::move ( factory ) };
+    Games sut { wrapper };
     sut.new_item();
     sut.new_item();
 
@@ -62,9 +65,7 @@ TEST(Games, get_current_game_returns_current_game)
     using namespace Tennis::Logic;
 
     // Arrange
-    std::unique_ptr<IAwardPointsFactory> award_points_factory = std::make_unique<AwardPointsFactory>();
-    std::unique_ptr<GameFactory> factory = std::make_unique<GameFactory> ( std::move ( award_points_factory ) );
-    Games sut { std::move ( factory ) };
+    Games sut { wrapper };
     sut.create_new_game();
 
     // Act

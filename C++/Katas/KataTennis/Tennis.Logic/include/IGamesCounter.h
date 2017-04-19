@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Player.h"
-#include "Games.h"
+#include "IGames.h"
 
 namespace Tennis
 {
@@ -16,7 +16,9 @@ namespace Tennis
 
             virtual int8_t count_games_for_player (
                 const Player player,
-                const IGames* games ) = 0;
+                const IGames_Ptr games ) = 0;
         };
+
+        typedef std::shared_ptr<Logic::IGamesCounter> IGamesCounter_Ptr;
     };
 };

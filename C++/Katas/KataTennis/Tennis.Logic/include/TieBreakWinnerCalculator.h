@@ -8,18 +8,17 @@ namespace Tennis
 {
     namespace Logic
     {
-
         class TieBreakWinnerCalculator
-            : public ITieBreakWinnerCalculator
+                : public ITieBreakWinnerCalculator
         {
         public:
-            TieBreakWinnerCalculator()
+            TieBreakWinnerCalculator ()
             {
             }
 
-            bool was_tie_break_won_by_player(
-                const ITieBreak* tie_break,
-                Player player) const override;
+            bool was_tie_break_won_by_player (
+                const ITieBreak_Ptr tie_break,
+                const Player player ) const override;
         };
     };
 };

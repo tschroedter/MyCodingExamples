@@ -1,8 +1,7 @@
 #pragma once
-#pragma once
 #include "Player.h"
 #include "IMatchWonPointHandler.h"
-#include "Sets.h"
+#include "ISets.h"
 
 namespace Tennis
 {
@@ -12,23 +11,20 @@ namespace Tennis
                 : public IMatchWonPointHandler
         {
         private:
-            ISets* m_sets;
+            ISets_Ptr m_sets;
 
             bool is_tie_break_finsihed () const;
             void create_new_set_and_call_won_point ( Player player ) const;
 
         public:
-            MatchWonPointHandler ( 
-                ISets* sets )
-                : m_sets ( sets )
-            {
-            }
-
             ~MatchWonPointHandler ()
             {
             }
 
+            void initialize ( const ISets_Ptr sets ) override;
             void won_point ( const Player player ) override;
         };
+
+        typedef std::shared_ptr<IMatchWonPointHandler> IMatchWonPointHandler_Ptr;
     };
 };

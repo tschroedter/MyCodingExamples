@@ -5,6 +5,11 @@ namespace Tennis
 {
     namespace Logic
     {
+        void MatchStatusCalculator::initialize ( ISets_Ptr sets )
+        {
+            m_sets = sets;
+        }
+
         const MatchStatus MatchStatusCalculator::get_status () const
         {
             if ( m_sets->get_number_of_sets() == 0 )

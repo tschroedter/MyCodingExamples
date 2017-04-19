@@ -1,5 +1,6 @@
 #pragma once
 #include "Player.h"
+#include <memory>
 
 namespace Tennis
 {
@@ -18,5 +19,7 @@ namespace Tennis
                 IGameScore* scorePlayerOne,
                 IGameScore* scorePlayerTwo ) = 0;
         };
+
+        typedef std::shared_ptr<Logic::IAwardPoints> IAwardPoints_Ptr;
     };
 };
