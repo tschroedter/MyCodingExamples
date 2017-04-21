@@ -5,12 +5,19 @@
 #include "MockICountPlayerGames.h"
 #include "MockISets.h"
 #include "MockISet.h"
+#include "MockITieBreak.h"
+#include "MockIGames.h"
 
 TEST(ScoresForPlayerCalculator, get_scores_for_player_returns_string_for_single_set)
 {
     using namespace Tennis::Logic;
 
     // Arrange
+    MockIGames* mock_games = new MockIGames{};
+    IGames_Ptr games ( mock_games );
+    MockITieBreak* mock_tie_break = new MockITieBreak{};
+    ITieBreak_Ptr tie_break ( mock_tie_break );
+
     MockISet* mock_set = new MockISet{};
     ISet_Ptr set ( mock_set );
     MockISets* mock_sets = new MockISets{};
@@ -28,6 +35,14 @@ TEST(ScoresForPlayerCalculator, get_scores_for_player_returns_string_for_single_
         count_player_games
     };
 
+    EXPECT_CALL(*mock_set, get_games())
+                                       .Times ( 1 )
+                                       .WillOnce ( testing::Return ( games ) );
+
+    EXPECT_CALL(*mock_set, get_tie_break())
+                                           .Times ( 1 )
+                                           .WillOnce ( testing::Return ( tie_break ) );
+
     EXPECT_CALL(*mock_sets,
         get_number_of_sets())
                              .Times ( 1 )
@@ -40,9 +55,10 @@ TEST(ScoresForPlayerCalculator, get_scores_for_player_returns_string_for_single_
 
     EXPECT_CALL(*mock_count_player_games,
         count_games(One,
-            mock_set))
-                      .Times ( 1 )
-                      .WillOnce ( testing::Return ( "3" ) );
+            games,
+            tie_break))
+                       .Times ( 1 )
+                       .WillOnce ( testing::Return ( "3" ) );
 
     EXPECT_CALL(*mock_calculator,
         get_current_score_for_player(One, set))
@@ -62,6 +78,16 @@ TEST(ScoresForPlayerCalculator, get_scores_for_player_returns_string_for_multipl
     using namespace Tennis::Logic;
 
     // Arrange
+    MockIGames* mock_games_one = new MockIGames{};
+    IGames_Ptr games_one ( mock_games_one );
+    MockITieBreak* mock_tie_break_one = new MockITieBreak{};
+    ITieBreak_Ptr tie_break_one ( mock_tie_break_one );
+
+    MockIGames* mock_games_two = new MockIGames{};
+    IGames_Ptr games_two ( mock_games_two );
+    MockITieBreak* mock_tie_break_two = new MockITieBreak{};
+    ITieBreak_Ptr tie_break_two ( mock_tie_break_two );
+
     MockISet* mock_set_one = new MockISet{};
     ISet_Ptr set_one ( mock_set_one );
     MockISet* mock_set_two = new MockISet{};
@@ -81,6 +107,22 @@ TEST(ScoresForPlayerCalculator, get_scores_for_player_returns_string_for_multipl
         count_player_games
     };
 
+    EXPECT_CALL(*mock_set_one, get_games())
+                                           .Times ( 1 )
+                                           .WillOnce ( testing::Return ( games_one ) );
+
+    EXPECT_CALL(*mock_set_one, get_tie_break())
+                                               .Times ( 1 )
+                                               .WillOnce ( testing::Return ( tie_break_one ) );
+
+    EXPECT_CALL(*mock_set_two, get_games())
+                                           .Times ( 1 )
+                                           .WillOnce ( testing::Return ( games_two ) );
+
+    EXPECT_CALL(*mock_set_two, get_tie_break())
+                                               .Times ( 1 )
+                                               .WillOnce ( testing::Return ( tie_break_two ) );
+
     EXPECT_CALL(*mock_sets,
         get_number_of_sets())
                              .Times ( 1 )
@@ -98,15 +140,17 @@ TEST(ScoresForPlayerCalculator, get_scores_for_player_returns_string_for_multipl
 
     EXPECT_CALL(*mock_count_player_games,
         count_games(One,
-            mock_set_one))
-                          .Times ( 1 )
-                          .WillOnce ( testing::Return ( "6" ) );
+            games_one,
+            tie_break_one))
+                           .Times ( 1 )
+                           .WillOnce ( testing::Return ( "6" ) );
 
     EXPECT_CALL(*mock_count_player_games,
         count_games(One,
-            mock_set_two))
-                          .Times ( 1 )
-                          .WillOnce ( testing::Return ( "6" ) );
+            games_two,
+            tie_break_two))
+                           .Times ( 1 )
+                           .WillOnce ( testing::Return ( "6" ) );
 
     EXPECT_CALL(*mock_calculator,
         get_current_score_for_player(One, set_two))

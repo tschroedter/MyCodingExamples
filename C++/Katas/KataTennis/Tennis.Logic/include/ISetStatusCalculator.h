@@ -12,8 +12,8 @@ namespace Tennis
         public:
             virtual ~ISetStatusCalculator () = default;
 
-            virtual const SetStatus get_status ( const ISet_Ptr set ) const = 0;
-            virtual const SetStatus get_status ( const ISet* set ) const = 0; // todo CHECK this first maybe ISet_Ptr
+            virtual const SetStatus get_status ( const IGames_Ptr games,
+                                                 const ITieBreak_Ptr tie_break ) const = 0;
         };
 
         typedef std::shared_ptr<ISetStatusCalculator> ISetStatusCalculator_Ptr;

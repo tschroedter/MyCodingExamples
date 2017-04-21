@@ -348,13 +348,12 @@ TEST(Set, get_status_calls_calculator)
     using namespace Tennis::Logic;
 
     // Arrange
-    ISet_Ptr set = std::make_shared<MockISet>();
+    IGames_Ptr games = std::make_shared<MockIGames>();
+    ITieBreak_Ptr tie_break = std::make_shared<MockITieBreak>();
 
     MockISetStatusCalculator* mock_calculator = new MockISetStatusCalculator();
     ISetStatusCalculator_Ptr calculator ( mock_calculator );
     ISetWonPointHandler_Ptr handler = std::make_shared<MockISetWonPointHandler>();
-    IGames_Ptr games = std::make_shared<MockIGames>();
-    ITieBreak_Ptr tie_break = std::make_shared<MockITieBreak>();
 
     Set sut
     {
@@ -365,9 +364,9 @@ TEST(Set, get_status_calls_calculator)
     };
 
     // Assert
-    EXPECT_CALL(*mock_calculator, get_status(&sut))
-                                                   .Times ( 1 )
-                                                   .WillOnce ( testing::Return ( SetStatus_NotStarted ) );
+    EXPECT_CALL(*mock_calculator, get_status(games, tie_break))
+                                                               .Times ( 1 )
+                                                               .WillOnce ( testing::Return ( SetStatus_NotStarted ) );
 
     // Act
     sut.get_status();

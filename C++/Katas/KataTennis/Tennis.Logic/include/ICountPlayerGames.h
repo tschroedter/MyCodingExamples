@@ -2,6 +2,7 @@
 
 #include "Player.h"
 #include "ISet.h"
+#include "TieBreak.h"
 
 namespace Tennis
 {
@@ -12,13 +13,15 @@ namespace Tennis
         public:
             virtual ~ICountPlayerGames () = default;
 
-            virtual std::string count_games (
+            virtual int8_t calculate_games(
                 const Player player,
-                const ISet* set ) const = 0;
-
-            virtual int8_t calculate_games (
+                const IGames_Ptr games,
+                const ITieBreak_Ptr tie_break) const = 0;
+            
+            virtual std::string count_games(
                 const Player player,
-                const ISet* set ) const = 0;
+                const IGames_Ptr games,
+                const ITieBreak_Ptr tie_break) const = 0;
         };
 
         typedef std::shared_ptr<Logic::ICountPlayerGames> ICountPlayerGames_Ptr;

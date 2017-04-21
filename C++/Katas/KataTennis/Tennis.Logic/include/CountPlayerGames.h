@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Player.h"
-#include "ISet.h"
 #include "IGamesCounter.h"
 #include "ITieBreakWinnerCalculator.h"
 #include "ICountPlayerGames.h"
@@ -26,13 +25,15 @@ namespace Tennis
             {
             }
 
-            std::string count_games (
+            std::string count_games(
                 const Player player,
-                const ISet* set ) const override;
+                const IGames_Ptr games,
+                const ITieBreak_Ptr tie_break) const override;
 
-            int8_t calculate_games (
+            int8_t calculate_games(
                 const Player player,
-                const ISet* set ) const override;
+                const IGames_Ptr games,
+                const ITieBreak_Ptr tie_break) const override;
         };
     };
 };

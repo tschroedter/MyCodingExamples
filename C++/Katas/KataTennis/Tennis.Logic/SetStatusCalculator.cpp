@@ -64,21 +64,20 @@ namespace Tennis
         }
 
         const SetStatus SetStatusCalculator::get_status (
-            const ISet_Ptr set ) const
-        {
-            return get_status ( set.get() );
-        }
-
-        const SetStatus SetStatusCalculator::get_status (
-            const ISet* set ) const
+            const IGames_Ptr games,
+            const ITieBreak_Ptr tie_break ) const
         {
             int8_t games_for_player_one =
-                    m_counter->calculate_games ( One,
-                                                 set );
+                    m_counter->calculate_games (
+                                                One,
+                                                games,
+                                                tie_break );
 
             int8_t games_for_player_two =
-                    m_counter->calculate_games ( Two,
-                                                 set );
+                    m_counter->calculate_games (
+                                                Two,
+                                                games,
+                                                tie_break );
 
             if ( has_player_won_set ( One,
                                       games_for_player_one,

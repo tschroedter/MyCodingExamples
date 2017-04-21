@@ -42,8 +42,8 @@ namespace Tennis
             {
             }
 
-            const SetStatus get_status ( const ISet* set ) const override;
-            const SetStatus get_status ( const ISet_Ptr set ) const override;
+            const SetStatus get_status ( const IGames_Ptr games,
+                                         const ITieBreak_Ptr tie_break ) const override;
         };
     };
 };

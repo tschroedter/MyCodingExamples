@@ -16,8 +16,6 @@ TEST(CountPlayerGames, get_games_count_for_player_returns_string_for_normal_set)
     IGames_Ptr games ( mock_games );
     MockITieBreak* mock_tie_break = new MockITieBreak{};
     ITieBreak_Ptr tie_break ( mock_tie_break );
-    MockISet* mock_set = new MockISet{};
-    ISet_Ptr set ( mock_set );
     MockIGamesCounter* mock_counter = new MockIGamesCounter{};
     IGamesCounter_Ptr counter ( mock_counter );
     MockITieBreakWinnerCalculator* mock_calculator = new MockITieBreakWinnerCalculator{};
@@ -35,14 +33,6 @@ TEST(CountPlayerGames, get_games_count_for_player_returns_string_for_normal_set)
                    .Times ( 1 )
                    .WillOnce ( testing::Return ( static_cast<int8_t> ( 6 ) ) );
 
-    EXPECT_CALL(*mock_set, get_games())
-                                       .Times ( 1 )
-                                       .WillOnce ( testing::Return ( games ) );
-
-    EXPECT_CALL(*mock_set, get_tie_break())
-                                           .Times ( 1 )
-                                           .WillOnce ( testing::Return ( tie_break ) );
-
     EXPECT_CALL(*mock_calculator,
         was_tie_break_won_by_player(
             tie_break,
@@ -52,7 +42,8 @@ TEST(CountPlayerGames, get_games_count_for_player_returns_string_for_normal_set)
 
     // Act
     auto actual = sut.count_games ( One,
-                                    mock_set );
+                                    games,
+                                    tie_break );
 
     // Assert
     EXPECT_EQ("6", actual);
@@ -67,8 +58,6 @@ TEST(CountPlayerGames, get_games_count_for_player_returns_string_for_tie_break_s
     IGames_Ptr games ( mock_games );
     MockITieBreak* mock_tie_break = new MockITieBreak{};
     ITieBreak_Ptr tie_break ( mock_tie_break );
-    MockISet* mock_set = new MockISet{};
-    ISet_Ptr set ( mock_set );
     MockIGamesCounter* mock_counter = new MockIGamesCounter{};
     IGamesCounter_Ptr counter ( mock_counter );
     MockITieBreakWinnerCalculator* mock_calculator = new MockITieBreakWinnerCalculator{};
@@ -86,14 +75,6 @@ TEST(CountPlayerGames, get_games_count_for_player_returns_string_for_tie_break_s
                    .Times ( 1 )
                    .WillOnce ( testing::Return ( static_cast<int8_t> ( 6 ) ) );
 
-    EXPECT_CALL(*mock_set, get_games())
-                                       .Times ( 1 )
-                                       .WillOnce ( testing::Return ( games ) );
-
-    EXPECT_CALL(*mock_set, get_tie_break())
-                                           .Times ( 1 )
-                                           .WillOnce ( testing::Return ( tie_break ) );
-
     EXPECT_CALL(*mock_calculator,
         was_tie_break_won_by_player(
             tie_break,
@@ -103,7 +84,8 @@ TEST(CountPlayerGames, get_games_count_for_player_returns_string_for_tie_break_s
 
     // Act
     auto actual = sut.count_games ( One,
-                                    mock_set );
+                                    games,
+                                    tie_break );
 
     // Assert
     EXPECT_EQ("7", actual);

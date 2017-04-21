@@ -6,8 +6,6 @@ namespace Tennis
 {
     namespace Logic
     {
-        // todo maybe use IMatch as parameter so we can avoid printing 0 current score when Match was won
-
         void ScoreBoard::padTo(std::string & str, const size_t num, const char paddingChar) const
         {
             if (num > str.size())

@@ -21,7 +21,8 @@ namespace Tennis
 
                 std::string games_for_player =
                         m_count_player_games->count_games ( player,
-                                                            set.get() ); // todo a bit odd
+                                                            set->get_games(),
+                                                            set->get_tie_break() );
 
                 if ( i != number_of_sets - 1 )
                 {

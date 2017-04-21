@@ -40,7 +40,8 @@ namespace Tennis
 
         const SetStatus Set::get_status () const
         {
-            return m_calculator->get_status ( this );
+            return m_calculator->get_status ( m_games,
+                                              m_tie_break );
         }
 
         const TieBreakStatus Set::get_tie_break_status () const
