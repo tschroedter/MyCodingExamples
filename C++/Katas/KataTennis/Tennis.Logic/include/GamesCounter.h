@@ -14,7 +14,7 @@ namespace Tennis
         public:
             int8_t count_games_for_player (
                 const Player player,
-                const IGames_Ptr games ) override; // todo move games into constructor
+                const IGames_Ptr games ) override;
         };
     };
 };

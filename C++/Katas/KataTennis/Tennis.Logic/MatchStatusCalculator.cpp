@@ -39,5 +39,16 @@ namespace Tennis
 
             return MatchStatus_InProgress;
         }
+
+        void MatchStatusCalculator::set_required_sets_to_win ( 
+            RequiredSetsToWin required_sets_to_win )
+        {
+            m_required_sets_to_win = required_sets_to_win;
+        }
+
+        const RequiredSetsToWin MatchStatusCalculator::get_required_sets_to_win ()
+        {
+            return m_required_sets_to_win;
+        }
     };
 };

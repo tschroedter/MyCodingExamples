@@ -100,3 +100,29 @@ TEST(MatchStatusCalculator, get_status_returns_PlayerTwoWon_for_player_two_won_r
     MatchStatus actual = sut.get_status();
     EXPECT_EQ(MatchStatus_PlayerTwoWon, actual);
 }
+
+TEST(MatchStatusCalculator, set_required_sets_to_win_sets_required_sets)
+{
+    using namespace Tennis::Logic;
+
+    // Arrange
+    MockIMatchCounter* mock_counter = new MockIMatchCounter();
+    IMatchCounter_Ptr counter ( mock_counter );
+
+    MockISets* mock_sets = new MockISets();
+    ISets_Ptr sets ( mock_sets );
+
+    MatchStatusCalculator sut {
+        counter,
+        RequiredSetsToWin_Two
+    };
+
+    sut.initialize ( sets );
+
+    // Assert
+    sut.set_required_sets_to_win ( RequiredSetsToWin_Three );
+
+    // Act
+    RequiredSetsToWin actual = sut.get_required_sets_to_win();
+    EXPECT_EQ(RequiredSetsToWin_Three, actual);
+}

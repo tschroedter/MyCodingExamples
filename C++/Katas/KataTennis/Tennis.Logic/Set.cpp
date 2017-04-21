@@ -10,7 +10,7 @@ namespace Tennis
             m_games->create_new_game();
 
             m_handler->intitialize ( m_games,
-                                     m_tie_break ); // todo testing
+                                     m_tie_break );
         }
 
         void Set::won_point ( Player player )

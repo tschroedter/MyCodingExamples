@@ -430,14 +430,15 @@ TEST(Set, get_tie_break_status_returns_status)
     EXPECT_EQ(TieBreakStatus_InProgress, actual);
 }
 
-TEST(Set, initialize_calls_games_new_game)
+TEST(Set, initialize_calls_games_and_handler)
 {
     using namespace Tennis::Logic;
 
     // Arrange
     IGame_Ptr game = std::make_shared<MockIGame>();
     ISetStatusCalculator_Ptr calculator = std::make_shared<MockISetStatusCalculator>();
-    ISetWonPointHandler_Ptr handler = std::make_shared<MockISetWonPointHandler>();
+    MockISetWonPointHandler* mock_handler = new MockISetWonPointHandler{};
+    ISetWonPointHandler_Ptr handler ( mock_handler );
     MockIGames* mock_games = new MockIGames();
     IGames_Ptr games ( mock_games );
     ITieBreak_Ptr tie_break = std::make_shared<MockITieBreak>();
@@ -455,6 +456,8 @@ TEST(Set, initialize_calls_games_new_game)
                                                .Times ( 1 )
                                                .WillRepeatedly ( testing::Return ( game ) );
 
-    // Act
+    EXPECT_CALL(*mock_handler, intitialize(games, tie_break))
+                                                             .Times ( 1 );
+
     sut.initialize();
 }

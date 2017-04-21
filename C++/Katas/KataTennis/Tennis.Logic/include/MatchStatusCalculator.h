@@ -20,7 +20,7 @@ namespace Tennis
         public:
             MatchStatusCalculator (
                 IMatchCounter_Ptr counter,
-                RequiredSetsToWin required_sets_to_win = RequiredSetsToWin_Two ) // todo add method to set
+                RequiredSetsToWin required_sets_to_win = RequiredSetsToWin_Two )
                 : m_counter ( counter )
                 , m_required_sets_to_win ( required_sets_to_win )
             {
@@ -32,6 +32,8 @@ namespace Tennis
 
             void initialize ( const ISets_Ptr sets ) override;
             const MatchStatus get_status () const override;
+            void set_required_sets_to_win(RequiredSetsToWin required_sets_to_win) override;
+            const RequiredSetsToWin get_required_sets_to_win() override;
         };
     };
 };
